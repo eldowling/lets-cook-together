@@ -4,48 +4,73 @@
 <head>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css" />
 </head>
 
 <body>
     <header>
+        <!-- Dropdown Structure -->
+        <ul id="dropdown1" class="dropdown-content">
+            <li><a href="#!">one</a></li>
+            <li><a href="#!">two</a></li>
+            <li class="divider"></li>
+            <li><a href="#!">three</a></li>
+        </ul>        
+
         <nav>
-            <div class="nav-wrapper">
-                <a href="#" class="brand-logo">Logo</a>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><a href="sass.html">Sass</a></li>
-                    <li><a href="badges.html">Components</a></li>
-                    <li><a href="collapsible.html">JavaScript</a></li>
-                </ul>
+            <div class="nav-wrapper cyan darken-4">
+                
+                <form>
+                    <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                    <div class="input-field inline ">
+                        <input id="search" type="search" required>
+                        <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                        <i class="material-icons">close</i>
+                    </div>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <li><a href="addedit-recipe.html">Add Recipe</a></li>
+                        <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Advanced Search<i class="material-icons right">arrow_drop_down</i></a></li>
+                    </ul>  
+                    
+                </form>
+                
             </div>
         </nav>
-    
+        
         <ul class="sidenav" id="mobile-demo">
-            <li><a href="sass.html">Sass</a></li>
-            <li><a href="badges.html">Components</a></li>
-            <li><a href="collapsible.html">Javascript</a></li>
-            <li><a href="mobile.html">Mobile</a></li>
+            <li><a href="addedit-recipe.html">Add Recipe</a></li>
+            <li><a href="badges.html">Advanced Search</a></li>
         </ul>
+    
+        
     </header>
     
-    <div class="container">
+    <div class="center">
+            <img class="main-img" src="static/images/lets-cook-logo.png"></img>
+    </div>
+    <div class="container yellow lighten-4">
         {% block content %} {% endblock %}
     </div>
     
-    <footer class="page-footer">
+    <footer class="page-footer cyan darken-4">
         <div class="container">
             <div class="row">
                 <div class="col l6 s12">
                     <h5 class="white-text">Footer Content</h5>
-                    <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+                    
+                    <span class="grey-text text-lighten-4 ">
+                        <a href="facebook.html"><i class="fab fa-facebook-square"></i></a>
+                        <a href="twitter.html"><i class="fab fa-twitter-square"></i></a>
+                        <a href="instagram.html"><i class="fab fa-instagram"></i></a>
+                    </span>
                 </div>
                 <div class="col l4 offset-l2 s12">
                     <h5 class="white-text">Links</h5>
                     <ul>
-                        <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                        <li><a class="grey-text text-lighten-3" href="{{url_for('get_catalog')}}">Full Recipe Catalog</a></li>
+                        <li><a class="grey-text text-lighten-3" href="tools.html">Tools</a></li>
+                        <li><a class="grey-text text-lighten-3" href="maintenance.html">Lists - Maintenace</a></li>
                     </ul>
                 </div>
             </div>
@@ -53,7 +78,6 @@
         <div class="footer-copyright">
             <div class="container">
                 © 2019 Copyright E.Dowling
-                <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
             </div>
         </div>
     </footer>
@@ -62,8 +86,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
+            $('.collapsible').collapsible();
+            $('select').material_select();
             $(".button-collapse").sideNav();
+            $(".dropdown-trigger").dropdown();
+            $('.sidenav').sidenav();
         });
+        
     </script>
 </body>
 </html>
