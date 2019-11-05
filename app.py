@@ -12,12 +12,27 @@ mongo = PyMongo(app)
 
 
 @app.route('/')
-@app.route('/get_catalog/<course>')
-def get_catalog(course):
-    if course == '':
+#@app.route('/get_catalog/<course>')
+#def get_catalog(course):
+@app.route('/get_catalog')
+def get_catalog():
+    #if course == '':*/
         return render_template("catalog.html", recipes=mongo.db.recipes.find())
-    elif course <> '':
-        return render_template("catalog.html", recipes=mongo.db.recipes.find({ "recipes.course": course }))
+    #if course != '':
+    #    return render_template("catalog.html", recipes=mongo.db.recipes.find({ "recipes.course": course }))
+    
+#@app.route('/get_catalog/<course_id>')
+#def show_recipe(recipe_id):
+#    course =  mongo.db.recipes.find_one({"course": ObjectId(course)})
+#    all_courses =  mongo.db.categories.find()
+#    return render_template('catalog.html', task=the_recipe,
+#                           categories=all_categories)
+    
+@app.route('/show_recipe/<recipe_id>')
+def show_recipe(recipe_id):
+    the_recipe =  mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+#    all_categories =  mongo.db.categories.find()
+    return render_template('recipe.html', recipe=the_recipe)
     
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
