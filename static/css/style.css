@@ -12,3 +12,16 @@
   border: 3px solid #73AD21;
   padding: 10px;
 }
+.tabs .tab a{
+    color:#00838f;
+}
+.tabs .tab a:hover,.tabs .tab a.active {
+	background-color:transparent;
+	color:#00b8d4;
+}
+.tabs .indicator {
+	background-color:#006064;
+}
+ .tabs {
+    margin-bottom: 2em;
+}
