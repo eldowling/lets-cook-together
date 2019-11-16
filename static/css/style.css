@@ -26,3 +26,19 @@
  .tabs {
     margin-bottom: 2em;
 }
+
+#nutr-border .col {
+  border: 2px solid #c9c9c9;
+}
+
+#nutr-border .col:not(:last-child) {
+  border-right-width: 0;
+}
+
+#nutr-border .row:not(:last-child) .col {
+  border-bottom-width: 0;
+}
+
+#nutr-border .row:not(:last-child) {
+  margin-bottom: 0;
+}
