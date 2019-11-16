@@ -1,49 +1,75 @@
 {% extends 'base.html'%} {% block content %}
-<div class="row justify-content-center">
-  <h2>{{ recipe.title }}</h2>
-</div>
-
-
-<ul class="tabs">
-  <li class="tab col s3"><a class="active" href="#general">General</a></li>
-  <li class="tab col s3"><a href="#ingredients">Ingredients</a></li>
-  <li class="tab col s3 "><a href="#prep">Prep. Steps</a></li>
-</ul>
-<div class="row">
-  <div class ="col s12 offset-s1">
-    <div id="general" class="col s12">
-      <div class="row">
-        <div class="col s12">
-            {{recipe.description}}
-        </div>
-      </div>
-      <div class="row">
-        <div class="col s6">
-            <strong>Course: </strong>{{recipe.course}}
-        </div>
-        <div class="col s6">
-            <strong>Cuisine: </strong>{{recipe.cuisine}}
-        </div>
-      </div>
-      <div class="row">
-        <div class="col s6">
-            <strong>Prep. Time: </strong>{{recipe.prep_time}}
-        </div>
-        <div class="col s6">
-            <strong>Cook Time: </strong>{{recipe.cook_time}}
-        </div>
-      </div>
-    </div>
-    
-    <div id="ingredients" class="col s12">
-      {{recipe.ingredients}}
-    </div>
-    
-    <div id="prep" class="col s12">
-      Preparation Steps
+<div class="container">
+  <div class="row  justify-content-center">
+    <div class="col s12 center">
+      <h2>{{ recipe.title }}</h2>
     </div>
   </div>
 </div>
+
+<ul class="tabs">
+  <li class="tab col-sm-4"><a class="active" href="#general">General</a></li>
+  <li class="tab col-sm-4"><a href="#ingredients">Ingredients</a></li>
+  <li class="tab col-sm-4 "><a href="#prep">Prep. Steps</a></li>
+</ul>
+
+<div id="general" class="container">
+  <div class="row">
+    <div class="col-sm-12">
+        {{recipe.description}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-2">
+      <i class="fas fa-coffee fa-2x"></i>
+    </div>
+    <div class="col-4">
+        <strong>Course: </strong>{{recipe.course}}
+    </div>
+    <div class="col-6">
+        <strong>Cuisine: </strong>{{recipe.cuisine}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-2">
+      <i class="far fa-clock fa-2x"></i>
+    </div>
+    <div class="col-4">
+      <strong>Prep. Time: </strong> {{recipe.prep_time}}
+    </div>
+    <div class="col-6">
+      <strong>Cook Time: </strong> {{recipe.cook_time}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-2">
+      <i class="fas fa-utensils fa-2x"></i>
+    </div>
+    <div class="col-10">
+      <strong>No. of servings: </strong> {{recipe.no_servings}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-2">
+      <i class="fas fa-blender fa-2x"></i>
+    </div>
+    <div class="col-10">
+      <strong>Tools used: </strong> {{recipe.tools}}
+    </div>
+  </div>
+</div>
+    
+      
+    
+    <div id="ingredients" class="container">
+      {{recipe.ingredients}}
+    </div>
+    
+    <div id="prep" class="container">
+      Preparation Steps
+    </div>
+  </div>
+
 
 
 {% endblock %}

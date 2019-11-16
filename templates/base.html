@@ -5,7 +5,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css" />
 </head>
 
@@ -47,10 +47,10 @@
         
     </header>
     
-    <div class="center">
+    <div class="center-img">
             <img class="main-img" src="static/images/lets-cook-logo.png"></img>
     </div>
-    <div> <BR> </div>
+    
     
         {% block content %} {% endblock %}
     
@@ -58,16 +58,16 @@
     <footer class="page-footer cyan darken-4">
         <div class="container">
             <div class="row">
-                <div class="col l6 s12">
+                <div class="col-sm-12 col-md-6">
                     <h5 class="white-text">Footer Content</h5>
                     
                     <span class="grey-text text-lighten-4 ">
-                        <a href="facebook.html"><i class="fab fa-facebook-square"></i></a>
-                        <a href="twitter.html"><i class="fab fa-twitter-square"></i></a>
-                        <a href="instagram.html"><i class="fab fa-instagram"></i></a>
+                        <a href="facebook.html"><i class="fab fa-facebook-square fa-3x"></i></a>
+                        <a href="twitter.html"><i class="fab fa-twitter-square fa-3x"></i></a>
+                        <a href="instagram.html"><i class="fab fa-instagram fa-3x"></i></a>
                     </span>
                 </div>
-                <div class="col l4 offset-l2 s12">
+                <div class="col-sm-12 col-md-4 offset-md-6">
                     <h5 class="white-text">Links</h5>
                     <ul>
                         <li><a class="grey-text text-lighten-3" href="{{url_for('get_catalog')}}">Full Recipe Catalog</a></li>

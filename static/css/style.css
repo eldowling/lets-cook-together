@@ -5,12 +5,13 @@
   max-width: 230px;
 }
 
-.center {
+.center-img {
   margin: auto;
   min-width: 250px;
   width: 30%;
   border: 3px solid #73AD21;
   padding: 10px;
+  margin-bottom: 4em;
 }
 .tabs .tab a{
     color:#00838f;
