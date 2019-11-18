@@ -16,10 +16,10 @@ mongo = PyMongo(app)
 #def get_catalog(course):
 @app.route('/get_catalog')
 def get_catalog():
-    #if course == '':*/
+#    if course == '':
         return render_template("catalog.html", recipes=mongo.db.recipes.find())
-    #if course != '':
-    #    return render_template("catalog.html", recipes=mongo.db.recipes.find({ "recipes.course": course }))
+#    if course != '':
+#        return render_template("catalog.html", recipes=mongo.db.recipes.find({ "recipes.course": course }))
     
 #@app.route('/get_catalog/<course_id>')
 #def show_recipe(recipe_id):

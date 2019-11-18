@@ -1,3 +1,7 @@
+.navbar{
+  margin-bottom: 2em;
+  background-color: #00838f;
+}
 .main-img {
   display: inline-block;
   vertical-align: middle;

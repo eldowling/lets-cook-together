@@ -4,48 +4,36 @@
 <head>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css" />
 </head>
 
 <body>
-    <header>
-        <!-- Dropdown Structure -->
-        <ul id="dropdown1" class="dropdown-content">
-            <li><a href="#!">one</a></li>
-            <li><a href="#!">two</a></li>
-            <li class="divider"></li>
-            <li><a href="#!">three</a></li>
-        </ul>        
+    <nav class="navbar navbar-expand-lg navbar-dark">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="#">Let's Cook</a>
 
-        <nav>
-            <div class="nav-wrapper cyan darken-4">
-                
-                <form>
-                    <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-                    <div class="input-field inline ">
-                        <input id="search" type="search" required>
-                        <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                        <i class="material-icons">close</i>
-                    </div>
-                    <ul id="nav-mobile" class="right hide-on-med-and-down">
-                        <li><a href="addedit-recipe.html">Add Recipe</a></li>
-                        <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Advanced Search<i class="material-icons right">arrow_drop_down</i></a></li>
-                    </ul>  
-                    
-                </form>
-                
-            </div>
-        </nav>
-        
-        <ul class="sidenav" id="mobile-demo">
-            <li><a href="addedit-recipe.html">Add Recipe</a></li>
-            <li><a href="badges.html">Advanced Search</a></li>
-        </ul>
-    
-        
-    </header>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
     
     <div class="center-img">
             <img class="main-img" src="static/images/lets-cook-logo.png"></img>
@@ -88,15 +76,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $('.collapsible').collapsible();
-            $('select').material_select();
-            $(".button-collapse").sideNav();
-            $(".dropdown-trigger").dropdown();
-            $('.sidenav').sidenav();
-            $('.dropdown-toggle').dropdown();
+            
             $('.tabs').tabs();
         });
         
