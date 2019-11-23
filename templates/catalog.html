@@ -7,35 +7,26 @@
     <div class="col s2 offset-s4">
       <h5>Filter By:</h5>
     </div>
-    <div class="col s3">
-      <div class="form-group">
-        <label for="selectCourse">Course</label>
-        <select class="form-control" id="selectCourse">
-          <option>Select Course</option>
-          <option><a href="{{url_for('get_catalog', course="breakfast")}}" >Breakfast</a></option>
-          <option>Lunch</option>
-          <option>Soup</option>
-          <option>Main</option>
-          <option>Dessert</option>
-        </select>
-      </div>
-    </div>
-    <div class="col s3">
-      <div class="form-group">
-        <label for="selectCuisine">Cuisine</label>
-        <select class="form-control" id="selectCuisine">
-          <option>Select Cuisine</option>
-          <option>Americian</option>
-          <option>Chinese</option>
-          <option>English</option>
-          <option>French</option>
-          <option>Italian</option>
-          <option>Mexican</option>
-        </select>
-      </div>
+    <div class="col s6">
+      <ul class="nav nav-pills">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Course</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="{{url_for('get_catalog')}}">All Courses</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{{url_for('get_catalog_bycourse', course="Breakfast")}}">Breakfast</a>
+            <a class="dropdown-item" href="{{url_for('get_catalog_bycourse', course="lunch")}}">Lunch</a>
+            <a class="dropdown-item" href="{{url_for('get_catalog_bycourse', course="soup")}}">Soup</a>
+            <a class="dropdown-item" href="{{url_for('get_catalog_bycourse', course="Main")}}">Main</a>
+            <a class="dropdown-item" href="{{url_for('get_catalog_bycourse', course="dessert")}}">Dessert</a>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
 </div>
+
+
 
 
 <div class="container yellow lighten-4">
