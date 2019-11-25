@@ -41,6 +41,11 @@ def show_recipe(recipe_id):
     the_recipe =  mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
 #    all_categories =  mongo.db.categories.find()
     return render_template('recipe.html', recipe=the_recipe)
+
+@app.route('/add_recipe')
+def add_new_recipe():
+    return render_template('add-recipe.html')
+    
     
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
