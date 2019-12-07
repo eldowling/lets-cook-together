@@ -46,3 +46,7 @@
 #nutr-border .row:not(:last-child) {
   margin-bottom: 0;
 }
+
+.waves-light {
+    @extend .teal, .darken-1;
+}

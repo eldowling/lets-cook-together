@@ -1,3 +1,0 @@
-.waves-light {
-    @extend .teal, .darken-1;
-}

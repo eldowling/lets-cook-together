@@ -43,8 +43,13 @@ def show_recipe(recipe_id):
     return render_template('recipe.html', recipe=the_recipe)
 
 @app.route('/add_recipe')
-def add_new_recipe():
+def add_edit_recipe():
     return render_template('add-recipe.html')
+
+@app.route('/add_recipe/<recipe_id>')
+def edit_recipe(recipe_id):
+    the_recipe =  mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+    return render_template('add-recipe.html', recipe=the_recipe)
     
     
 if __name__ == '__main__':
