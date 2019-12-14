@@ -7,18 +7,18 @@
     <form class="col s12">
       <div class="row">
         <div class="input-field col s12">
-          <input id="recipe_name" type="text" class="validate">
+          <input id="recipe_name" type="text" class="validate" value = "{{ recipe.title }}">
           <label for="recipe_name">Recipe Name</label>
         </div>
         <div class="input-field col s12">
-          <input id="descr" type="text" class="validate">
+          <input id="descr" type="text" class="validate" value = "{{ recipe.description }}">
           <label for="descr">Description</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s6 m4">
           <select>
-            <option value="" disabled selected>Select option</option>
+            <option value = "{{ recipe.course }}" disabled selected>Select option</option>
             <option value="1">Option 1</option>
             <option value="2">Option 2</option>
             <option value="3">Option 3</option>
@@ -27,7 +27,7 @@
         </div>
         <div class="input-field col s6 m4">
           <select>
-            <option value="" disabled selected>Select option</option>
+            <option value = "{{ recipe.cuisine }}" disabled selected>Select option</option>
             <option value="1">Option 1</option>
             <option value="2">Option 2</option>
             <option value="3">Option 3</option>
@@ -46,15 +46,15 @@
       </div>
       <div class="row">
         <div class="input-field col s4">
-          <input id="prep_time" type="text" class="validate">
+          <input id="prep_time" type="text" class="validate" value = "{{ recipe.prep_time }}">
           <label for="prep_time">Prep. Time</label>
         </div>
         <div class="input-field col s4">
-          <input id="cook_time" type="text" class="validate">
+          <input id="cook_time" type="text" class="validate" value = "{{ recipe.cook_time }}">
           <label for="cook_time">Cook Time</label>
         </div>
         <div class="input-field col s4">
-          <input id="no_serv" type="text" class="validate">
+          <input id="no_serv" type="text" class="validate" value = "{{ recipe.no_servings }}">
           <label for="no_serv">No. Servings</label>
         </div>
       </div>
@@ -65,25 +65,25 @@
       </div>
       <div class="row">
         <div class="input-field col s4">
-          <input id="kcal" type="text" class="validate">
+          <input id="kcal" type="text" class="validate" value = "{{ recipe.kcal }}">
           <label for="kcal">KCal</label>
         </div>
         <div class="input-field col s4">
-          <input id="fat" type="text" class="validate">
+          <input id="fat" type="text" class="validate" value = "{{ recipe.fat }}">
           <label for="fat">Fat</label>
         </div>
         <div class="input-field col s4">
-          <input id="carbs" type="text" class="validate">
+          <input id="carbs" type="text" class="validate" value = "{{ recipe.carbohydrate }}">
           <label for="carbs">Carbs</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s4">
-          <input id="salt" type="text" class="validate">
+          <input id="salt" type="text" class="validate"  value = "{{ recipe.salt }}">
           <label for="salt">Salt</label>
         </div>
         <div class="input-field col s4">
-          <input id="sugar" type="text" class="validate">
+          <input id="sugar" type="text" class="validate" value = "{{ recipe.sugars }}">
           <label for="sugar">Sugars</label>
         </div>
       </div>
@@ -94,7 +94,7 @@
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <textarea id="ingrd_textarea1" class="materialize-textarea"></textarea>
+          <textarea id="ingrd_textarea1" class="materialize-textarea" value = "{{ recipe.ingredients }}"></textarea>
           <label for="ingrd_textarea1">Ingredients</label>
         </div>
       </div>
@@ -111,7 +111,7 @@
       </div>
       <div class="row">
         <div class="input-field col s6">
-          <a class="waves-effect waves-light btn">Save Recipe</a>
+          <a class="waves-effect waves-light btn">Update Recipe</a>
         </div>
         <div class="input-field col s6">
           <a class="waves-effect waves-light btn">Cancel</a>
