@@ -55,10 +55,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script type="text/javascript">
         $(document).ready(function() {
+            $('.modal').modal();
             $('.dropdown-trigger').dropdown();
             $('.tabs').tabs();
             $('select').formSelect();
         });
+
+        var dropdowns = document.querySelectorAll('.dropdown-trigger')
+        for (var i = 0; i < dropdowns.length; i++){
+            M.Dropdown.init(dropdowns[i]);
+        }
+
+        var instance = M.Tabs.getInstance(elem);
         
         
         
