@@ -10,7 +10,25 @@
 </head>
 
 <body>
+    <nav>
+        <div class="nav-wrapper">
+        <a href="#!" class="brand-logo">Let's Cook</a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+            <li><a href="{{url_for('get_catalog')}}">Home</a></li>
+            <li><a href="{{url_for('add_edit_recipe')}}">Add Recipe</a></li>
+            <li><a href="#">Maintenance</a></li>
+            <li><a href="#">Search</a></li>
+        </ul>
+        </div>
+    </nav>
 
+    <ul class="sidenav" id="mobile-demo">
+        <li><a href="{{url_for('get_catalog')}}">Home</a></li>
+            <li><a href="{{url_for('add_edit_recipe')}}">Add Recipe</a></li>
+            <li><a href="#">Maintenance</a></li>
+            <li><a href="#">Search</a></li>
+    </ul>
     
     <div class="center-img">
             <img class="main-img" src="static/images/lets-cook-logo.png"></img>
@@ -57,6 +75,7 @@
         $(document).ready(function() {
             $('.modal').modal();
             $('.dropdown-trigger').dropdown();
+            $('.sidenav').sidenav();
             $('.tabs').tabs();
             $('select').formSelect();
         });
