@@ -29,13 +29,7 @@ def get_catalog_bycourse(course):
 #    if course != '':
  #       return render_template("catalog.html", recipes=mongo.db.recipes.find({ "course": 'breakfast' }))
     
-#@app.route('/get_catalog/<course_id>')
-#def show_recipe(recipe_id):
-#    course =  mongo.db.recipes.find_one({"course": ObjectId(course)})
-#    all_courses =  mongo.db.categories.find()
-#    return render_template('catalog.html', task=the_recipe,
-#                           categories=all_categories)
-    
+ 
 @app.route('/show_recipe/<recipe_id>')
 def show_recipe(recipe_id):
     the_recipe =  mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
@@ -44,7 +38,16 @@ def show_recipe(recipe_id):
 
 @app.route('/add_recipe')
 def add_edit_recipe():
-    return render_template('add-recipe.html')
+    return render_template('add-recipe.html', 
+                            courses=mongo.db.courses.find(),  
+                            cuisines=mongo.db.cuisine.find(),
+                            tools=mongo.db.tools.find())
+
+@app.route('/insert_recipe', methods=['POST'])
+def insert_recipe():
+    recipes = mongo.db.recipies
+    recipes.insert_one(request.form.to_dict())
+    return redirect(url_for('get_catalog'))
 
 @app.route('/edit_recipe/<recipe_id>')
 def edit_recipe(recipe_id):

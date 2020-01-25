@@ -3,11 +3,11 @@
   <h2>Add Recipe</h2>
 </div>
 <div class="row">
-    <form class="col s12">
+    <form action="{{ url_for('insert_recipe') }}" method="POST" class="col s12">
       <div class="row">
         <div class="input-field col s6">
-          <input placeholder="Placeholder" id="recipe_name" type="text" class="validate">
-          <label for="recipe_name">Recipe Name</label>
+          <input placeholder="Placeholder" id="title" type="text" class="validate">
+          <label for="title">Recipe Title</label>
         </div>
         <div class="input-field col s12 m6">
           <input id="description" type="text" class="validate">
@@ -16,23 +16,23 @@
       </div>
       <div class="row">
         <div class="input-field col s6">
-			<select>
-			  <option value="" disabled selected>Choose your option</option>
-			  <option value="1">Option 1</option>
-			  <option value="2">Option 2</option>
-			  <option value="3">Option 3</option>
-			</select>
-			<label>Select Course</label>
-		</div>
+            <select id="course" name="course">
+                <option value="" disabled selected>Choose Course</option>
+                {% for course in courses %}
+                    <option value="{{course.course_desc}}">{{course.course_desc}}</option>
+                {% endfor %}
+            </select>
+            <label>Course</label>
+        </div>
         <div class="input-field col s6">
-			<select>
-			  <option value="" disabled selected>Choose your option</option>
-			  <option value="1">Option 1</option>
-			  <option value="2">Option 2</option>
-			  <option value="3">Option 3</option>
-			</select>
-			<label>Select Cuisine</label>
-		</div>
+            <select id="cuisine" name="cuisine">
+                <option value="" disabled selected>Choose Cuisine</option>
+                {% for cuisine in cuisines %}
+                    <option value="{{cuisine.cuisine_name}}">{{cuisine.cuisine_name}}</option>
+                {% endfor %}
+            </select>
+            <label>Cuisine</label>
+        </div>
       </div>
       <div class="row">
         <div class="input-field col s4">
@@ -44,8 +44,8 @@
           <label for="cook_time">Cook Time</label>
         </div>
         <div class="input-field col s4">
-          <input id="no_serv" type="text" class="validate">
-          <label for="no_serv">No. Servings</label>
+          <input id="no_servings" type="text" class="validate">
+          <label for="no_servings">No. Servings</label>
         </div>
       </div>
       <div class="row">
@@ -73,8 +73,8 @@
           <label for="salt">Salt</label>
         </div>
         <div class="input-field col s4">
-          <input id="sugar" type="text" class="validate">
-          <label for="sugar">Sugars</label>
+          <input id="sugars" type="text" class="validate">
+          <label for="sugars">Sugars</label>
         </div>
       </div>
       <div class="row">
@@ -84,8 +84,8 @@
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <textarea id="ingrd_textarea1" class="materialize-textarea"></textarea>
-          <label for="ingrd_textarea1">Ingredients</label>
+          <textarea id="ingredients" class="materialize-textarea"></textarea>
+          <label for="ingredients">Ingredients</label>
         </div>
       </div>
       <div class="row">
@@ -95,17 +95,15 @@
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <textarea id="prep_textarea2" class="materialize-textarea"></textarea>
-          <label for="prep_textarea2">Preparation Steps</label>
+          <textarea id="prep_steps" class="materialize-textarea"></textarea>
+          <label for="prep_steps">Preparation Steps</label>
         </div>
       </div>
       <div class="row">
-        <div class="input-field col s3 offset-s3 m4 offset-m4">
-          <a class="waves-effect waves-light btn">Save Recipe</a>
-        </div>
-        <div class="input-field col s3 m4">
-          <a class="waves-effect waves-light btn">Cancel</a>
-        </div>
+        <button class="btn waves-effect waves-light" type="submit">Add Recipe
+            <i class="material-icons right">playlist_add</i>
+        </button>
+        
       </div>
     </form>
   </div>
