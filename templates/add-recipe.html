@@ -35,25 +35,76 @@
 		</div>
       </div>
       <div class="row">
-        <div class="input-field col s12">
-          <input id="password" type="password" class="validate">
-          <label for="password">Password</label>
+        <div class="input-field col s4">
+          <input id="prep_time" type="text" class="validate">
+          <label for="prep_time">Prep. Time</label>
         </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <input id="email" type="email" class="validate">
-          <label for="email">Email</label>
+        <div class="input-field col s4">
+          <input id="cook_time" type="text" class="validate">
+          <label for="cook_time">Cook Time</label>
+        </div>
+        <div class="input-field col s4">
+          <input id="no_serv" type="text" class="validate">
+          <label for="no_serv">No. Servings</label>
         </div>
       </div>
       <div class="row">
         <div class="col s12">
-          This is an inline input field:
-          <div class="input-field inline">
-            <input id="email_inline" type="email" class="validate">
-            <label for="email_inline">Email</label>
-            <span class="helper-text" data-error="wrong" data-success="right">Helper text</span>
-          </div>
+          <em>Nutritional Values:</em>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s4">
+          <input id="kcal" type="text" class="validate">
+          <label for="kcal">KCal</label>
+        </div>
+        <div class="input-field col s4">
+          <input id="fat" type="text" class="validate">
+          <label for="fat">Fat</label>
+        </div>
+        <div class="input-field col s4">
+          <input id="carbs" type="text" class="validate">
+          <label for="carbs">Carbs</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s4">
+          <input id="salt" type="text" class="validate">
+          <label for="salt">Salt</label>
+        </div>
+        <div class="input-field col s4">
+          <input id="sugar" type="text" class="validate">
+          <label for="sugar">Sugars</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <em>Ingredients:</em>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea id="ingrd_textarea1" class="materialize-textarea"></textarea>
+          <label for="ingrd_textarea1">Ingredients</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <em>Preparation Steps:</em>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea id="prep_textarea2" class="materialize-textarea"></textarea>
+          <label for="prep_textarea2">Preparation Steps</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s3 offset-s3 m4 offset-m4">
+          <a class="waves-effect waves-light btn">Save Recipe</a>
+        </div>
+        <div class="input-field col s3 m4">
+          <a class="waves-effect waves-light btn">Cancel</a>
         </div>
       </div>
     </form>
