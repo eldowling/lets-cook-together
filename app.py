@@ -45,7 +45,7 @@ def add_edit_recipe():
 
 @app.route('/insert_recipe', methods=['POST'])
 def insert_recipe():
-    recipes = mongo.db.recipies
+    recipes = mongo.db.recipes
     recipes.insert_one(request.form.to_dict())
     return redirect(url_for('get_catalog'))
 

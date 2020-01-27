@@ -6,11 +6,11 @@
     <form action="{{ url_for('insert_recipe') }}" method="POST" class="col s12">
       <div class="row">
         <div class="input-field col s6">
-          <input placeholder="Placeholder" id="title" type="text" class="validate">
+          <input placeholder="Placeholder" id="title" name="title" type="text" class="validate">
           <label for="title">Recipe Title</label>
         </div>
         <div class="input-field col s12 m6">
-          <input id="description" type="text" class="validate">
+          <input id="description" name="description" type="text" class="validate">
           <label for="description">Description</label>
         </div>
       </div>
@@ -36,15 +36,15 @@
       </div>
       <div class="row">
         <div class="input-field col s4">
-          <input id="prep_time" type="text" class="validate">
+          <input id="prep_time" name="prep_time" type="text" class="validate">
           <label for="prep_time">Prep. Time</label>
         </div>
         <div class="input-field col s4">
-          <input id="cook_time" type="text" class="validate">
+          <input id="cook_time"  name="cook_time" type="text" class="validate">
           <label for="cook_time">Cook Time</label>
         </div>
         <div class="input-field col s4">
-          <input id="no_servings" type="text" class="validate">
+          <input id="no_servings" name="no_servings" type="text" class="validate">
           <label for="no_servings">No. Servings</label>
         </div>
       </div>
@@ -55,25 +55,25 @@
       </div>
       <div class="row">
         <div class="input-field col s4">
-          <input id="kcal" type="text" class="validate">
+          <input id="kcal" name="kcal" type="text" class="validate">
           <label for="kcal">KCal</label>
         </div>
         <div class="input-field col s4">
-          <input id="fat" type="text" class="validate">
+          <input id="fat" name="fat" type="text" class="validate">
           <label for="fat">Fat</label>
         </div>
         <div class="input-field col s4">
-          <input id="carbs" type="text" class="validate">
+          <input id="carbs" name="carbs" type="text" class="validate">
           <label for="carbs">Carbs</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s4">
-          <input id="salt" type="text" class="validate">
+          <input id="salt" name="salt" type="text" class="validate">
           <label for="salt">Salt</label>
         </div>
         <div class="input-field col s4">
-          <input id="sugars" type="text" class="validate">
+          <input id="sugars" name="sugars" type="text" class="validate">
           <label for="sugars">Sugars</label>
         </div>
       </div>
@@ -84,7 +84,7 @@
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <textarea id="ingredients" class="materialize-textarea"></textarea>
+          <textarea id="ingredients" name="ingredients" class="materialize-textarea"></textarea>
           <label for="ingredients">Ingredients</label>
         </div>
       </div>
@@ -95,7 +95,7 @@
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <textarea id="prep_steps" class="materialize-textarea"></textarea>
+          <textarea id="prep_steps" name="prep_steps" class="materialize-textarea"></textarea>
           <label for="prep_steps">Preparation Steps</label>
         </div>
       </div>
