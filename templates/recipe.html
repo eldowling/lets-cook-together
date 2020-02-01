@@ -24,23 +24,51 @@
 	<div class="row">
       <div class="col s2"><i class="fas fa-coffee fa-2x"></i></div>
 	  <div class="row">
-        <div class="col s5"><strong>Course: </strong></div>
+        <div class="col s5"><span class="text-darken-2">Course: </span>{{recipe.course}}</div>
         <div class="col s5"><strong>Cuisine: </strong>{{recipe.cuisine}}</div>
 	  </div>
-      <div class="row">
-        <div class="col s5">{{recipe.course}}</div>
-        <div class="col s5">{{recipe.cuisine}}</div>
-	  </div>
+      
     </div>
 	<div class="row">
       <div class="col s2"><i class="far fa-clock fa-2x"></i></div>
-	  <div class="col s5"><strong>Prep. Time: </strong></div>
-	  <div class="col s5"><strong>Cook Time: </strong></div>
+	  <div class="col s5"><strong>Prep. Time: </strong>{{recipe.prep_time}}</div>
+	  <div class="col s5"><strong>Cook Time: </strong>{{recipe.cook_time}}</div>
     </div>
     <div class="row">
-      <div class="col s2"></div>
-	  <div class="col s5">{{recipe.prep_time}}</div>
-	  <div class="col s5">{{recipe.cook_time}}</div>
+      <div class="col s2"><i class="fas fa-utensils fa-2x"></i></div>
+	  <div class="col s5"><strong>No. of servings: </strong> {{recipe.no_servings}}</div>
+	  <div class="col s5"></div>
+    </div>
+    <div class="row">
+      <div class="col s2"><i class="fas fa-blender fa-2x"></i></div>
+	  <div class="col s10"><strong>Tools used: </strong> {{recipe.tools}}</div>
+    </div>
+    <div class="row">
+      <div class="col s2"><i class="fas fa-chart-pie fa-2x"></i></div>
+	  <div class="col s10"><strong>Nutrition</strong> per serving:</div>
+    </div>
+    <div class="row">
+        <div class="col s2"></div>
+        <div class="col s10">
+            <div class="container-fluid" id="nutr-border">
+                <div class="row">
+                
+                <div class="col s2">Kcal</div>
+                <div class="col s2">Fat</div>
+                <div class="col s2">Carbs.</div>
+                <div class="col s2">Sugar</div>
+                <div class="col s2">Salt</div>
+                </div>
+                <div class="row">
+                <div class="col s2"></div>
+                <div class="col s2">{{recipe.kcal}}</div>
+                <div class="col s2">{{recipe.fat}}</div>
+                <div class="col s2">{{recipe.carbs}}</div>
+                <div class="col s2">{{recipe.sugars}}</div>
+                <div class="col s2">{{recipe.salt}}</div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
