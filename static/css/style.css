@@ -39,6 +39,7 @@
 
 #nutr-border .col {
   border: 2px solid #c9c9c9;
+  font-size: 12px;
 }
 
 #nutr-border .col:not(:last-child) {
