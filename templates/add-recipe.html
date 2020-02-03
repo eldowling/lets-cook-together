@@ -33,6 +33,15 @@
             </select>
             <label>Cuisine</label>
         </div>
+        <div class="input-field col s6">
+            <select multiple id="tools" name="tools">
+                <option value="" disabled selected>Choose Tools Used</option>
+                {% for tool in tools %}
+                    <option value="{{tool.tool_name}}">{{tool.tool_name}}</option>
+                {% endfor %}
+            </select>
+            <label>Tools Used</label>
+        </div>
       </div>
       <div class="row">
         <div class="input-field col s4">

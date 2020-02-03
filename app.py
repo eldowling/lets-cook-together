@@ -54,6 +54,10 @@ def edit_recipe(recipe_id):
     the_recipe =  mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
     the_ingredients = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)}).ingredients
     return render_template('edit-recipe.html', recipe=the_recipe, ingrd_list=the_ingredients)
+
+@app.route('/maintenance')
+def maintenance():
+    return render_template("maintenance.html", courses=mongo.db.courses.find())
     
     
 if __name__ == '__main__':

@@ -48,6 +48,7 @@
 
 #nutr-border .row:not(:last-child) .col {
   border-bottom-width: 0;
+  background-color:#00b8d4;
 }
 
 #nutr-border .row:not(:last-child) {
