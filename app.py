@@ -57,7 +57,8 @@ def edit_recipe(recipe_id):
 
 @app.route('/maintenance')
 def maintenance():
-    return render_template("maintenance.html", courses=mongo.db.courses.find())
+    return render_template("maintenance.html", courses=mongo.db.courses.find(), 
+                        cuisines=mongo.db.cuisine.find(), tools=mongo.db.tools.find())
     
     
 if __name__ == '__main__':

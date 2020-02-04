@@ -1,8 +1,8 @@
 {% extends 'base.html'%} {% block content %}
 <div class="container">
   <div class="row  justify-content-center">
-    <div class="col s12 center">
-      <h2>{{ recipe.title }}</h2>
+    <div class="col s12 center title-block">
+      <h3 class="white-text text-darken-2">{{ recipe.title }}</h3>
     </div>
   </div>
 </div>
@@ -47,24 +47,27 @@
             <div class="col s10"><b>Nutrition per serving:</b></div>
         </div>
         <div class="row">
-            <div class="col s2"></div>
-            <div class="col s10">
-                <div class="container-fluid" id="nutr-border">
-                    <div class="row"><div class="col s2"><b>Kcal</b></div>
-                        <div class="col s2"><b>Fat</b></div>
-                        <div class="col s2"><b>Carbs.</b></div>
-                        <div class="col s2"><b>Sugar</b></div>
-                        <div class="col s2"><b>Salt</b></div>
-                    </div>
-                    <div class="row">
-                        <div class="col s2">{{recipe.kcal}}</div>
-                        <div class="col s2">{{recipe.fat}}</div>
-                        <div class="col s2">{{recipe.carbs}}</div>
-                        <div class="col s2">{{recipe.sugars}}</div>
-                        <div class="col s2">{{recipe.salt}}</div>
-                    </div>
-                </div>
-            </div>
+            <table>
+                <thead>
+                <tr>
+                    <th>Kcal</th>
+                    <th>Fat</th>
+                    <th>Carbs</th>
+                    <th>Sugar</th>
+                    <th>Salt</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td>{{recipe.kcal}}</td>
+                    <td>{{recipe.fat}}</td>
+                    <td>{{recipe.carbs}}</td>
+                    <td>{{recipe.sugars}}</td>
+                    <td>{{recipe.salt}}</td>
+                </tr>          
+                </tbody>
+            </table>
         </div>
     </div>
 
