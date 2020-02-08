@@ -45,8 +45,32 @@ def add_edit_recipe():
 
 @app.route('/insert_recipe', methods=['POST'])
 def insert_recipe():
+
+    if request.method == "POST":
+        tempIngList = request.form.to_dict("ingredients")
+        ingredList = tempIngList.split('\r\n')
+        tempPrepSteps = request.form.to_dict("prep_steps")
+        prepStepsList = tempPrepSteps.split('\r\n')
+        save_recipe = {
+            "title": request.form.to_dict("title"),
+            "description": request.form.to_dict("description"),
+            "course": request.form.to_dict("course"),
+            "cuisine": request.form.to_dict("cuisine"),
+            "tools": request.form.to_dict("tools"),
+            "prep_time": request.form.to_dict("prep_time"),
+            "cook_time": request.form.to_dict("cook_time"),
+            "no_servings": request.form.to_dict("no_servings"),
+            "kcal": request.form.to_dict("kcal"),
+            "fat": request.form.to_dict("fat"),
+            "carbs": request.form.to_dict("carbs"),
+            "salt": request.form.to_dict("salt"),
+            "sugars": request.form.to_dict("sugars"),
+            "ingredients": request.form.to_dict("ingredList"),
+            "prep_steps": request.form.to_dict("prepStepsList")
+        }
+
     recipes = mongo.db.recipes
-    recipes.insert_one(request.form.to_dict())
+    recipes.insert_one(request.form.to_dict(save_recipe))
     return redirect(url_for('get_catalog'))
 
 @app.route('/edit_recipe/<recipe_id>')
