@@ -72,16 +72,18 @@
     </div>
 
     <div id="ingredients" class="container">
+        <span>Ingredients: {{recipe.ingredients}}</span>
         <ul>
-            {% for key in recipe.ingredients %}
-                <li><i class="fas fa-check"></i> {{key}}</li>
+            {% for temp in recipe.ingredients.split('\n') %}
+                <li><i class="fas fa-check"></i> {{temp}}</li>
             {% endfor %}
         </ul>
     </div>
     
     <div id="prepsteps" class="container">
+    <span>Prep. Steps {{recipe.prep_steps}}</span>
       <ol>
-            {% for key in recipe.prep_steps %}
+            {% for key in recipe.prep_steps.split('\n') %}
                 <li>{{key}}</li>
             {% endfor %}
         </ol>

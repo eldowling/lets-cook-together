@@ -47,10 +47,9 @@ def add_edit_recipe():
 def insert_recipe():
 
     if request.method == "POST":
-        tempIngList = request.form.to_dict("ingredients")
-        ingredList = tempIngList.split('\r\n')
-        tempPrepSteps = request.form.to_dict("prep_steps")
-        prepStepsList = tempPrepSteps.split('\r\n')
+        ingredients = request.form.get("ingredients").splitlines()
+        prep_steps = request.form.get("prep_steps").splitlines()
+        
         save_recipe = {
             "title": request.form.to_dict("title"),
             "description": request.form.to_dict("description"),
@@ -65,8 +64,8 @@ def insert_recipe():
             "carbs": request.form.to_dict("carbs"),
             "salt": request.form.to_dict("salt"),
             "sugars": request.form.to_dict("sugars"),
-            "ingredients": request.form.to_dict("ingredList"),
-            "prep_steps": request.form.to_dict("prepStepsList")
+            "ingredients": request.form.to_dict("ingredients"),
+            "prep_steps": request.form.to_dict("prep_steps")
         }
 
     recipes = mongo.db.recipes
