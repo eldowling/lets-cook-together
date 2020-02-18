@@ -1,8 +1,8 @@
 {% extends 'base.html'%} {% block content %}
 <div class="container">
   <div class="row  justify-content-center">
-    <div class="col s12 center title-block">
-      <h3 class="white-text text-darken-2">{{ recipe.title }}</h3>
+    <div class="col s12 center">
+      <h3 class="white-text text-darken-2 title-block">{{ recipe.title }}</h3>
     </div>
   </div>
 </div>
@@ -47,40 +47,73 @@
             <div class="col s10"><b>Nutrition per serving:</b></div>
         </div>
         <div class="row hide-on-med-and-up">
-            <div class="col s3 offset-s2" ><b>Kcal</b></div>
-            <div class="col s3"><b>Carbs</b></div>
-            <div class="col s3"><b>Fat</b></div>
+            <table>
+                <thead>
+                <tr>
+                    <th> </th>
+                    <th>Kcal</th>
+                    <th>Carbs</th>
+                    <th>Fat</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td> </td>
+                    <td>{{recipe.kcal}}</td>
+                    <td>{{recipe.carbs}}</td>
+                    <td>{{recipe.fat}}</td>
+                </tr>          
+                </tbody>
+            </table>
+        </div><div class="row hide-on-med-and-up">
+            <table>
+                <thead>
+                <tr>
+                    <th> </th>
+                    <th>Sugar</th>
+                    <th>Salt</th>
+                    <th>Fibre</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td> </td>
+                    <td>{{recipe.sugars}}</td>
+                    <td>{{recipe.salt}}</td>
+                    <td>{{recipe.fibre}}</td>
+                </tr>          
+                </tbody>
+            </table>
         </div>
-        <div class="row hide-on-med-and-up">
-            <div class="col s3 offset-s2">{{recipe.kcal}}</div>
-            <div class="col s3">{{recipe.carbs}}</div>
-            <div class="col s3">{{recipe.fat}}</div>
-        </div>
-        <div class="row hide-on-med-and-up">
-            <div class="col s3 offset-s2"><b>Sugars</b></div>
-            <div class="col s3"><b>Salt</b></div>
-            <div class="col s3"><b>Fibre</b></div>
-        </div>
-        <div class="row hide-on-med-and-up">            
-            <div class="col s3 offset-s2">{{recipe.sugars}}</div>
-            <div class="col s3">{{recipe.salt}}</div>
-            <div class="col s3">{{recipe.fibre}}</div>
-        </div>
+
         <div class="row hide-on-small-only">
-            <div class="col m2"><b>Kcal</b></div>
-            <div class="col m2"><b>Carbs</b></div>
-            <div class="col m2"><b>Fat</b></div>
-            <div class="col m2"><b>Sugars</b></div>
-            <div class="col m2"><b>Salt</b></div>
-            <div class="col m2"><b>Fibre</b></div>   
-        </div>
-        <div class="row hide-on-small-only">
-            <div class="col m2">{{recipe.kcal}}</div>
-            <div class="col m2">{{recipe.carbs}}</div>
-            <div class="col m2">{{recipe.fat}}</div>
-            <div class="col m2">{{recipe.sugars}}</div>
-            <div class="col m2">{{recipe.salt}}</div>
-            <div class="col m2">{{recipe.fibre}}</div>
+            <table>
+                <thead>
+                <tr>
+                    <th> </th>
+                    <th>Kcal</th>
+                    <th>Carbs</th>
+                    <th>Fat</th>
+                    <th>Sugar</th>
+                    <th>Salt</th>
+                    <th>Fibre</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td> </td>
+                    <td>{{recipe.kcal}}</td>
+                    <td>{{recipe.carbs}}</td>
+                    <td>{{recipe.fat}}</td>
+                    <td>{{recipe.sugars}}</td>
+                    <td>{{recipe.salt}}</td>
+                    <td>{{recipe.fibre}}</td>
+                </tr>          
+                </tbody>
+            </table>
         </div>
     </div>
 
