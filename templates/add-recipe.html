@@ -39,7 +39,7 @@
         </div>
         <div class="input-field col s6">
             <select multiple id="tools" name="tools">
-                <option value="" disabled selected>Choose Tools Used</option>
+                <option value="" disabled>Choose Tools Used</option>
                 {% for tool in tools %}
                     <option value="{{tool.tool_name}}">{{tool.tool_name}}</option>
                 {% endfor %}
