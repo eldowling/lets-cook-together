@@ -7,8 +7,6 @@
   </div>
 </div>
 
-<div class="show-on-small hide-on-med-and-up">This is a new section</div>
-
 <div class="row">
     <div class="col s12">
       <ul class="tabs">
@@ -49,36 +47,40 @@
             <div class="col s10"><b>Nutrition per serving:</b></div>
         </div>
         <div class="row hide-on-med-and-up">
-            <div class="col s4 m2" id="nutr-border"><b>kcal</b></div>
-            <div class="col s4 m2"><b>carbs</b></div>
-            <div class="col s4 m2"><b>fat</b></div>
-            <div class="col s4 m2">{{recipe.kcal}}</div>
-            <div class="col s4 m2">{{recipe.carbs}}</div>
-            <div class="col s4 m2">{{recipe.fat}}</div>
+            <div class="col s3 offset-s2" ><b>Kcal</b></div>
+            <div class="col s3"><b>Carbs</b></div>
+            <div class="col s3"><b>Fat</b></div>
         </div>
         <div class="row hide-on-med-and-up">
-            <div class="col s4 m2"><b>sugar</b></div>
-            <div class="col s4 m2"><b>salt</b></div>
-            <div class="col s4 m2"><b>fiber</b></div>            
-            <div class="col s4 m2">{{recipe.sugars}}</div>
-            <div class="col s4 m2">{{recipe.salt}}</div>
-            <div class="col s4 m2">fiber</div>
+            <div class="col s3 offset-s2">{{recipe.kcal}}</div>
+            <div class="col s3">{{recipe.carbs}}</div>
+            <div class="col s3">{{recipe.fat}}</div>
+        </div>
+        <div class="row hide-on-med-and-up">
+            <div class="col s3 offset-s2"><b>Sugars</b></div>
+            <div class="col s3"><b>Salt</b></div>
+            <div class="col s3"><b>Fibre</b></div>
+        </div>
+        <div class="row hide-on-med-and-up">            
+            <div class="col s3 offset-s2">{{recipe.sugars}}</div>
+            <div class="col s3">{{recipe.salt}}</div>
+            <div class="col s3">{{recipe.fibre}}</div>
         </div>
         <div class="row hide-on-small-only">
-            <div class="col s4 m2"><b>kcal</b></div>
-            <div class="col s4 m2"><b>carbs</b></div>
-            <div class="col s4 m2"><b>fat</b></div>
-            <div class="col s4 m2"><b>sugar</b></div>
-            <div class="col s4 m2"><b>salt</b></div>
-            <div class="col s4 m2"><b>fiber</b></div>   
+            <div class="col m2"><b>Kcal</b></div>
+            <div class="col m2"><b>Carbs</b></div>
+            <div class="col m2"><b>Fat</b></div>
+            <div class="col m2"><b>Sugars</b></div>
+            <div class="col m2"><b>Salt</b></div>
+            <div class="col m2"><b>Fibre</b></div>   
         </div>
         <div class="row hide-on-small-only">
-            <div class="col s4 m2">{{recipe.kcal}}</div>
-            <div class="col s4 m2">{{recipe.carbs}}</div>
-            <div class="col s4 m2">{{recipe.fat}}</div>
-            <div class="col s4 m2">{{recipe.sugars}}</div>
-            <div class="col s4 m2">{{recipe.salt}}</div>
-            <div class="col s4 m2">fiber</div>
+            <div class="col m2">{{recipe.kcal}}</div>
+            <div class="col m2">{{recipe.carbs}}</div>
+            <div class="col m2">{{recipe.fat}}</div>
+            <div class="col m2">{{recipe.sugars}}</div>
+            <div class="col m2">{{recipe.salt}}</div>
+            <div class="col m2">{{recipe.fibre}}</div>
         </div>
     </div>
 
@@ -102,8 +104,8 @@
 
   <div class="container">
     <div class="row">
-        <div class="col s4 m6 offset-s4 offset-m6">
-            <a class="waves-effect waves-light btn" href="{{url_for('edit_recipe', recipe_id=recipe._id)}}"><i class="material-icons left"></i>Edit</a>
+        <div class="col s6 offset-s4 offset-m6">
+            <a class="waves-effect waves-light btn" href="{{url_for('edit_recipe', recipe_id=recipe._id)}}"><i class="material-icons left">edit</i>Edit</a>
         </div>
     </div>
   </div>

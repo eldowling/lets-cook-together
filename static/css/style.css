@@ -32,26 +32,8 @@
 }
 
 .title-block{
-    background-color:#006064;
+    background-color: #00838f;
     text-decoration-color: white;
-}
-
-#nutr-border .col {
-  /*border: 2px solid #c9c9c9;*/
-  font-size: 12px;
-}
-
-#nutr-border .col:not(:last-child) {
-  border-right-width: 0;
-}
-
-#nutr-border .row:not(:last-child) .col {
-  /*border-bottom-width: 0;*/
-  background-color:#59b7c577;
-}
-
-#nutr-border .row:not(:last-child) {
-  margin-bottom: 0;
 }
 
 .waves-light {

@@ -2,14 +2,14 @@
 <div class="container">
   <div class="row  justify-content-center">
     <div class="col s12 center title-block">
-      <h3 class="white-text text-darken-2">Add / Edit Recipe</h3>
+      <h3 class="white-text text-darken-2">Add / Update</h3>
     </div>
   </div>
 </div>
 <div class="row">
     <form action="{{ url_for('insert_recipe') }}" method="POST" class="col s12">
       <div class="row">
-        <div class="input-field col s6">
+        <div class="input-field col s10 m6">
           <input placeholder="Placeholder" id="title" name="title" type="text" class="validate">
           <label for="title">Recipe Title</label>
         </div>
@@ -72,22 +72,26 @@
           <label for="kcal">KCal</label>
         </div>
         <div class="input-field col s4">
-          <input id="fat" name="fat" type="text" class="validate">
-          <label for="fat">Fat</label>
-        </div>
-        <div class="input-field col s4">
           <input id="carbs" name="carbs" type="text" class="validate">
           <label for="carbs">Carbs</label>
         </div>
+        <div class="input-field col s4">
+          <input id="fat" name="fat" type="text" class="validate">
+          <label for="fat">Fat</label>
+        </div>
       </div>
       <div class="row">
+        <div class="input-field col s4">
+          <input id="sugars" name="sugars" type="text" class="validate">
+          <label for="sugars">Sugars</label>
+        </div>
         <div class="input-field col s4">
           <input id="salt" name="salt" type="text" class="validate">
           <label for="salt">Salt</label>
         </div>
         <div class="input-field col s4">
-          <input id="sugars" name="sugars" type="text" class="validate">
-          <label for="sugars">Sugars</label>
+          <input id="fibre" name="fibre" type="text" class="validate">
+          <label for="fibre">Fibre</label>
         </div>
       </div>
       <div class="row">
@@ -113,9 +117,11 @@
         </div>
       </div>
       <div class="row">
-        <button class="btn waves-effect waves-light" type="submit">Add Recipe
-            <i class="material-icons right">playlist_add</i>
-        </button>
+        <div class="col s6 offset-s4 offset-m6">
+            <button class="btn waves-effect waves-light" type="submit">Update
+                <i class="material-icons left">playlist_add</i>
+            </button>
+        </div>
         
       </div>
     </form>
