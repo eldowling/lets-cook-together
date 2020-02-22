@@ -78,7 +78,8 @@
                     <strong>Tools</strong>
                 </div>
                 <div class="col s3">
-                    <a href="#" class="waves-effect waves-light btn btn_small blue">Edit</a>
+                    <a href="#maint_modal" class="waves-effect waves-light btn btn_small modal-trigger">Add New</a>
+                    
                 </div>
             </div>
             <div class="collapsible-body">
@@ -96,5 +97,26 @@
         </li>
     </ul>
 </div>
+
+<div id="maint_modal" class="modal">
+    <div class="modal-content">
+      <h4>Add to TABLE NAME</h4>
+      <form class="col s12">
+        <div class="row">
+            <div class="input-field col s6">
+                <input placeholder="Placeholder" id="code" type="text" class="validate">
+                <label for="code">Code</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="description" type="text" class="validate">
+                <label for="description">Description</label>
+            </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div>
 
 {% endblock %}
