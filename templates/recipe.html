@@ -1,8 +1,8 @@
 {% extends 'base.html'%} {% block content %}
 <div class="container">
   <div class="row  justify-content-center">
-    <div class="col s12 center">
-      <h3 class="white-text text-darken-2 title-block">{{ recipe.title }}</h3>
+    <div class="col s12 center title-block">
+      <h4 class="white-text text-darken-2 ">{{ recipe.title }}</h4>
     </div>
   </div>
 </div>
@@ -47,7 +47,7 @@
             <div class="col s10"><b>Nutrition per serving:</b></div>
         </div>
         <div class="row hide-on-med-and-up">
-            <table>
+            <table class="centered">
                 <thead>
                 <tr>
                     <th> </th>
@@ -67,7 +67,7 @@
                 </tbody>
             </table>
         </div><div class="row hide-on-med-and-up">
-            <table>
+            <table class="centered">
                 <thead>
                 <tr>
                     <th> </th>
@@ -89,7 +89,7 @@
         </div>
 
         <div class="row hide-on-small-only">
-            <table>
+            <table class="centered">
                 <thead>
                 <tr>
                     <th> </th>

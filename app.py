@@ -49,8 +49,8 @@ def insert_recipe():
     if request.method == "POST":
         ingredients = request.form.get("ingredients").splitlines()
         prep_steps = request.form.get("prep_steps").splitlines()
-        tools = request.form.get("tools").splitlines()
-        
+        tools  = request.form.getlist('tools')
+                
         save_recipe = {
             "title": request.form.to_dict("title"),
             "description": request.form.to_dict("description"),
