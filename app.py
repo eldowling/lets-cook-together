@@ -71,7 +71,7 @@ def insert_recipe():
         }
 
     recipes = mongo.db.recipes
-    recipes.insert_one(request.form.to_dict(save_recipe))
+    recipes.insert_one(save_recipe)
     return redirect(url_for('get_catalog'))
 
 @app.route('/edit_recipe/<recipe_id>')
