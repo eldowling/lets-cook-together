@@ -50,14 +50,16 @@ def insert_recipe():
         ingredients = request.form.get("ingredients").splitlines()
         prep_steps = request.form.get("prep_steps").splitlines()
         tools_list = request.form.getlist("tools")
-        print (tools_list)
+        print (tools_list) 
+        tools_str = " ".join(tools_list)
+        print(tools_str)
 
         save_recipe = {
             "title": request.form.to_dict("title"),
             "description": request.form.to_dict("description"),
             "course": request.form.to_dict("course"),
             "cuisine": request.form.to_dict("cuisine"),
-            "tools": tools_list,
+            "tools": tools_str,
             "prep_time": request.form.to_dict("prep_time"),
             "cook_time": request.form.to_dict("cook_time"),
             "no_servings": request.form.to_dict("no_servings"),
@@ -71,7 +73,7 @@ def insert_recipe():
         }
 
     recipes = mongo.db.recipes
-    recipes.insert_one(save_recipe)
+    recipes.insert_one(request.form.to_dict(save_recipe))
     return redirect(url_for('get_catalog'))
 
 @app.route('/edit_recipe/<recipe_id>')
