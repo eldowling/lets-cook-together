@@ -41,7 +41,7 @@ def add_edit_recipe():
     return render_template('add-recipe.html', 
                             courses=mongo.db.courses.find(),  
                             cuisines=mongo.db.cuisine.find(),
-                            tools=mongo.db.tools.find())
+                            tools=mongo.db.tools.find(), recipe='NEW')
 
 @app.route('/insert_recipe', methods=['POST'])
 def insert_recipe():
@@ -77,8 +77,10 @@ def insert_recipe():
 @app.route('/edit_recipe/<recipe_id>')
 def edit_recipe(recipe_id):
     the_recipe =  mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
-    the_ingredients = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)}).ingredients
-    return render_template('edit-recipe.html', recipe=the_recipe, ingrd_list=the_ingredients)
+    return render_template('add-recipe.html', recipe=the_recipe, 
+                            courses=mongo.db.courses.find(),  
+                            cuisines=mongo.db.cuisine.find(),
+                            tools=mongo.db.tools.find())
 
 @app.route('/maintenance')
 def maintenance():

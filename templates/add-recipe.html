@@ -1,4 +1,41 @@
 {% extends 'base.html'%} {% block content %}
+    {% if recipe != "NEW" %}
+        {% set recp_title = recipe.title -%}
+        {% set recp_descr = recipe.description -%}
+        {% set recp_course = recipe.course -%}
+        {% set recp_cuisine = recipe.cuisine -%}
+        {% set recp_tools = recipe.tools -%}
+        {% set recp_preptime = recipe.prep_time -%}
+        {% set recp_cooktime = recipe.cook_time -%}
+        {% set recp_numserv = recipe.no_servings -%}
+        {% set recp_kcal = recipe.kcal -%}
+        {% set recp_carbs = recipe.carbs -%}
+        {% set recp_fat = recipe.fat -%}
+        {% set recp_sugars = recipe.sugars -%}
+        {% set recp_salt = recipe.salt -%}
+        {% set recp_fibre = recipe.fibre -%}
+        
+        
+        {% set recp_prepsteps = recipe.prep_steps -%}
+    {% else %}
+        {% set recp_title = '' -%}
+        {% set recp_title = '' -%}
+        {% set recp_descr = '' -%}
+        {% set recp_course = '' -%}
+        {% set recp_cuisine = '' -%}
+        {% set recp_tools = '' -%}
+        {% set recp_preptime = '' -%}
+        {% set recp_cooktime = '' -%}
+        {% set recp_numserv = '' -%}
+        {% set recp_kcal = '' -%}
+        {% set recp_carbs = '' -%}
+        {% set recp_fat = '' -%}
+        {% set recp_sugars = '' -%}
+        {% set recp_salt = '' -%}
+        {% set recp_fibre = '' -%}
+        {% set recp_ingrd = '' -%}
+        {% set recp_prepsteps = '' -%}
+    {% endif %}
 <div class="container">
   <div class="row  justify-content-center">
     <div class="col s12 center title-block">
@@ -10,18 +47,22 @@
     <form action="{{ url_for('insert_recipe') }}" method="POST" class="col s12">
       <div class="row">
         <div class="input-field col s10 m6">
-          <input placeholder="Placeholder" id="title" name="title" type="text" class="validate">
+          <input placeholder="Placeholder" id="title" name="title" value="{{recp_title}}" type="text" class="validate">
           <label for="title">Recipe Title</label>
         </div>
         <div class="input-field col s12 m6">
-          <input id="description" name="description" type="text" class="validate">
+          <input id="description" name="description" value="{{recp_descr}}" type="text" class="validate">
           <label for="description">Description</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s6">
             <select id="course" name="course">
-                <option value="" disabled selected>Choose Course</option>
+                {% if recp_course %}
+                    <option value="{{recp_course}}" selected>{{recp_course}}</option>
+                {% else %}
+                    <option value="" disabled selected>Choose Course</option>
+                {% endif%}
                 {% for course in courses %}
                     <option value="{{course.course_desc}}">{{course.course_desc}}</option>
                 {% endfor %}
@@ -30,7 +71,11 @@
         </div>
         <div class="input-field col s6">
             <select id="cuisine" name="cuisine">
-                <option value="" disabled selected>Choose Cuisine</option>
+                {% if recp_course %}
+                    <option value="{{recp_cuisine}}" selected>{{recp_cuisine}}</option>
+                {% else %}
+                    <option value="" disabled selected>Choose Cuisine</option>
+                {% endif%}
                 {% for cuisine in cuisines %}
                     <option value="{{cuisine.cuisine_name}}">{{cuisine.cuisine_name}}</option>
                 {% endfor %}
@@ -49,15 +94,15 @@
       </div>
       <div class="row">
         <div class="input-field col s4">
-          <input id="prep_time" name="prep_time" type="text" class="validate">
+          <input id="prep_time" name="prep_time" value="{{recp_preptime}}" type="text" class="validate">
           <label for="prep_time">Prep. Time</label>
         </div>
         <div class="input-field col s4">
-          <input id="cook_time"  name="cook_time" type="text" class="validate">
+          <input id="cook_time"  name="cook_time" value="{{recp_cooktime}}" type="text" class="validate">
           <label for="cook_time">Cook Time</label>
         </div>
         <div class="input-field col s4">
-          <input id="no_servings" name="no_servings" type="text" class="validate">
+          <input id="no_servings" name="no_servings" value="{{recp_numserv}}" type="text" class="validate">
           <label for="no_servings">No. Servings</label>
         </div>
       </div>
@@ -68,29 +113,29 @@
       </div>
       <div class="row">
         <div class="input-field col s4">
-          <input id="kcal" name="kcal" type="text" class="validate">
+          <input id="kcal" name="kcal" value="{{recp_kcal}}" type="text" class="validate">
           <label for="kcal">KCal</label>
         </div>
         <div class="input-field col s4">
-          <input id="carbs" name="carbs" type="text" class="validate">
+          <input id="carbs" name="carbs" value="{{recp_carbs}}" type="text" class="validate">
           <label for="carbs">Carbs</label>
         </div>
         <div class="input-field col s4">
-          <input id="fat" name="fat" type="text" class="validate">
+          <input id="fat" name="fat" value="{{recp_fat}}" type="text" class="validate">
           <label for="fat">Fat</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s4">
-          <input id="sugars" name="sugars" type="text" class="validate">
+          <input id="sugars" name="sugars" value="{{recp_sugars}}" type="text" class="validate">
           <label for="sugars">Sugars</label>
         </div>
         <div class="input-field col s4">
-          <input id="salt" name="salt" type="text" class="validate">
+          <input id="salt" name="salt" value="{{recp_salt}}" type="text" class="validate">
           <label for="salt">Salt</label>
         </div>
         <div class="input-field col s4">
-          <input id="fibre" name="fibre" type="text" class="validate">
+          <input id="fibre" name="fibre" value="{{recp_fibre}}" type="text" class="validate">
           <label for="fibre">Fibre</label>
         </div>
       </div>
@@ -101,7 +146,14 @@
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <textarea id="ingredients" name="ingredients" class="materialize-textarea"></textarea>
+        
+          <textarea id="ingredients" name="ingredients" value="" class="materialize-textarea">
+          {% if recipe != "NEW" -%} 
+          {% for ingrd in recipe.ingredients -%} 
+          {{ ingrd|safe }} <br>
+          {%- endfor %} 
+          {%- endif %} </textarea>
+        
           <label for="ingredients">Ingredients</label>
           <span class="helper-text" data-error="wrong" data-success="right">Enter each ingredient on a new line</span>
         </div>
@@ -113,7 +165,7 @@
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <textarea id="prep_steps" name="prep_steps" class="materialize-textarea"></textarea>
+          <textarea id="prep_steps" name="prep_steps" value="{{recp_prepsteps}}" class="materialize-textarea"></textarea>
           <label for="prep_steps">Preparation Steps</label>
           <span class="helper-text" data-error="wrong" data-success="right">Enter each step on a new line</span>
         </div>
