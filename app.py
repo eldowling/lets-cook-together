@@ -50,30 +50,28 @@ def insert_recipe():
         ingredients = request.form.get("ingredients").splitlines()
         prep_steps = request.form.get("prep_steps").splitlines()
         tools_list = request.form.getlist("tools")
-        print (tools_list) 
-        tools_str = " ".join(tools_list)
-        print(tools_str)
+        
 
         save_recipe = {
-            "title": request.form.to_dict("title"),
-            "description": request.form.to_dict("description"),
-            "course": request.form.to_dict("course"),
-            "cuisine": request.form.to_dict("cuisine"),
-            "tools": tools_str,
-            "prep_time": request.form.to_dict("prep_time"),
-            "cook_time": request.form.to_dict("cook_time"),
-            "no_servings": request.form.to_dict("no_servings"),
-            "kcal": request.form.to_dict("kcal"),
-            "fat": request.form.to_dict("fat"),
-            "carbs": request.form.to_dict("carbs"),
-            "salt": request.form.to_dict("salt"),
-            "sugars": request.form.to_dict("sugars"),
-            "ingredients": request.form.to_dict("ingredients"),
-            "prep_steps": request.form.to_dict("prep_steps")
+            "title": request.form.get("title"),
+            "description": request.form.get("description"),
+            "course": request.form.get("course"),
+            "cuisine": request.form.get("cuisine"),
+            "tools": tools_list,
+            "prep_time": request.form.get("prep_time"),
+            "cook_time": request.form.get("cook_time"),
+            "no_servings": request.form.get("no_servings"),
+            "kcal": request.form.get("kcal"),
+            "fat": request.form.get("fat"),
+            "carbs": request.form.get("carbs"),
+            "salt": request.form.get("salt"),
+            "sugars": request.form.get("sugars"),
+            "ingredients": ingredients,
+            "prep_steps": prep_steps
         }
 
     recipes = mongo.db.recipes
-    recipes.insert_one(request.form.to_dict(save_recipe))
+    recipes.insert_one(save_recipe)
     return redirect(url_for('get_catalog'))
 
 @app.route('/edit_recipe/<recipe_id>')
