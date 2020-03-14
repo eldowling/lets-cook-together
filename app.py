@@ -65,6 +65,7 @@ def insert_recipe(recipe_id):
             "carbs": request.form.get("carbs"),
             "salt": request.form.get("salt"),
             "sugars": request.form.get("sugars"),
+            "fibre": request.form.get("fibre"),
             "ingredients": ingredients,
             "prep_steps": prep_steps
         }
