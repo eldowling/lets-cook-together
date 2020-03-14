@@ -43,15 +43,14 @@ def add_edit_recipe():
                             cuisines=mongo.db.cuisine.find(),
                             tools=mongo.db.tools.find(), recipe='NEW')
 
-@app.route('/insert_recipe', methods=['POST'])
-def insert_recipe():
+@app.route('/insert_recipe/<recipe_id>', methods=['POST'])
+def insert_recipe(recipe_id):
 
     if request.method == "POST":
         ingredients = request.form.get("ingredients").splitlines()
         prep_steps = request.form.get("prep_steps").splitlines()
         tools_list = request.form.getlist("tools")
         
-
         save_recipe = {
             "title": request.form.get("title"),
             "description": request.form.get("description"),
@@ -71,7 +70,11 @@ def insert_recipe():
         }
 
     recipes = mongo.db.recipes
-    recipes.insert_one(save_recipe)
+    if recipe_id != 'NEW':
+        recipes.update_one( {'_id': ObjectId(recipe_id)},
+                     {"$set":save_recipe})
+    else:
+        recipes.insert_one(save_recipe)
     return redirect(url_for('get_catalog'))
 
 @app.route('/edit_recipe/<recipe_id>')
