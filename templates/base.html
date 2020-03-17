@@ -18,7 +18,7 @@
             <li><a href="{{url_for('get_catalog')}}">Home</a></li>
             <li><a href="{{url_for('add_edit_recipe')}}">Add Recipe</a></li>
             <li><a href="{{url_for('maintenance')}}">Maintenance</a></li>
-            <li><a href="#">Search</a></li>
+            <li><a href="#login" class="modal-trigger">Login / Sign up</a></li>
         </ul>
         </div>
     </nav>
@@ -27,8 +27,37 @@
         <li><a href="{{url_for('get_catalog')}}">Home</a></li>
             <li><a href="{{url_for('add_edit_recipe')}}">Add Recipe</a></li>
             <li><a href="{{url_for('maintenance')}}">Maintenance</a></li>
-            <li><a href="#">Search</a></li>
+            <li><a href="#login" class="modal-trigger">Login / Sign up</a></li>
     </ul>
+
+    <div class="modal" id="login">
+        <div class="modal-content">
+            <h4>Login</h4>
+	        <div class="col s6">
+		        <form class="">
+                    <div class="row">
+		                <div class="input-field col s12">
+                            <input id="Email" type="email" class="validate">
+                            <label for="Email">Email</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <input id="Password" type="text" class="validate">
+                            <label for="Password">Password</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <button type="submit" class="waves-effect waves-light btn">Login</button>
+                        </div>
+                        <div class="input-field col s12">
+                            <a href="#">Forgot Password?</a>
+                        </div>        
+                    </div>	
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+        </div>
+    </div>
     
     <div class="center-img">
             <img class="responsive-img" src="{{ url_for('static', filename='images/lets-cook-logo.png') }}"></img>
