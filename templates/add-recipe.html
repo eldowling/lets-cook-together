@@ -37,6 +37,7 @@
         {% set recp_fibre = '' -%}
         {% set recp_ingrd = '' -%}
         {% set recp_prepsteps = '' -%}
+        {% set recp_imgurl = '' -%}
     {% endif %}
 <div class="container">
   <div class="row  justify-content-center">
@@ -176,6 +177,10 @@
           <span class="helper-text" data-error="wrong" data-success="right">Enter each step on a new line</span>
         </div>
       </div>
+      <div class="input-field col s12 m6">
+          <input id="imgurl" name="imgage_url" value="{{recp_imgurl}}" type="text" class="validate">
+          <label for="imgurl">Image URL:</label>
+        </div>
       <div class="row">
         <div class="col s6 offset-s4 offset-m6">
             <button class="btn waves-effect waves-light" type="submit">Update
