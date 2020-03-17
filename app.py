@@ -67,7 +67,8 @@ def insert_recipe(recipe_id):
             "sugars": request.form.get("sugars"),
             "fibre": request.form.get("fibre"),
             "ingredients": ingredients,
-            "prep_steps": prep_steps
+            "prep_steps": prep_steps,
+            "image_url": request.form.get("image_url")
         }
 
     recipes = mongo.db.recipes
