@@ -30,10 +30,18 @@
             <li><a href="#login" class="modal-trigger">Login / Sign up</a></li>
     </ul>
 
-    <div class="modal" id="login">
+    <div class="modal modal-fixed-header" id="login">
+        <div class="modal-header">
+            <div class="col s12">
+                <ul class="tabs">
+                    <li class="tab col s3"><a class="active" href="#signin">Login</a></li>
+                    <li class="tab col s3"><a href="#signup">Sign Up</a></li>
+                </ul>
+            </div>
+        </div>
         <div class="modal-content">
-            <h4>Login</h4>
-	        <div class="col s6">
+            <div id="signin" class="col s6">
+                <h4>Login</h4>
 		        <form class="">
                     <div class="row">
 		                <div class="input-field col s12">
@@ -44,14 +52,41 @@
                             <input id="Password" type="text" class="validate">
                             <label for="Password">Password</label>
                         </div>
-                        <div class="input-field col s12">
+                        <div class="input-field col s6">
                             <button type="submit" class="waves-effect waves-light btn">Login</button>
                         </div>
-                        <div class="input-field col s12">
+                        <div class="input-field col s6">
                             <a href="#">Forgot Password?</a>
                         </div>        
                     </div>	
                 </form>
+            </div>
+            <div id="signup" class="col s6">
+                    <h4>Sign Up</h4>
+                    <form class="">
+                        <div class="row">
+                            <div class="input-field col s12 m6">
+                                <input id="Name" type="text" class="validate">
+                                <label for="Name">Name</label>
+                            </div>
+                            <div class="input-field col s12 m6">
+                                <input id="Email" type="email" class="validate">
+                                <label for="Email">Email</label>
+                            </div>
+                            <div class="input-field col s12 m6">
+                                <input id="Password" type="text" class="validate">
+                                <label for="Password">Password</label>
+                            </div>
+                            <div class="input-field col s12 m6">
+                                <input id="ConfPassword" type="text" class="validate">
+                                <label for="ConfPassword">Confirm Password</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <button type="submit" class="waves-effect waves-light btn">Sign-Up</button>
+                            </div>
+                                    
+                        </div>	
+                    </form>
             </div>
         </div>
         <div class="modal-footer">
