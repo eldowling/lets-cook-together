@@ -1,8 +1,10 @@
 import os
-from flask import Flask, render_template, redirect, request, url_for
+from flask import Flask, render_template, redirect, request, url_for, session
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 
+from flask.ext.pymongo import PyMongo
+import bcrypt
 app = Flask(__name__)
 app.config["MONGO_DBNAME"] = 'recipie_catalog'
 app.config["MONGO_URI"] = 'mongodb+srv://root:r00tUser@myfirstcluster-pwjgy.mongodb.net/recipie_catalog?retryWrites=true&w=majority'
@@ -15,6 +17,9 @@ mongo = PyMongo(app)
 
 @app.route('/get_catalog')
 def get_catalog():
+    if 'username' in session:
+        return 'You are logged in as ' + session['username']
+
     return render_template("catalog.html", recipes=mongo.db.recipes.find())
 
 @app.route('/get_catalog/<course>')
@@ -29,7 +34,18 @@ def get_catalog_bycourse(course):
 #    if course != '':
  #       return render_template("catalog.html", recipes=mongo.db.recipes.find({ "course": 'breakfast' }))
     
- 
+@app.route('/login', methods=['POST'])
+def login():
+    users = mongo.db.users
+    login_user = users.find_one({'name' : request.form['username']})
+
+    if login_user:
+        if bcrypt.hashpw(request.form['pass'].encode('utf-8'), login_user['password'].encode('utf-8')) == login_user['password'].encode('utf-8'):
+            session['username'] = request.form['username']
+            return redirect(url_for('get_catalog'))
+
+    return 'Invalid username/password combination'
+     
 @app.route('/show_recipe/<recipe_id>')
 def show_recipe(recipe_id):
     the_recipe =  mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
