@@ -49,7 +49,7 @@
                             <label for="name">Username</label>
                         </div>
                         <div class="input-field col s12">
-                            <input id="Email" type="email" class="validate">
+                            <input id="Email" name="email" type="email" class="validate">
                             <label for="Email">Email</label>
                         </div>
                         <div class="input-field col s12">
@@ -67,22 +67,22 @@
             </div>
             <div id="signup" class="col s6">
                     <h4>Sign Up</h4>
-                    <form class="">
+                    <form method=POST action="{{ url_for('register') }}" class="">
                         <div class="row">
                             <div class="input-field col s12 m6">
-                                <input id="Name" type="text" class="validate">
+                                <input id="Name" name="username" type="text" class="validate">
                                 <label for="Name">Name</label>
                             </div>
                             <div class="input-field col s12 m6">
-                                <input id="Email" type="email" class="validate">
+                                <input id="Email" name="email" type="email" class="validate">
                                 <label for="Email">Email</label>
                             </div>
                             <div class="input-field col s12 m6">
-                                <input id="Password" type="text" class="validate">
+                                <input id="Password" name="password" type="text" class="validate">
                                 <label for="Password">Password</label>
                             </div>
                             <div class="input-field col s12 m6">
-                                <input id="ConfPassword" type="text" class="validate">
+                                <input id="ConfPassword" name="confpassword" type="text" class="validate">
                                 <label for="ConfPassword">Confirm Password</label>
                             </div>
                             <div class="input-field col s12">
