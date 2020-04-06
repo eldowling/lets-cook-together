@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+</head>
+
+<body>
+    <h1>THIS IS THE INIT PAGE</h1>
+    <div class="container">
+        <form method=POST action="{{ url_for('signout') }}">
+            <button type="submit" class="btn btn-primary btn-block">Sign out</button>
+        </form>
+        <div class="row">
+            {% block content %} {% endblock %}
+        </div>
+    </div>
+
+</body>
+</html>

@@ -18,7 +18,7 @@
             <li><a href="{{url_for('get_catalog')}}">Home</a></li>
             <li><a href="{{url_for('add_edit_recipe')}}">Add Recipe</a></li>
             <li><a href="{{url_for('maintenance')}}">Maintenance</a></li>
-            <li><a href="#login" class="modal-trigger">Login / Sign up</a></li>
+            
         </ul>
         </div>
     </nav>
@@ -27,76 +27,10 @@
         <li><a href="{{url_for('get_catalog')}}">Home</a></li>
             <li><a href="{{url_for('add_edit_recipe')}}">Add Recipe</a></li>
             <li><a href="{{url_for('maintenance')}}">Maintenance</a></li>
-            <li><a href="#login" class="modal-trigger">Login / Sign up</a></li>
+            
     </ul>
 
-    <div class="modal modal-fixed-header" id="login">
-        <div class="modal-header">
-            <div class="col s12">
-                <ul class="tabs">
-                    <li class="tab col s3"><a class="active" href="#signin">Login</a></li>
-                    <li class="tab col s3"><a href="#signup">Sign Up</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="modal-content">
-            <div id="signin" class="col s6">
-                <h4>Login</h4>
-		        <form method=POST action="{{ url_for('login') }}">
-                    <div class="row">
-		                <div class="input-field col s12">
-                            <input id="name" name="username" type="text" class="validate">
-                            <label for="name">Username</label>
-                        </div>
-                        <div class="input-field col s12">
-                            <input id="Email" name="email" type="email" class="validate">
-                            <label for="Email">Email</label>
-                        </div>
-                        <div class="input-field col s12">
-                            <input id="Password" name="password" type="text" class="validate">
-                            <label for="Password">Password</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <button type="submit" class="waves-effect waves-light btn">Login</button>
-                        </div>
-                        <div class="input-field col s6">
-                            <a href="#">Forgot Password?</a>
-                        </div>        
-                    </div>	
-                </form>
-            </div>
-            <div id="signup" class="col s6">
-                    <h4>Sign Up</h4>
-                    <form method=POST action="{{ url_for('register') }}" class="">
-                        <div class="row">
-                            <div class="input-field col s12 m6">
-                                <input id="Name" name="username" type="text" class="validate">
-                                <label for="Name">Name</label>
-                            </div>
-                            <div class="input-field col s12 m6">
-                                <input id="Email" name="email" type="email" class="validate">
-                                <label for="Email">Email</label>
-                            </div>
-                            <div class="input-field col s12 m6">
-                                <input id="Password" name="password" type="text" class="validate">
-                                <label for="Password">Password</label>
-                            </div>
-                            <div class="input-field col s12 m6">
-                                <input id="ConfPassword" name="confpassword" type="text" class="validate">
-                                <label for="ConfPassword">Confirm Password</label>
-                            </div>
-                            <div class="input-field col s12">
-                                <button type="submit" class="waves-effect waves-light btn">Sign-Up</button>
-                            </div>
-                                    
-                        </div>	
-                    </form>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
-        </div>
-    </div>
+    
     
     <div class="center-img">
             <img class="responsive-img" src="{{ url_for('static', filename='images/lets-cook-logo.png') }}"></img>
@@ -109,7 +43,7 @@
     <footer class="page-footer cyan darken-4">
         <div class="container">
             <div class="row">
-                <div class="col-sm-12 col-md-6">
+                <div class="col s12 col m6">
                     <h5 class="white-text">Footer Content</h5>
                     
                     <span class="grey-text text-lighten-4 ">
@@ -118,7 +52,7 @@
                         <a href="instagram.html"><i class="fab fa-instagram fa-3x"></i></a>
                     </span>
                 </div>
-                <div class="col-sm-12 col-md-4 offset-md-6">
+                <div class="col s12 col m4 offset-m6">
                     <h5 class="white-text">Links</h5>
                     <ul>
                         <li><a class="grey-text text-lighten-3" href="{{url_for('get_catalog')}}">Full Recipe Catalog</a></li>

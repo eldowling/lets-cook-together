@@ -18,35 +18,33 @@ mongo = PyMongo(app)
 
 
 @app.route('/')
-
-@app.route('/get_catalog')
-def get_catalog():
+def index():
+    #session.clear()
     if 'username' in session:
         return 'You are logged in as ' + session['username']
 
-    return render_template("catalog.html", recipes=mongo.db.recipes.find())
+    return render_template('index.html')
 
-@app.route('/get_catalog/<course>')
-def get_catalog_bycourse(course):
-    recipes_bycourse = list(mongo.db.recipes.find({"course": course}))
-    return render_template("catalog.html", recipes=recipes_bycourse)
-
-##@app.route('/get_catalog')
-##def get_catalog():
-#    if course == '':
-#        return render_template("catalog.html", recipes=mongo.db.recipes.find())
-#    if course != '':
- #       return render_template("catalog.html", recipes=mongo.db.recipes.find({ "course": 'breakfast' }))
-    
 @app.route('/login', methods=['POST'])
 def login():
     users = mongo.db.users
     login_user = users.find_one({'name' : request.form['username']})
 
     if login_user:
-        if bcrypt.hashpw(request.form['password'].encode('utf-8'), login_user['password'].encode('utf-8')) == login_user['password'].encode('utf-8'):
+        #if bcrypt.hashpw(request.form['pass'].encode('utf-8'), login_user['password'].encode('utf-8')) == login_user['password'].encode('utf-8'):
+        form_password= request.form['pass'].encode("utf-8")
+        db_password = str(login_user['password']).encode("utf-8")
+        hashed_pass= bcrypt.hashpw(form_password, bcrypt.gensalt())
+        if bcrypt.checkpw(db_password, hashed_pass):
+            print("Yaay, It Matches!")
             session['username'] = request.form['username']
-            return redirect(url_for('get_catalog'))
+            return redirect(url_for('index'))
+        else:
+            print("Oops, It Does not Match :(")
+            print(db_password)
+            print(hashed_pass)
+        
+            
 
     return 'Invalid username/password combination'
 
@@ -57,15 +55,45 @@ def register():
         existing_user = users.find_one({'name' : request.form['username']})
 
         if existing_user is None:
-            hashpass = bcrypt.hashpw(request.form['password'].encode('utf-8'), bcrypt.gensalt())
-            users.insert({'name' : request.form['username'], 'password' : hashpass})
+            #hashpass = bcrypt.hashpw(request.form['pass'].encode('utf-8'), bcrypt.gensalt())
+            form_password= request.form['pass'].encode("utf-8")
+            hashpass= bcrypt.hashpw(form_password, bcrypt.gensalt())
+            users.insert_one({'name' : request.form['username'], 'password' : hashpass})
+            #users.insert({'name' : request.form['username'], 'password' : hashpass})
             session['username'] = request.form['username']
             return redirect(url_for('index'))
         
         return 'That username already exists!'
 
     return render_template('register.html')
-     
+
+@app.route('/signout', methods=['POST', 'GET'])
+def signout():
+    if request.method == 'POST':
+        if session['username']:
+            session.clear()
+            return redirect(url_for('index'))
+
+@app.route('/get_catalog')
+def get_catalog():
+    return render_template("catalog.html", recipes=mongo.db.recipes.find())
+
+@app.route('/get_catalog/<course>')
+def get_catalog_bycourse(course):
+    recipes_bycourse = list(mongo.db.recipes.find({"course": course}))
+    return render_template("catalog.html", recipes=recipes_bycourse)
+
+#@app.route('/filter_catalog/<course>')
+#def filter_catalog(course):
+#    return render_template("catalog.html", recipes=mongo.db.recipes.find({ "recipes.course": course }))
+
+##@app.route('/get_catalog')
+##def get_catalog():
+#    if course == '':
+#        return render_template("catalog.html", recipes=mongo.db.recipes.find())
+#    if course != '':
+ #       return render_template("catalog.html", recipes=mongo.db.recipes.find({ "course": 'breakfast' }))
+    
 @app.route('/show_recipe/<recipe_id>')
 def show_recipe(recipe_id):
     the_recipe =  mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
@@ -134,8 +162,3 @@ if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
             debug=True)
-            
-
-@app.route('/filter_catalog/<course>')
-def filter_catalog(course):
-    return render_template("catalog.html", recipes=mongo.db.recipes.find({ "recipes.course": course }))
