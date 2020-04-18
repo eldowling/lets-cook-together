@@ -1,28 +1,21 @@
 import os
-from flask import Flask, render_template, redirect, request, url_for, session
-#from flask.ext.bcrypt import Bcrypt
-#import flask_bcrypt
-import bcrypt
+from flask import Flask,  render_template, redirect, request, url_for, session
 from flask_pymongo import PyMongo
-from bson.objectid import ObjectId
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
-#bcrypt = Bcrypt(app)
-#bcrypt = flask_bcrypt.Bcrypt(app)
-#mongo = PyMongo(app)
 app.config["MONGO_DBNAME"] = 'recipie_catalog'
 app.config["MONGO_URI"] = 'mongodb+srv://root:r00tUser@myfirstcluster-pwjgy.mongodb.net/recipie_catalog?retryWrites=true&w=majority'
-#app.config["MONGO_URI"] = os.getenv('MONGO_URI', 'mongodb://localhost')
 
 mongo = PyMongo(app)
 
 
 @app.route('/')
 def index():
-    #session.clear()
     if 'username' in session:
-        return 'You are logged in as ' + session['username']
+        return redirect(url_for('get_catalog'))
 
+    #Return LOGIN PAGE
     return render_template('index.html')
 
 @app.route('/login', methods=['POST'])
@@ -31,22 +24,15 @@ def login():
     login_user = users.find_one({'name' : request.form['username']})
 
     if login_user:
-        #if bcrypt.hashpw(request.form['pass'].encode('utf-8'), login_user['password'].encode('utf-8')) == login_user['password'].encode('utf-8'):
-        form_password= request.form['pass'].encode("utf-8")
-        db_password = str(login_user['password']).encode("utf-8")
-        hashed_pass= bcrypt.hashpw(form_password, bcrypt.gensalt())
-        if bcrypt.checkpw(db_password, hashed_pass):
-            print("Yaay, It Matches!")
+        db_pass = login_user['password']
+
+        if check_password_hash(db_pass, request.form['pass']):
             session['username'] = request.form['username']
-            return redirect(url_for('index'))
-        else:
-            print("Oops, It Does not Match :(")
-            print(db_password)
-            print(hashed_pass)
+            return redirect(url_for('get_catalog'))
         
-            
 
     return 'Invalid username/password combination'
+    #flash ('Invalid username/password combination')
 
 @app.route('/register', methods=['POST', 'GET'])
 def register():
@@ -55,24 +41,21 @@ def register():
         existing_user = users.find_one({'name' : request.form['username']})
 
         if existing_user is None:
-            #hashpass = bcrypt.hashpw(request.form['pass'].encode('utf-8'), bcrypt.gensalt())
-            form_password= request.form['pass'].encode("utf-8")
-            hashpass= bcrypt.hashpw(form_password, bcrypt.gensalt())
-            users.insert_one({'name' : request.form['username'], 'password' : hashpass})
-            #users.insert({'name' : request.form['username'], 'password' : hashpass})
+            hash_form_pass = generate_password_hash(request.form['pass'], "sha256")
+            users.insert_one({'name' : request.form['username'], 'password' : hash_form_pass})
             session['username'] = request.form['username']
             return redirect(url_for('index'))
         
         return 'That username already exists!'
+        #flash ('That username already exists!')
 
     return render_template('register.html')
 
-@app.route('/signout', methods=['POST', 'GET'])
+@app.route('/signout')
 def signout():
-    if request.method == 'POST':
-        if session['username']:
-            session.clear()
-            return redirect(url_for('index'))
+    session.pop('username', None)
+    #flash ('You were signed out')
+    return redirect(url_for('get_catalog'))
 
 @app.route('/get_catalog')
 def get_catalog():

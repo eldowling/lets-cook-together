@@ -15,6 +15,12 @@
         <a href="#!" class="brand-logo">Let's Cook ...</a>
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
+            {% if session['username'] %}
+              <li> Signed in as: {{session['username']}} </li>
+              <li><a href="/signout">Sign Out</a></li>
+            {% else %}
+                <li><a href="{{url_for('index')}}">Login</a></li>
+            {% endif %}
             <li><a href="{{url_for('get_catalog')}}">Home</a></li>
             <li><a href="{{url_for('add_edit_recipe')}}">Add Recipe</a></li>
             <li><a href="{{url_for('maintenance')}}">Maintenance</a></li>
@@ -24,14 +30,32 @@
     </nav>
 
     <ul class="sidenav" id="mobile-demo">
-        <li><a href="{{url_for('get_catalog')}}">Home</a></li>
+        {% if session['username'] %}
+            <li><a href="/signout">Sign Out</a></li>
+        {% else %}
+            <li><a href="{{url_for('index')}}">Login</a></li>
+        {% endif %}
+            <li><a href="{{url_for('get_catalog')}}">Home</a></li>
             <li><a href="{{url_for('add_edit_recipe')}}">Add Recipe</a></li>
             <li><a href="{{url_for('maintenance')}}">Maintenance</a></li>
             
     </ul>
-
-    
-    
+    <div class="row hide-on-med-and-up">
+        {% if session['username'] %}
+            <h5> Signed in as: {{session['username']}}! </h5>
+        {% endif %}
+    </div>
+    <div class="row">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class=flashes>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
     <div class="center-img">
             <img class="responsive-img" src="{{ url_for('static', filename='images/lets-cook-logo.png') }}"></img>
     </div>
