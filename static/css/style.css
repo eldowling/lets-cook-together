@@ -6,6 +6,7 @@
 .center-img {
   margin: auto;
   min-width: 250px;
+  max-width: 325px;
   width: 30%;
   border: 3px solid rgba(69, 97, 29, 0.801);
   padding: 10px;

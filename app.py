@@ -1,6 +1,7 @@
 import os
 from flask import Flask, flash, render_template, redirect, request, url_for, session
 from flask_pymongo import PyMongo
+from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
@@ -83,10 +84,14 @@ def show_recipe(recipe_id):
 
 @app.route('/add_recipe')
 def add_edit_recipe():
-    return render_template('add-recipe.html', 
+    if 'username' in session:
+        return render_template('add-recipe.html', 
                             courses=mongo.db.courses.find(),  
                             cuisines=mongo.db.cuisine.find(),
                             tools=mongo.db.tools.find(), recipe='NEW')
+    else:
+        flash('You must log in first to add a recipe')
+        return redirect(url_for('index'))
 
 @app.route('/insert_recipe/<recipe_id>', methods=['POST'])
 def insert_recipe(recipe_id):
@@ -97,6 +102,7 @@ def insert_recipe(recipe_id):
         tools_list = request.form.getlist("tools")
         
         save_recipe = {
+            "author": request.form.get("author"),
             "title": request.form.get("title"),
             "description": request.form.get("description"),
             "course": request.form.get("course"),

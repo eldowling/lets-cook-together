@@ -1,6 +1,7 @@
 {% extends 'base.html'%} {% block content %}
     {% if recipe != "NEW" %}
         {% set recp_id = recipe._id -%}
+        {% set recp_author = recipe.author -%}
         {% set recp_title = recipe.title -%}
         {% set recp_descr = recipe.description -%}
         {% set recp_course = recipe.course -%}
@@ -20,6 +21,7 @@
         {% set recp_imgurl = recipe.image_url -%}
     {% else %}
         {% set recp_id = 'NEW' -%}
+        {% set recp_author = session['username'] -%}
         {% set recp_title = '' -%}
         {% set recp_title = '' -%}
         {% set recp_descr = '' -%}
@@ -48,6 +50,12 @@
 </div>
 <div class="row">
     <form action="{{ url_for('insert_recipe', recipe_id=recp_id) }}" method="POST" class="col s12">
+      <div class="row">
+        <div class="input-field col s10 m6">   
+            <input disabled id="author" name="author" value="{{recp_author}}" type="text" class="validate">
+            <label for="author">Author</label>
+        </div>
+      </div>
       <div class="row">
         <div class="input-field col s10 m6">
           <input placeholder="Placeholder" id="title" name="title" value="{{recp_title}}" type="text" class="validate">
@@ -162,7 +170,7 @@
           {%- endif %} </textarea>
         
           <label for="ingredients">Ingredients</label>
-          <span class="helper-text" data-error="wrong" data-success="right">Enter each ingredient on a new line</span>
+          <span class="helper-text" data-error="wrong" data-success="right">Seperate each ingredient using a comma: ','</span>
         </div>
       </div>
       <div class="row">
