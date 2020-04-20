@@ -45,17 +45,18 @@
             <h5> Signed in as: {{session['username']}}! </h5>
         {% endif %}
     </div>
-    <div class="row">
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                <ul class=flashes>
-                {% for message in messages %}
-                <li>{{ message }}</li>
-                {% endfor %}
-                </ul>
-            {% endif %}
-        {% endwith %}
-    </div>
+    
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="chip">
+                    {{message}}
+                    <i class="close material-icons">close</i>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    
     <div class="center-img">
             <img class="responsive-img" src="{{ url_for('static', filename='images/lets-cook-logo.png') }}"></img>
     </div>
@@ -113,6 +114,11 @@
         }
 
         var instance = M.Tabs.getInstance(elem);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.chips');
+            var instances = M.Chips.init(elems, options);
+        });
         
         
         

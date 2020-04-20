@@ -1,5 +1,5 @@
 import os
-from flask import Flask,  render_template, redirect, request, url_for, session
+from flask import Flask, flash, render_template, redirect, request, url_for, session
 from flask_pymongo import PyMongo
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -15,24 +15,22 @@ def index():
     if 'username' in session:
         return redirect(url_for('get_catalog'))
 
-    #Return LOGIN PAGE
     return render_template('index.html')
 
 @app.route('/login', methods=['POST'])
 def login():
-    users = mongo.db.users
-    login_user = users.find_one({'name' : request.form['username']})
-
-    if login_user:
-        db_pass = login_user['password']
-
-        if check_password_hash(db_pass, request.form['pass']):
-            session['username'] = request.form['username']
-            return redirect(url_for('get_catalog'))
-        
-
-    return 'Invalid username/password combination'
-    #flash ('Invalid username/password combination')
+    if request.method == 'POST':
+        users = mongo.db.users
+        login_user = users.find_one({'name' : request.form['username']})
+        if login_user:
+            db_pass = login_user['password']
+            if check_password_hash(db_pass, request.form['pass']):
+                session['username'] = request.form['username']
+                return redirect(url_for('get_catalog'))
+        else:
+            flash('Invalid username/password combination')
+	
+    return render_template('index.html')
 
 @app.route('/register', methods=['POST', 'GET'])
 def register():
@@ -46,15 +44,15 @@ def register():
             session['username'] = request.form['username']
             return redirect(url_for('index'))
         
-        return 'That username already exists!'
-        #flash ('That username already exists!')
+        else:
+            flash ('That username already exists!')
 
     return render_template('register.html')
 
 @app.route('/signout')
 def signout():
     session.pop('username', None)
-    #flash ('You were signed out')
+    flash ('You were signed out')
     return redirect(url_for('get_catalog'))
 
 @app.route('/get_catalog')
