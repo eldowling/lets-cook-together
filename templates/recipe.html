@@ -1,4 +1,6 @@
 {% extends 'base.html'%} {% block content %}
+{% set temp_ingd = recipe.ingredients -%}
+{% set temp_ingd = '\n'.join(temp_ingd) -%}
 <div class="container">
   <div class="row  justify-content-center">
     <div class="col s12 center title-block">

@@ -16,7 +16,7 @@
         {% set recp_sugars = recipe.sugars -%}
         {% set recp_salt = recipe.salt -%}
         {% set recp_fibre = recipe.fibre -%}
-               
+        
         {% set recp_prepsteps = recipe.prep_steps -%}
         {% set recp_imgurl = recipe.image_url -%}
     {% else %}
@@ -162,12 +162,15 @@
       <div class="row">
         <div class="input-field col s12">
         
-          <textarea id="ingredients" name="ingredients" value="" class="materialize-textarea">
+          
+          <textarea id="ingredients" name="ingredients" value="{{recp_ingrd_list}}" class="materialize-textarea">
           {% if recipe != "NEW" -%} 
-          {% for ingrd in recipe.ingredients -%} 
-          {{ ingrd|safe }} <br>
-          {%- endfor %} 
-          {%- endif %} </textarea>
+            {% for ingrd in recipe.ingredients -%} 
+              {{ ingrd|safe }} <br>
+            {%- endfor %}
+          {%- endif %} 
+          </textarea>
+          
         
           <label for="ingredients">Ingredients</label>
           <span class="helper-text" data-error="wrong" data-success="right">Seperate each ingredient using a comma: ','</span>
