@@ -48,16 +48,22 @@
         </div>
       </div>
       <div class="row">
-      <div class="col s3">
-        <img src="{{recipe.image_url}}" alt="{{ recipe.course }}" width="120" height="90"/>
+        <div class="col s4">
+            <img src="{{recipe.image_url}}" alt="{{ recipe.course }}" width="100%" height="auto"/>
+        </div>
+        <div class="col s8">
+            <div class="row">
+                <div class="col s12">
+                    {{recipe.description}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <strong>Rating: </strong> {{recipe.rating}}
+                </div>
+            </div>
+        </div>
       </div>
-      <div class="col s6 ">
-        {{recipe.description}}
-      </div>
-      <div class="col s3">
-        <strong>Rating: </strong> {{recipe.rating}}
-      </div>
-    </div>
       {% endfor %}
       </ul>
       </li>

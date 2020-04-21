@@ -79,3 +79,7 @@
         }
     }
 }
+
+.textarea .materialize-textarea .ingrds_field {
+    white-space: pre-wrap;
+}
