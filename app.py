@@ -58,7 +58,21 @@ def signout():
 
 @app.route('/get_catalog')
 def get_catalog():
-    return render_template("catalog.html", recipes=mongo.db.recipes.find())
+    #posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
+    ###
+    #    """returns a set of documents belonging to page number `page_num`
+    #where size of each page is `page_size`.
+    page_size = 2
+    page_num = 1
+    ## Calculate number of documents to skip
+    skips = page_size * (page_num - 1)
+    cursor = mongo.db.recipes.find().skip(skips).limit(page_size)
+    ## Return documents
+    #return [x for x in cursor]
+    return render_template("catalog.html", recipes=cursor)
+    ###
+    ##recipe=mongo.db.recipes.find().limit(5)
+    ##return render_template("catalog.html", recipes=recipe)
 
 @app.route('/get_catalog/<course>')
 def get_catalog_bycourse(course):
@@ -102,7 +116,7 @@ def insert_recipe(recipe_id):
         tools_list = request.form.getlist("tools")
         
         save_recipe = {
-            "author": request.form.get("author"),
+            "author": session['username'],
             "title": request.form.get("title"),
             "description": request.form.get("description"),
             "course": request.form.get("course"),
@@ -126,6 +140,7 @@ def insert_recipe(recipe_id):
     if recipe_id != 'NEW':
         recipes.update_one( {'_id': ObjectId(recipe_id)},
                      {"$set":save_recipe})
+
     else:
         recipes.insert_one(save_recipe)
     return redirect(url_for('get_catalog'))
