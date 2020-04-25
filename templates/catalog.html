@@ -72,4 +72,20 @@
 </div>
 </div>
 
+<div>
+    <ul class="pagination">
+        <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+        
+        {% for page_no in range(div_times) %}
+            {% set act_page = page_no + 1-%}
+            {%if act_page == page %}
+                <li class="active"><a href="{{ url_for('get_catalog', page=act_page) }}">{{ act_page }}</a></li>
+            {% else %}
+            <li class="waves-effect"><a href="{{ url_for('get_catalog', page=act_page) }}">{{ act_page }}</a></li>
+            {% endif %}
+        {% endfor %}
+        <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+    </ul>
+</div>
+
 {% endblock %}

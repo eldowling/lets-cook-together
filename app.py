@@ -62,14 +62,21 @@ def get_catalog():
     ###
     #    """returns a set of documents belonging to page number `page_num`
     #where size of each page is `page_size`.
+    page_num = request.args.get('page', 1, type=int)
     page_size = 2
-    page_num = 1
+    #page_num = page
     ## Calculate number of documents to skip
     skips = page_size * (page_num - 1)
     cursor = mongo.db.recipes.find().skip(skips).limit(page_size)
+    total_recs = mongo.db.recipes.count()
+    div_times = total_recs // page_size
+    remain = total_recs % page_size
+    if remain > 0:
+        div_times += 1
+    
     ## Return documents
     #return [x for x in cursor]
-    return render_template("catalog.html", recipes=cursor)
+    return render_template("catalog.html", recipes=cursor, page=page_num, div_times=div_times)
     ###
     ##recipe=mongo.db.recipes.find().limit(5)
     ##return render_template("catalog.html", recipes=recipe)
