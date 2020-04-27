@@ -58,14 +58,8 @@ def signout():
 
 @app.route('/get_catalog')
 def get_catalog():
-    #posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
-    ###
-    #    """returns a set of documents belonging to page number `page_num`
-    #where size of each page is `page_size`.
     page_num = request.args.get('page', 1, type=int)
-    page_size = 2
-    #page_num = page
-    ## Calculate number of documents to skip
+    page_size = 5
     skips = page_size * (page_num - 1)
     cursor = mongo.db.recipes.find().skip(skips).limit(page_size)
     total_recs = mongo.db.recipes.count()
@@ -73,13 +67,8 @@ def get_catalog():
     remain = total_recs % page_size
     if remain > 0:
         div_times += 1
-    
-    ## Return documents
-    #return [x for x in cursor]
     return render_template("catalog.html", recipes=cursor, page=page_num, div_times=div_times)
-    ###
-    ##recipe=mongo.db.recipes.find().limit(5)
-    ##return render_template("catalog.html", recipes=recipe)
+    
 
 @app.route('/get_catalog/<course>')
 def get_catalog_bycourse(course):
@@ -159,6 +148,12 @@ def edit_recipe(recipe_id):
                             courses=mongo.db.courses.find(),  
                             cuisines=mongo.db.cuisine.find(),
                             tools=mongo.db.tools.find())
+
+@app.route('/delete_recipe/<recipe_id>')
+def delete_recipe(recipe_id):
+    mongo.db.recipes.remove( {'_id': ObjectId(recipe_id)})
+    flash('Recipe has been deleted')
+    return redirect(url_for('get_catalog'))
 
 @app.route('/maintenance')
 def maintenance():

@@ -74,17 +74,29 @@
 
 <div>
     <ul class="pagination">
-        <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-        
+        {% set num_pages = 2 -%}
+        {% set left_side = (page - num_pages) -%}
+        {% set right_side = (page + num_pages) -%}
+        {% set left_edge = (page - (num_pages + 1)) -%}
+        {% set right_edge = (page + (num_pages + 1)) -%}
+
         {% for page_no in range(div_times) %}
-            {% set act_page = page_no + 1-%}
-            {%if act_page == page %}
-                <li class="active"><a href="{{ url_for('get_catalog', page=act_page) }}">{{ act_page }}</a></li>
-            {% else %}
-            <li class="waves-effect"><a href="{{ url_for('get_catalog', page=act_page) }}">{{ act_page }}</a></li>
+            {% set act_page = page_no + 1 -%}
+            {% if act_page == left_edge -%}
+                {% set prev_page = left_edge -%}
+                <li class="waves-effect"><a href="{{ url_for('get_catalog', page=prev_page) }}"><i class="material-icons">chevron_left</i></a></li>
+            {% elif ((act_page >= left_side) and (act_page <= page)) or ((act_page >= page) and (act_page <= right_side))  -%}
+                {% if act_page == page -%}
+                    <li class="active"><a href="{{ url_for('get_catalog', page=act_page) }}">{{ act_page }}</a></li>
+                {% else %}
+                <li class="waves-effect"><a href="{{ url_for('get_catalog', page=act_page) }}">{{ act_page }}</a></li>
+                {% endif %}
+            {% elif act_page == right_edge -%}
+                {% set next_page = right_edge -%}
+                <li class="waves-effect"><a href="{{ url_for('get_catalog', page=next_page) }}"><i class="material-icons">chevron_right</i></a></li>
             {% endif %}
         {% endfor %}
-        <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+        
     </ul>
 </div>
 
