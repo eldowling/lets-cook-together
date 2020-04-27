@@ -214,7 +214,7 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn teal lighten-3 modal-close">Cancel</button>
-            <form action="{{url_for('delete_recipe', recipe_id=recipe.id)}}" method="post">
+            <form action="{{url_for('delete_recipe', recipe_id=recp_id)}}" method="POST">
                 <input type="submit" value="Delete" class="btn red darken-4">
             </form>
     </div>

@@ -139,7 +139,8 @@ def insert_recipe(recipe_id):
 
     else:
         recipes.insert_one(save_recipe)
-    return redirect(url_for('get_catalog'))
+    #return redirect(url_for('get_catalog'))
+    return redirect(url_for('show_recipe', recipe_id=recipe_id))
 
 @app.route('/edit_recipe/<recipe_id>')
 def edit_recipe(recipe_id):
@@ -149,11 +150,13 @@ def edit_recipe(recipe_id):
                             cuisines=mongo.db.cuisine.find(),
                             tools=mongo.db.tools.find())
 
-@app.route('/delete_recipe/<recipe_id>')
+@app.route('/delete_recipe/<recipe_id>', methods=['POST'])
 def delete_recipe(recipe_id):
-    mongo.db.recipes.remove( {'_id': ObjectId(recipe_id)})
-    flash('Recipe has been deleted')
-    return redirect(url_for('get_catalog'))
+    if request.method == "POST":
+        recipe = mongo.db.recipes
+        recipe.remove( {'_id': ObjectId(recipe_id)})
+        flash('Recipe has been deleted')
+        return redirect(url_for('get_catalog'))
 
 @app.route('/maintenance')
 def maintenance():

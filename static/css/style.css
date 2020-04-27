@@ -27,8 +27,12 @@
 .tabs .indicator {
 	background-color:#006064;
 }
- .tabs {
+.tabs {
     margin-bottom: 2em;
+}
+
+.pagination li.active {
+    background-color:#05a6ab;
 }
 
 .dropdown-content{
