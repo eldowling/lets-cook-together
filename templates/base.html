@@ -16,7 +16,7 @@
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
             {% if session['username'] %}
-              <li> Signed in as: {{session['username']}} </li>
+              <li> Welcome, {{session['username']}}     </li>
               <li><a href="/signout">Sign Out</a></li>
             {% else %}
                 <li><a href="{{url_for('index')}}">Login</a></li>
@@ -40,9 +40,9 @@
             <li><a href="{{url_for('maintenance')}}">Maintenance</a></li>
             
     </ul>
-    <div class="row hide-on-med-and-up">
+    <div class="row hide-on-med-and-up small-msg">
         {% if session['username'] %}
-            <h5> Signed in as: {{session['username']}}! </h5>
+            <p> Welcome, {{session['username']}}! </p>
         {% endif %}
     </div>
     
@@ -105,7 +105,6 @@
             $('.tabs').tabs();
             $('select').formSelect();
             $('.collapsible').collapsible();
-            $('.modal').modal();
         });
 
         var dropdowns = document.querySelectorAll('.dropdown-trigger')

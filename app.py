@@ -62,6 +62,7 @@ def get_catalog():
     page_size = 5
     skips = page_size * (page_num - 1)
     cursor = mongo.db.recipes.find().skip(skips).limit(page_size)
+    #cursor = mongo.db.recipes.aggregate([{$sort: {title: 1}}, {$limit: page_size}, {$group: {_id: '$course'}}, {$sort: {_id: 1}}])
     total_recs = mongo.db.recipes.count()
     div_times = total_recs // page_size
     remain = total_recs % page_size
