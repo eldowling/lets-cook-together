@@ -161,8 +161,6 @@
       </div>
       <div class="row">
         <div class="input-field col s12">
-        
-          
           <textarea id="ingredients" name="ingredients" value="{{recp_ingrd_list}}" class="materialize-textarea ingrds_field">
           {% if recipe != "NEW" -%} 
             {% for ingrd in recipe.ingredients -%} 
@@ -170,7 +168,6 @@
             {%- endfor %}
           {%- endif %} 
           </textarea>
-          
         
           <label for="ingredients">Ingredients</label>
           <span class="helper-text" data-error="wrong" data-success="right">Enter each ingredient on a new line</span>
@@ -188,10 +185,26 @@
           <span class="helper-text" data-error="wrong" data-success="right">Enter each step on a new line</span>
         </div>
       </div>
-      <div class="input-field col s12 m6">
-          <input id="imgurl" name="image_url" value="{{recp_imgurl}}" type="text" class="validate">
-          <label for="imgurl">Image URL:</label>
+      <div class="row">
+        <div class="input-field col s12 m6">
+            <input id="imgurl" name="image_url" value="{{recp_imgurl}}" type="text" class="validate">
+            <label for="imgurl">Add the URL for your recipe's image here:</label>
         </div>
+        
+      </div>
+      <div>
+        <div class="col s12">
+            <div class="info">
+                <span class="tiny-more-info">more</span>
+                <i class="material-icons info">info</i>
+                <span class="chip more-info">
+                    Right click on the image for your recipe <br> Select copy link location
+                    <br>Paste the copied link to the Image URL text box above
+                </span><br>
+                
+            </div>
+        </div>
+      </div>
       <div class="row">
         <div class="col s6 offset-s4 offset-m6">
             <button class="btn waves-effect waves-light" type="submit">Update
