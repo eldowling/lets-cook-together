@@ -18,7 +18,9 @@
                     <strong>Courses</strong>
                 </div>
                 <div class="col s3">
-                    <a href="#" class="waves-effect waves-light btn btn_small blue">Edit</a>
+                    {% set url_for_var = "insert_course" -%}
+                    {% set add_to_list = "Courses" -%}
+                    <a href="#maint_modal" class="waves-effect waves-light btn btn_small modal-trigger">Add New</a>                    
                 </div>
             </div>
             <div class="collapsible-body">
@@ -48,7 +50,9 @@
                     <strong>Cuisine</strong>
                 </div>
                 <div class="col s3">
-                    <a href="#" class="waves-effect waves-light btn btn_small blue">Edit</a>
+                    {% set url_for_var = "insert_cuisine" -%}
+                    {% set add_to_list = "Cuisine" -%}
+                    <a href="#maint_modal" class="waves-effect waves-light btn btn_small modal-trigger">Add New</a>                    
                 </div>
             </div>
             <div class="collapsible-body">
@@ -78,8 +82,9 @@
                     <strong>Tools</strong>
                 </div>
                 <div class="col s3">
-                    <a href="#maint_modal" class="waves-effect waves-light btn btn_small modal-trigger">Add New</a>
-                    
+                    {% set url_for_var = "insert_tool" -%}
+                    {% set add_to_list = "Tools" -%}
+                    <a href="#maint_modal" class="waves-effect waves-light btn btn_small modal-trigger">Add New</a>                    
                 </div>
             </div>
             <div class="collapsible-body">
@@ -100,22 +105,24 @@
 
 <div id="maint_modal" class="modal">
     <div class="modal-content">
-      <h4>Add to TABLE NAME</h4>
-      <form class="col s12">
+      <h4>Add to {{add_to_list}}</h4>
+      <form action="{{ url_for(url_for_var) }}" method="POST" class="col s12">
         <div class="row">
             <div class="input-field col s6">
-                <input placeholder="Placeholder" id="code" type="text" class="validate">
+                <input placeholder="Placeholder" id="code" name="code" type="text" class="validate">
                 <label for="code">Code</label>
             </div>
             <div class="input-field col s6">
-                <input id="description" type="text" class="validate">
-                <label for="description">Description</label>
+                <input id="name" name="name" type="text" class="validate">
+                <label for="name">Name / Description</label>
             </div>
         </div>
+        <div class="row">
+            <button class="btn waves-effect waves-light" type="submit">Add
+                <i class="material-icons right">playlist_add</i>
+             </button>
+        </div>
       </form>
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
     </div>
   </div>
 

@@ -56,31 +56,41 @@ def signout():
     flash ('You were signed out')
     return redirect(url_for('get_catalog'))
 
-def paginate_funct(page_num, filter):
-    print("inside function")
-    print(page_num)
+#def paginate_funct(page_num, filter):
+#    print("inside function")
+#    print(page_num)
+#    page_size = 5
+#    skips = page_size * (page_num - 1)
+#    #if filter == 'None':
+#    cursor = mongo.db.recipes.find().skip(skips).limit(page_size)
+#    #elif filter != '':
+#    #    recipes_bycourse = list(mongo.db.recipes.find({"course": course}))
+#    #cursor = mongo.db.recipes.aggregate([{$sort: {title: 1}}, {$limit: page_size}, {$group: {_id: '$course'}}, {$sort: {_id: 1}}])
+#    total_recs = mongo.db.recipes.count()
+#    div_times = total_recs // page_size
+#    remain = total_recs % page_size
+#    if remain > 0:
+#        div_times += 1
+#    return cursor, div_times;
+
+@app.route('/get_catalog')
+def get_catalog():
+    page_num = request.args.get('page', 1, type=int)
     page_size = 5
     skips = page_size * (page_num - 1)
-    #if filter == 'None':
-    cursor = mongo.db.recipes.find().skip(skips).limit(page_size)
-    #elif filter != '':
-    #    recipes_bycourse = list(mongo.db.recipes.find({"course": course}))
-    #cursor = mongo.db.recipes.aggregate([{$sort: {title: 1}}, {$limit: page_size}, {$group: {_id: '$course'}}, {$sort: {_id: 1}}])
+    #cursor = mongo.db.recipes.find().skip(skips).limit(page_size)
+    cursor = mongo.db.recipes.find().sort('course').skip(skips).limit(page_size)
     total_recs = mongo.db.recipes.count()
     div_times = total_recs // page_size
     remain = total_recs % page_size
     if remain > 0:
         div_times += 1
-    return cursor, div_times;
-
-@app.route('/get_catalog')
-def get_catalog():
-    page_num = request.args.get('page', 1, type=int)
-    cursor, div_times = paginate_funct(page_num, 'None')
-    print("Pagination function returned")
-    print(cursor)
-    print(div_times)
-    #return render_template("catalog.html", recipes=cursor, page=page_num, div_times=div_times)
+    #return cursor, div_times;
+    #cursor, div_times = paginate_funct(page_num, 'None')
+    #print("Pagination function returned")
+    #print(cursor)
+    #print(div_times)
+    return render_template("catalog.html", recipes=cursor, page=page_num, div_times=div_times)
     
 
 @app.route('/get_catalog/<course>')
@@ -175,7 +185,36 @@ def delete_recipe(recipe_id):
 def maintenance():
     return render_template("maintenance.html", courses=mongo.db.courses.find(), 
                         cuisines=mongo.db.cuisine.find(), tools=mongo.db.tools.find())
-    
+
+@app.route('/insert_course', methods=['POST'])    
+def insert_course():
+    courses=mongo.db.courses
+    save_course = {
+            "course_code": request.form.get("code"),
+            "course_desc": request.form.get("name")
+    }
+    courses.insert_one(save_course)
+    return redirect(url_for('maintenance'))
+
+@app.route('/insert_cuisine', methods=['POST'])    
+def insert_cuisine():
+    cuisine=mongo.db.cuisine
+    save_cuisine = {
+            "cuisine_code": request.form.get("code"),
+            "cuisine_name": request.form.get("name")
+    }
+    cuisine.insert_one(save_cuisine)
+    return redirect(url_for('maintenance'))
+
+@app.route('/insert_tool', methods=['POST'])    
+def insert_tool():
+    tools=mongo.db.tools
+    save_tool = {
+            "tool_code": request.form.get("code"),
+            "tool_name": request.form.get("name")
+    }
+    tools.insert_one(save_tool)
+    return redirect(url_for('maintenance'))
     
 if __name__ == '__main__':
     app.secret_key = 'mysecret'
