@@ -90,13 +90,13 @@ def get_catalog():
     #print("Pagination function returned")
     #print(cursor)
     #print(div_times)
-    return render_template("catalog.html", recipes=cursor, page=page_num, div_times=div_times)
+    return render_template("catalog.html", recipes=cursor, page=page_num, div_times=div_times, sel_course="ALL")
     
 
 @app.route('/get_catalog/<course>')
 def get_catalog_bycourse(course):
     recipes_bycourse = list(mongo.db.recipes.find({"course": course}))
-    return render_template("catalog.html", recipes=recipes_bycourse)
+    return render_template("catalog.html", recipes=recipes_bycourse, sel_course=course)
 
 #@app.route('/filter_catalog/<course>')
 #def filter_catalog(course):

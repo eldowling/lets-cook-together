@@ -18,9 +18,7 @@
                     <strong>Courses</strong>
                 </div>
                 <div class="col s3">
-                    {% set url_for_var = "insert_course" -%}
-                    {% set add_to_list = "Courses" -%}
-                    <a href="#maint_modal" class="waves-effect waves-light btn btn_small modal-trigger">Add New</a>                    
+                    <a href="#maint_modal" name="course" class="waves-effect waves-light btn btn_small modal-trigger">Add New</a>                    
                 </div>
             </div>
             <div class="collapsible-body">
@@ -50,9 +48,7 @@
                     <strong>Cuisine</strong>
                 </div>
                 <div class="col s3">
-                    {% set url_for_var = "insert_cuisine" -%}
-                    {% set add_to_list = "Cuisine" -%}
-                    <a href="#maint_modal" class="waves-effect waves-light btn btn_small modal-trigger">Add New</a>                    
+                    <a href="#maint_modal" name="cuisine" class="waves-effect waves-light btn btn_small modal-trigger">Add New</a>                    
                 </div>
             </div>
             <div class="collapsible-body">
@@ -84,7 +80,7 @@
                 <div class="col s3">
                     {% set url_for_var = "insert_tool" -%}
                     {% set add_to_list = "Tools" -%}
-                    <a href="#maint_modal" class="waves-effect waves-light btn btn_small modal-trigger">Add New</a>                    
+                    <a href="#maint_modal" name="tools" class="waves-effect waves-light btn btn_small modal-trigger">Add New</a>                    
                 </div>
             </div>
             <div class="collapsible-body">
@@ -105,8 +101,8 @@
 
 <div id="maint_modal" class="modal">
     <div class="modal-content">
-      <h4>Add to {{add_to_list}}</h4>
-      <form action="{{ url_for(url_for_var) }}" method="POST" class="col s12">
+      <h4>Add to new code to list:</h4>
+      <form action="{{ url_for('maintenance_insert') }}" method="POST" class="col s12">
         <div class="row">
             <div class="input-field col s6">
                 <input placeholder="Placeholder" id="code" name="code" type="text" class="validate">

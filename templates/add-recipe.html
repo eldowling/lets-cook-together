@@ -16,8 +16,6 @@
         {% set recp_sugars = recipe.sugars -%}
         {% set recp_salt = recipe.salt -%}
         {% set recp_fibre = recipe.fibre -%}
-        
-        {% set recp_prepsteps = recipe.prep_steps -%}
         {% set recp_imgurl = recipe.image_url -%}
     {% else %}
         {% set recp_id = 'NEW' -%}
@@ -180,7 +178,13 @@
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <textarea id="prep_steps" name="prep_steps" value="{{recp_prepsteps}}" class="materialize-textarea"></textarea>
+          <textarea id="prep_steps" name="prep_steps" value="{{recp_prepsteps}}" class="materialize-textarea">
+          {% if recipe != "NEW" -%} 
+            {% for prepstep in recipe.prep_steps -%} 
+            {{prepstep}} &#13;&#10;
+            {%- endfor %}
+          {%- endif %}
+          </textarea>
           <label for="prep_steps">Preparation Steps</label>
           <span class="helper-text" data-error="wrong" data-success="right">Enter each step on a new line</span>
         </div>

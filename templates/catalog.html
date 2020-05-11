@@ -27,14 +27,13 @@
   </div>
   <div class="row">
     <div class="col s6 offset-s3 sel-course-filter">
+        {% if sel_course != "ALL" -%}
         <span class="red-text text-accent-4">Selected course: {{ recipes.course }}</span>
+        {% endif -%}
     </div>
 
   </div>
 </div>
-
-
-
 
 <div class="container">
   <div class = "row">
