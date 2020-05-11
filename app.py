@@ -56,47 +56,37 @@ def signout():
     flash ('You were signed out')
     return redirect(url_for('get_catalog'))
 
-#def paginate_funct(page_num, filter):
-#    print("inside function")
-#    print(page_num)
-#    page_size = 5
-#    skips = page_size * (page_num - 1)
-#    #if filter == 'None':
-#    cursor = mongo.db.recipes.find().skip(skips).limit(page_size)
-#    #elif filter != '':
-#    #    recipes_bycourse = list(mongo.db.recipes.find({"course": course}))
-#    #cursor = mongo.db.recipes.aggregate([{$sort: {title: 1}}, {$limit: page_size}, {$group: {_id: '$course'}}, {$sort: {_id: 1}}])
-#    total_recs = mongo.db.recipes.count()
-#    div_times = total_recs // page_size
-#    remain = total_recs % page_size
-#    if remain > 0:
-#        div_times += 1
-#    return cursor, div_times;
-
-@app.route('/get_catalog')
-def get_catalog():
-    page_num = request.args.get('page', 1, type=int)
+def paginate_funct(page_num, filter):
     page_size = 5
     skips = page_size * (page_num - 1)
-    #cursor = mongo.db.recipes.find().skip(skips).limit(page_size)
-    cursor = mongo.db.recipes.find().sort('course').skip(skips).limit(page_size)
+    if filter == 'None':
+        cursor = mongo.db.recipes.find().skip(skips).limit(page_size)
+    elif filter != '':
+        cursor = list(mongo.db.recipes.find({"course": filter}))
+        #cursor = mongo.db.recipes.aggregate([{$sort: {title: 1}}, {$limit: page_size}, {$group: {_id: '$course'}}, {$sort: {_id: 1}}])
     total_recs = mongo.db.recipes.count()
     div_times = total_recs // page_size
     remain = total_recs % page_size
     if remain > 0:
         div_times += 1
-    #return cursor, div_times;
-    #cursor, div_times = paginate_funct(page_num, 'None')
-    #print("Pagination function returned")
-    #print(cursor)
-    #print(div_times)
+    paginate_ret = (cursor, div_times)
+    return paginate_ret
+
+@app.route('/get_catalog')
+def get_catalog():
+    page_num = request.args.get('page', 1, type=int)
+        
+    cursor, div_times = paginate_funct(page_num, 'None')
     return render_template("catalog.html", recipes=cursor, page=page_num, div_times=div_times, sel_course="ALL")
     
 
 @app.route('/get_catalog/<course>')
 def get_catalog_bycourse(course):
-    recipes_bycourse = list(mongo.db.recipes.find({"course": course}))
-    return render_template("catalog.html", recipes=recipes_bycourse, sel_course=course)
+    page_num = request.args.get('page', 1, type=int)
+    cursor, div_times = paginate_funct(page_num, course)
+    #recipes_bycourse = list(mongo.db.recipes.find({"course": course}))
+    #return render_template("catalog.html", recipes=recipes_bycourse, sel_course=course)
+    return render_template("catalog.html", recipes=cursor, page=page_num, div_times=div_times, sel_course=course)
 
 #@app.route('/filter_catalog/<course>')
 #def filter_catalog(course):
