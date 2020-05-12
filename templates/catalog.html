@@ -17,11 +17,9 @@
         <ul id='dropdown1' class='dropdown-content'>
             <li><a href="{{url_for('get_catalog')}}">All Courses</a></li>
             <li class="divider" tabindex="-1"></li>
-            <li><a href="{{url_for('get_catalog_bycourse', course='Breakfast')}}">Breakfast</a></li>
-            <li><a href="{{url_for('get_catalog_bycourse', course='Lunch')}}">Lunch</a></li>
-            <li><a href="{{url_for('get_catalog_bycourse', course='Soup')}}">Soup</a></li>
-            <li><a href="{{url_for('get_catalog_bycourse', course='Main')}}">Main</a></li>
-            <li><a href="{{url_for('get_catalog_bycourse', course='Dessert')}}">Dessert</a></li>
+            {% for c_desc in courses %}
+                <li><a href="{{url_for('get_catalog_bycourse', course=c_desc.course_desc)}}">{{c_desc.course_desc}}</a></li>
+            {% endfor %}
         </ul>        
     </div>    
   </div>
@@ -85,14 +83,15 @@
         {% set left_edge = (page - (num_pages + 1)) -%}
         {% set right_edge = (page + (num_pages + 1)) -%}
 
+        {% if sel_course != "ALL" -%}
+            {% set urlName = "get_catalog/" + sel_course + "?" -%}
+        {% else %}
+            {% set urlName = "get_catalog" -%}
+        {% endif %}
+        
         {% for page_no in range(div_times) %}
             {% set act_page = page_no + 1 -%}
-            
-            {% if sel_course != "ALL" -%}
-                {% set urlName = "get_catalog/" + sel_course + "?" -%}
-            {% else %}
-                {% set urlName = "get_catalog" -%}
-            {% endif %}
+                        
             {% if act_page == left_edge -%}
                 {% set prev_page = left_edge -%}
                 <li class="waves-effect"><a href="{{ url_for(urlName, page=prev_page) }}"><i class="material-icons">chevron_left</i></a></li>
