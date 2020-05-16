@@ -3,7 +3,7 @@ from flask import Flask, flash, render_template, redirect, request, url_for, ses
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
-from forms import RegisterForm, LoginForm
+from forms import RegisterForm, LoginForm, AddEditReceipeForm
 import functools
 
 app = Flask(__name__)
@@ -129,22 +129,22 @@ def show_recipe(recipe_id):
 @login_required
 def add_edit_recipe():
     if 'username' in session:
+        form = AddEditReceipeForm()
         return render_template('add-recipe.html', 
                             courses=mongo.db.courses.find(),  
                             cuisines=mongo.db.cuisine.find(),
-                            tools=mongo.db.tools.find(), recipe='NEW')
+                            tools=mongo.db.tools.find(), recipe='NEW', form=form)
     else:
         flash('You must log in first to add a recipe')
         return redirect(url_for('index'))
 
 @app.route('/insert_recipe/<recipe_id>', methods=['POST'])
 def insert_recipe(recipe_id):
-
-    if request.method == "POST":
+    form = AddEditReceipeForm()
+    if form.validate_on_submit():
         ingredients = request.form.get("ingredients").splitlines()
         prep_steps = request.form.get("prep_steps").splitlines()
         tools_list = request.form.getlist("tools")
-        
         save_recipe = {
             "author": session['username'],
             "title": request.form.get("title"),
@@ -166,23 +166,30 @@ def insert_recipe(recipe_id):
             "image_url": request.form.get("image_url")
         }
 
-    recipes = mongo.db.recipes
-    if recipe_id != 'NEW':
-        recipes.update_one( {'_id': ObjectId(recipe_id)},
-                     {"$set":save_recipe})
-
+        recipes = mongo.db.recipes
+        if recipe_id != 'NEW':
+            recipes.update_one( {'_id': ObjectId(recipe_id)},
+                        {"$set":save_recipe})
+        else:
+            recipes.insert_one(save_recipe)
+        #return redirect(url_for('get_catalog'))
+        return redirect(url_for('show_recipe', recipe_id=recipe_id))
     else:
-        recipes.insert_one(save_recipe)
-    #return redirect(url_for('get_catalog'))
-    return redirect(url_for('show_recipe', recipe_id=recipe_id))
+        flash('Validation errors in recipe')
+    
+    return render_template(add_edit_recipe())
 
 @app.route('/edit_recipe/<recipe_id>')
 def edit_recipe(recipe_id):
+    form = AddEditReceipeForm()
     the_recipe =  mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+    form.title.data = the_recipe.get("title")
+    form.description.data = the_recipe.get("description")
+    #form.url.data = the_recipe.get("image_url")
     return render_template('add-recipe.html', recipe=the_recipe, 
                             courses=mongo.db.courses.find(),  
                             cuisines=mongo.db.cuisine.find(),
-                            tools=mongo.db.tools.find())
+                            tools=mongo.db.tools.find(), form=form)
 
 @app.route('/delete_recipe/<recipe_id>', methods=['POST'])
 def delete_recipe(recipe_id):

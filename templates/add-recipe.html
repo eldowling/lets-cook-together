@@ -48,6 +48,7 @@
 </div>
 <div class="row">
     <form action="{{ url_for('insert_recipe', recipe_id=recp_id) }}" method="POST" class="col s12">
+      {{ form.csrf_token }}
       <div class="row">
         <div class="input-field col s10 m6">   
             <input disabled id="author" name="author" value="{{recp_author}}" type="text" class="validate">
@@ -56,12 +57,17 @@
       </div>
       <div class="row">
         <div class="input-field col s10 m6">
-          <input placeholder="Title" id="title" name="title" value="{{recp_title}}" type="text" class="validate">
-          <label for="title">Recipe Title</label>
+            {{ form.title(placeholder='Title') }}
+            {{ form.title.label }}
+            <ul>
+                {% for error in form.title.errors %}
+                    <li style="color:red;">{{ error }}</li>
+                {% endfor %}
+            </ul>
         </div>
         <div class="input-field col s12 m6">
-          <input placeholder="Description" id="description" name="description" value="{{recp_descr}}" type="text" class="validate">
-          <label for="description">Description</label>
+          {{ form.description(placeholder='Description') }}
+          {{ form.description.label }}
         </div>
       </div>
       <div class="row">
