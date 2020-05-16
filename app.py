@@ -3,6 +3,7 @@ from flask import Flask, flash, render_template, redirect, request, url_for, ses
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
+from forms import RegisterForm, LoginForm
 
 app = Flask(__name__)
 app.config["MONGO_DBNAME"] = 'recipie_catalog'
@@ -16,16 +17,21 @@ def index():
     if 'username' in session:
         return redirect(url_for('get_catalog'))
 
-    return render_template('index.html')
+    return redirect(url_for('login'))
 
-@app.route('/login', methods=['POST'])
+@app.route('/login', methods=['POST', 'GET'])
 def login():
-    if request.method == 'POST':
+    form = LoginForm()
+    if request.method == 'GET':
+        return render_template('index.html', form=form)
+    
+    if form.validate_on_submit():
+    #if request.method == 'POST':
         users = mongo.db.users
         login_user = users.find_one({'name' : request.form['username']})
         if login_user:
             db_pass = login_user['password']
-            if check_password_hash(db_pass, request.form['pass']):
+            if check_password_hash(db_pass, request.form['password']):
                 session['username'] = request.form['username']
                 return redirect(url_for('get_catalog'))
         else:
@@ -35,12 +41,16 @@ def login():
 
 @app.route('/register', methods=['POST', 'GET'])
 def register():
-    if request.method == 'POST':
+    form = RegisterForm()
+    if request.method == 'GET':
+        return render_template('register.html', form=form)
+    #if request.method == 'POST':
+    if form.validate_on_submit():
         users = mongo.db.users
         existing_user = users.find_one({'name' : request.form['username']})
 
         if existing_user is None:
-            hash_form_pass = generate_password_hash(request.form['pass'], "sha256")
+            hash_form_pass = generate_password_hash(request.form['password'], "sha256")
             users.insert_one({'name' : request.form['username'], 'password' : hash_form_pass})
             session['username'] = request.form['username']
             return redirect(url_for('index'))
