@@ -4,6 +4,7 @@ from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
 from forms import RegisterForm, LoginForm
+import functools
 
 app = Flask(__name__)
 app.config["MONGO_DBNAME"] = 'recipie_catalog'
@@ -11,6 +12,14 @@ app.config["MONGO_URI"] = 'mongodb+srv://root:r00tUser@myfirstcluster-pwjgy.mong
 
 mongo = PyMongo(app)
 
+def login_required(func):
+    @functools.wraps(func)
+    def secure_function(*args, **kwargs):
+        if "username" not in session:
+            return redirect(url_for("login", next=request.url))
+        return func(*args, **kwargs)
+
+    return secure_function
 
 @app.route('/')
 def index():
@@ -27,12 +36,15 @@ def login():
     
     if form.validate_on_submit():
     #if request.method == 'POST':
+        next_url = request.form.get("next")
         users = mongo.db.users
         login_user = users.find_one({'name' : request.form['username']})
         if login_user:
             db_pass = login_user['password']
             if check_password_hash(db_pass, request.form['password']):
                 session['username'] = request.form['username']
+                if next_url:
+                    return redirect(next_url)
                 return redirect(url_for('get_catalog'))
         else:
             flash('Invalid username/password combination')
@@ -114,6 +126,7 @@ def show_recipe(recipe_id):
     return render_template('recipe.html', recipe=the_recipe)
 
 @app.route('/add_recipe')
+@login_required
 def add_edit_recipe():
     if 'username' in session:
         return render_template('add-recipe.html', 
