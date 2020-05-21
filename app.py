@@ -131,9 +131,9 @@ def add_edit_recipe():
     if 'username' in session:
         form = AddEditReceipeForm()
         return render_template('add-recipe.html', 
-                            courses=mongo.db.courses.find(),  
-                            cuisines=mongo.db.cuisine.find(),
-                            tools=mongo.db.tools.find(), recipe='NEW', form=form)
+                            courses=mongo.db.courses.find().sort('course_desc'),  
+                            cuisines=mongo.db.cuisine.find().sort('cuisine_name'),
+                            tools=mongo.db.tools.find().sort('tool_name'), recipe='NEW', form=form)
     else:
         flash('You must log in first to add a recipe')
         return redirect(url_for('index'))
@@ -177,7 +177,7 @@ def insert_recipe(recipe_id):
     else:
         flash('Validation errors in recipe')
     
-    return render_template(add_edit_recipe())
+    return render_template()
 
 @app.route('/edit_recipe/<recipe_id>')
 def edit_recipe(recipe_id):
@@ -187,9 +187,9 @@ def edit_recipe(recipe_id):
     form.description.data = the_recipe.get("description")
     #form.url.data = the_recipe.get("image_url")
     return render_template('add-recipe.html', recipe=the_recipe, 
-                            courses=mongo.db.courses.find(),  
-                            cuisines=mongo.db.cuisine.find(),
-                            tools=mongo.db.tools.find(), form=form)
+                            courses=mongo.db.courses.find().sort('course_desc'),  
+                            cuisines=mongo.db.cuisine.find().sort('cuisine_name'),
+                            tools=mongo.db.tools.find().sort('tool_name'), form=form)
 
 @app.route('/delete_recipe/<recipe_id>', methods=['POST'])
 def delete_recipe(recipe_id):
@@ -201,8 +201,15 @@ def delete_recipe(recipe_id):
 
 @app.route('/maintenance')
 def maintenance():
-    return render_template("maintenance.html", courses=mongo.db.courses.find(), 
-                        cuisines=mongo.db.cuisine.find(), tools=mongo.db.tools.find())
+    if 'username' in session:
+        return render_template("maintenance.html", 
+                        courses=mongo.db.courses.find().sort('course_desc'), 
+                        cuisines=mongo.db.cuisine.find().sort('cuisine_name'), 
+                        tools=mongo.db.tools.find().sort('tool_name'))
+    else:
+        flash('You must log in first to access the maintenance section')
+        return redirect(url_for('index'))
+    
 
 @app.route('/insert_course', methods=['POST'])    
 def insert_course():
