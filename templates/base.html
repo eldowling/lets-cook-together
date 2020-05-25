@@ -105,6 +105,7 @@
             $('.tabs').tabs();
             $('select').formSelect();
             $('.collapsible').collapsible();
+            $("select[required]").css({display: "inline", height: 0, padding: 0, width: 0});
         });
 
         var dropdowns = document.querySelectorAll('.dropdown-trigger')
@@ -119,6 +120,11 @@
             var instances = M.Chips.init(elems, options);
         });
         
+
+
+
+
+
         
         
     </script>
