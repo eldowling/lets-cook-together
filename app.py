@@ -87,11 +87,13 @@ def paginate_funct(page_num, filter):
     skips = page_size * (page_num - 1)
     if filter == 'None':
         cursor = mongo.db.recipes.find().sort('course').skip(skips).limit(page_size)
+        total_recs = mongo.db.recipes.count()
     elif filter != '':
         cursor = list(mongo.db.recipes.find({"course": filter}).sort('course').skip(skips).limit(page_size))
-    total_recs = mongo.db.recipes.count()
+        total_recs = mongo.db.recipes.find({"course": filter}).count()
     div_times = total_recs // page_size
     remain = total_recs % page_size
+    
     if remain > 0:
         div_times += 1
     paginate_ret = (cursor, div_times)
