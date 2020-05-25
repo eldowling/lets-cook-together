@@ -84,8 +84,8 @@
         {% set right_edge = (page + (num_pages + 1)) -%}
 
         {% if sel_course != "ALL" -%}
-            {% set urlName = "get_catalog/" + sel_course + "?" -%}
-        {% else %}
+            {% set urlName = "get_catalog_bycourse" -%}
+        {% elif sel_course == "ALL" %}
             {% set urlName = "get_catalog" -%}
         {% endif %}
         
@@ -94,16 +94,16 @@
                         
             {% if act_page == left_edge -%}
                 {% set prev_page = left_edge -%}
-                <li class="waves-effect"><a href="{{ url_for(urlName, page=prev_page) }}"><i class="material-icons">chevron_left</i></a></li>
+                <li class="waves-effect"><a href="{{ url_for(urlName, course=sel_course, page=prev_page) }}"><i class="material-icons">chevron_left</i></a></li>
             {% elif ((act_page >= left_side) and (act_page <= page)) or ((act_page >= page) and (act_page <= right_side))  -%}
                 {% if act_page == page -%}
-                    <li class="active"><a href="{{ url_for(urlName, page=act_page) }}">{{ act_page }}</a></li>
+                    <li class="active"><a href="{{ url_for(urlName, course=sel_course, page=act_page) }}">{{ act_page }}</a></li>
                 {% else %}
-                <li class="waves-effect"><a href="{{ url_for(urlName, page=act_page) }}">{{ act_page }}</a></li>
+                <li class="waves-effect"><a href="{{ url_for(urlName, course=sel_course, page=act_page) }}">{{ act_page }}</a></li>
                 {% endif %}
             {% elif act_page == right_edge -%}
                 {% set next_page = right_edge -%}
-                <li class="waves-effect"><a href="{{ url_for(urlName, page=next_page) }}"><i class="material-icons">chevron_right</i></a></li>
+                <li class="waves-effect"><a href="{{ url_for(urlName, course=sel_course, page=next_page) }}"><i class="material-icons">chevron_right</i></a></li>
             {% endif %}
         {% endfor %}
         

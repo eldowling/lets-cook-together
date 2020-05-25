@@ -5,6 +5,10 @@ from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
 from forms import RegisterForm, LoginForm, AddEditReceipeForm
 import functools
+from os import path
+
+if path.exists("env.py"):
+  import env 
 
 app = Flask(__name__)
 app.config["MONGO_DBNAME"] = 'recipie_catalog'
@@ -200,6 +204,7 @@ def delete_recipe(recipe_id):
         return redirect(url_for('get_catalog'))
 
 @app.route('/maintenance')
+@login_required
 def maintenance():
     if 'username' in session:
         return render_template("maintenance.html", 
