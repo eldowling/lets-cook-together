@@ -99,7 +99,7 @@
                 {% if act_page == page -%}
                     <li class="active"><a href="{{ url_for(urlName, course=sel_course, page=act_page) }}">{{ act_page }}</a></li>
                 {% else %}
-                <li class="waves-effect"><a href="{{ url_for(urlName, course=sel_course, page=act_page) }}">{{ act_page }}</a></li>
+                    <li class="waves-effect"><a href="{{ url_for(urlName, course=sel_course, page=act_page) }}">{{ act_page }}</a></li>
                 {% endif %}
             {% elif act_page == right_edge -%}
                 {% set next_page = right_edge -%}

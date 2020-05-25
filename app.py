@@ -177,13 +177,15 @@ def insert_recipe(recipe_id):
             recipes.update_one( {'_id': ObjectId(recipe_id)},
                         {"$set":save_recipe})
         else:
-            recipes.insert_one(save_recipe)
-        #return redirect(url_for('get_catalog'))
+            recipe_id = recipes.insert_one(save_recipe).inserted_id
         return redirect(url_for('show_recipe', recipe_id=recipe_id))
     else:
         flash('Validation errors in recipe')
     
-    return render_template()
+    return render_template('add-recipe.html', recipe='NEW', 
+                            courses=mongo.db.courses.find().sort('course_desc'),  
+                            cuisines=mongo.db.cuisine.find().sort('cuisine_name'),
+                            tools=mongo.db.tools.find().sort('tool_name'), form=form)
 
 @app.route('/edit_recipe/<recipe_id>')
 def edit_recipe(recipe_id):
