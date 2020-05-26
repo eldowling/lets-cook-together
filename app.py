@@ -39,7 +39,6 @@ def login():
         return render_template('index.html', form=form)
     
     if form.validate_on_submit():
-    #if request.method == 'POST':
         next_url = request.form.get("next")
         users = mongo.db.users
         login_user = users.find_one({'name' : request.form['username']})
@@ -60,7 +59,6 @@ def register():
     form = RegisterForm()
     if request.method == 'GET':
         return render_template('register.html', form=form)
-    #if request.method == 'POST':
     if form.validate_on_submit():
         users = mongo.db.users
         existing_user = users.find_one({'name' : request.form['username']})
@@ -114,21 +112,9 @@ def get_catalog_bycourse(course):
     courses = mongo.db.courses.find().sort('course_desc')
     return render_template("catalog.html", recipes=cursor, page=page_num, div_times=div_times, sel_course=course, courses=courses)
 
-#@app.route('/filter_catalog/<course>')
-#def filter_catalog(course):
-#    return render_template("catalog.html", recipes=mongo.db.recipes.find({ "recipes.course": course }))
-
-##@app.route('/get_catalog')
-##def get_catalog():
-#    if course == '':
-#        return render_template("catalog.html", recipes=mongo.db.recipes.find())
-#    if course != '':
- #       return render_template("catalog.html", recipes=mongo.db.recipes.find({ "course": 'breakfast' }))
-    
 @app.route('/show_recipe/<recipe_id>')
 def show_recipe(recipe_id):
     the_recipe =  mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
-#    all_categories =  mongo.db.categories.find()
     return render_template('recipe.html', recipe=the_recipe)
 
 @app.route('/add_recipe')
@@ -193,7 +179,6 @@ def edit_recipe(recipe_id):
     the_recipe =  mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
     form.title.data = the_recipe.get("title")
     form.description.data = the_recipe.get("description")
-    #form.url.data = the_recipe.get("image_url")
     return render_template('add-recipe.html', recipe=the_recipe, 
                             courses=mongo.db.courses.find().sort('course_desc'),  
                             cuisines=mongo.db.cuisine.find().sort('cuisine_name'),

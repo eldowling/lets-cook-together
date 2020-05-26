@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, TextAreaField
+from wtforms import StringField, PasswordField
 from wtforms.validators import InputRequired, Length
 
 class RegisterForm(FlaskForm):
@@ -13,5 +13,4 @@ class LoginForm(FlaskForm):
 class AddEditReceipeForm(FlaskForm):
     title = StringField('Title', validators=[InputRequired('A recipe title is required'),Length(min=3, max=100)])
     description = StringField('Description')
-    #imgurl = URLField('Image Url', validators=[URL('An image url is required')])
     

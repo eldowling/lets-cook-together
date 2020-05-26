@@ -165,7 +165,8 @@
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <textarea id="ingredients" name="ingredients" value="{{recp_ingrd_list}}" class="materialize-textarea ingrds_field" required>
+          <textarea id="ingredients" name="ingredients" value="{{recp_ingrd_list}}" 
+                    class="materialize-textarea ingrds_field validate" minlength="5" required>
           {% if recipe != "NEW" -%} 
             {% for ingrd in recipe.ingredients -%} 
             {{ingrd}} &#13;&#10;
@@ -184,10 +185,11 @@
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <textarea id="prep_steps" name="prep_steps" value="{{recp_prepsteps}}" class="materialize-textarea" required>
+          <textarea id="prep_steps" name="prep_steps" value="{{recp_prepsteps}}" 
+                    class="materialize-textarea validate" minlength="5" required>
           {% if recipe != "NEW" -%} 
             {% for prepstep in recipe.prep_steps -%} 
-            {{prepstep}} &#13;&#10;
+              {{prepstep}} &#13;&#10;
             {%- endfor %}
           {%- endif %}
           </textarea>
@@ -197,7 +199,7 @@
       </div>
       <div class="row">
         <div class="input-field col s12 m6">
-            <input id="imgurl" name="image_url" value="{{recp_imgurl}}" type="text" class="validate">
+            <input id="imgurl" name="image_url" value="{{recp_imgurl}}" type="url" class="validate">
             <label for="imgurl">Add the URL for your recipe's image here:</label>
         </div>
         
