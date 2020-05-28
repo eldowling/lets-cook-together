@@ -11,6 +11,8 @@ if path.exists("env.py"):
   import env 
 
 app = Flask(__name__)
+#MONGO_DBNAME = os.environ.get('MONGO_DBNAME')
+#MONGO_URI = os.environ.get('MONGO_URI')
 app.config["MONGO_DBNAME"] = 'recipie_catalog'
 app.config["MONGO_URI"] = 'mongodb+srv://root:r00tUser@myfirstcluster-pwjgy.mongodb.net/recipie_catalog?retryWrites=true&w=majority'
 
@@ -115,7 +117,15 @@ def get_catalog_bycourse(course):
 @app.route('/show_recipe/<recipe_id>')
 def show_recipe(recipe_id):
     the_recipe =  mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
-    return render_template('recipe.html', recipe=the_recipe)
+    if 'username' in session:
+        find_rating = mongo.db.ratings.find({"recpie_id": ObjectId(recipe_id), "user":'username'})
+        #rated = find_rating._id
+        rated = "true"
+        print("rated")
+        print(rated)
+    else:
+        rated = "false"
+    return render_template('recipe.html', recipe=the_recipe, rated=rated)
 
 @app.route('/add_recipe')
 @login_required
