@@ -28,11 +28,22 @@
             <div class="row">
             <div class="col s6 offset-s3">
                 <p><b>Rating: </b></p>
-                <ul>                
-                {% for r in range(recipe.avg_rating) %}
-                    <li class="material-icons rating_star">star</li>
-                {% endfor %}
-                </ul>
+                {% if recipe.avg_rating == 0 %}
+                        {% for x in range(5) %}
+                            <li class="material-icons rating_star">star_border</li>
+                        {% endfor %}
+                    {% else %}
+                    <ul>                
+                        {% for r in range(recipe.avg_rating) %}
+                            <li class="material-icons rating_star">star</li>
+                        {% endfor %}
+                        {% if recipe.avg_rating < 5 %}
+                            {% for x in range(recipe.avg_rating, 5) %}
+                                <li class="material-icons rating_star">star_border</li>
+                            {% endfor %}
+                        {% endif %}
+                    </ul>                    
+                    {% endif %}
             </div>
         </div>
         {% else %}

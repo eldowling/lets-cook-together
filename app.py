@@ -118,11 +118,12 @@ def get_catalog_bycourse(course):
 def show_recipe(recipe_id):
     the_recipe =  mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
     if 'username' in session:
-        find_rating = mongo.db.ratings.find({"recpie_id": ObjectId(recipe_id), "user":'username'})
-        #rated = find_rating._id
-        rated = "true"
-        print("rated")
-        print(rated)
+        session_user = session['username']
+        find_rating = mongo.db.ratings.find({"recipe_id": recipe_id, "user": session_user}).count()
+        if find_rating > 0:
+            rated="true"
+        else:
+            rated = "false"
     else:
         rated = "false"
     return render_template('recipe.html', recipe=the_recipe, rated=rated)
@@ -147,6 +148,7 @@ def insert_recipe(recipe_id):
         ingredients = request.form.get("ingredients").splitlines()
         prep_steps = request.form.get("prep_steps").splitlines()
         tools_list = request.form.getlist("tools")
+        avg_rate = 0
         save_recipe = {
             "author": session['username'],
             "title": request.form.get("title"),
@@ -165,7 +167,8 @@ def insert_recipe(recipe_id):
             "fibre": request.form.get("fibre"),
             "ingredients": ingredients,
             "prep_steps": prep_steps,
-            "image_url": request.form.get("image_url")
+            "image_url": request.form.get("image_url"),
+            "avg_rating": avg_rate
         }
 
         recipes = mongo.db.recipes
