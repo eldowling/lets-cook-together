@@ -205,6 +205,37 @@ def delete_recipe(recipe_id):
         flash('Recipe has been deleted')
         return redirect(url_for('get_catalog'))
 
+@app.route('/rate_recipe/<recipe_id>', methods=['POST'])
+def rate_recipe(recipe_id):
+    if request.method == "POST":
+        #save the rating for the user
+        form_rating = request.form.get("rating")
+        print("form_rating:")
+        print(form_rating)
+        save_rating = {
+            "recipe_id": recipe_id,
+            "user": session['username'],
+            "rating": form_rating,
+        }
+        ratings = mongo.db.ratings
+        ratings.insert_one(save_rating)
+        
+        #get all ratings for this recipe to find average
+        rated_recipes = mongo.db.ratings.find({"recipe_id": recipe_id})
+        count_ratings = rated_recipes.count()
+        total_rating = 0
+        for doc in rated_recipes:
+            total_rating += int(doc["rating"])
+            
+        #update the recipe with an average rating
+        avg_rating = total_rating / count_ratings
+        avg_rating = int(avg_rating)
+        recipes = mongo.db.recipes
+        recipes.update_one( {'_id': ObjectId(recipe_id)},
+                        {"$set": {"avg_rating": avg_rating}})
+        
+        return redirect(url_for('show_recipe', recipe_id=recipe_id))
+
 @app.route('/maintenance')
 @login_required
 def maintenance():
