@@ -39,6 +39,9 @@
   </div>
   <div>
     
+    {% if not recipes|groupby('course') %}
+            <div>No recipes found for selected course: {{sel_course}} </div>
+    {% endif %}
     {% for group in recipes|groupby('course') %}
       <h4>{{ group.grouper }}</h4>
       <div class = "row">

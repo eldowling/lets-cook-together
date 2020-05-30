@@ -11,10 +11,8 @@ if path.exists("env.py"):
   import env 
 
 app = Flask(__name__)
-#MONGO_DBNAME = os.environ.get('MONGO_DBNAME')
-#MONGO_URI = os.environ.get('MONGO_URI')
-app.config["MONGO_DBNAME"] = 'recipie_catalog'
-app.config["MONGO_URI"] = 'mongodb+srv://root:r00tUser@myfirstcluster-pwjgy.mongodb.net/recipie_catalog?retryWrites=true&w=majority'
+app.config["MONGO_DBNAME"] = os.environ.get('MONGO_DBNAME')
+app.config["MONGO_URI"] = os.environ.get('MONGO_URI')
 
 mongo = PyMongo(app)
 
