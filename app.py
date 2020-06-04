@@ -80,13 +80,16 @@ def signout():
     flash ('You were signed out')
     return redirect(url_for('get_catalog'))
 
-def paginate_funct(page_num, filter):
+def paginate_funct(page_num, filter_type, filter):
     page_size = 5
     skips = page_size * (page_num - 1)
-    if filter == 'None':
+    if filter_type == 'None':
         cursor = list(mongo.db.recipes.find().sort('course').skip(skips).limit(page_size))
         total_recs = mongo.db.recipes.count_documents({})        
-    elif filter != '':
+    elif filter_type == 'Search':
+        cursor = list(mongo.db.recipes.find({"title": {'$regex': filter, '$options': 'i'}}).sort('course').skip(skips).limit(page_size))
+        total_recs = mongo.db.recipes.count_documents({"title": {'$regex': filter, '$options': 'i'}})
+    elif filter_type == 'Course':
         cursor = list(mongo.db.recipes.find({"course": filter}).sort('course').skip(skips).limit(page_size))
         total_recs = mongo.db.recipes.count_documents({"course": filter})
         
@@ -101,17 +104,25 @@ def paginate_funct(page_num, filter):
 @app.route('/get_catalog')
 def get_catalog():
     page_num = request.args.get('page', 1, type=int)
-    cursor, div_times = paginate_funct(page_num, 'None')
+    cursor, div_times = paginate_funct(page_num, 'None', 'None')
     courses = mongo.db.courses.find().sort('course_desc')
     return render_template("catalog.html", recipes=cursor, page=page_num, div_times=div_times, sel_course="ALL", courses=courses)
-    
 
 @app.route('/get_catalog/<course>')
 def get_catalog_bycourse(course):
     page_num = request.args.get('page', 1, type=int)
-    cursor, div_times = paginate_funct(page_num, course)
+    cursor, div_times = paginate_funct(page_num, 'Course', course)
     courses = mongo.db.courses.find().sort('course_desc')
     return render_template("catalog.html", recipes=cursor, page=page_num, div_times=div_times, sel_course=course, courses=courses)
+
+@app.route('/catalog_search', methods=['POST'])
+def catalog_search():
+    if request.method == 'POST':
+        page_num = request.args.get('page', 1, type=int)
+        search_text = request.form['search']
+        cursor, div_times = paginate_funct(page_num, 'Search', search_text)
+        courses = mongo.db.courses.find().sort('course_desc')
+        return render_template("catalog.html", recipes=cursor, page=page_num, div_times=div_times, sel_course="Search", courses=courses)
 
 @app.route('/show_recipe/<recipe_id>')
 def show_recipe(recipe_id):

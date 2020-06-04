@@ -3,6 +3,15 @@
   background-color: #00838f;
 }
 
+.search-bar{
+    margin-bottom: 2em;
+    background-color: #83a5a8;
+}
+
+.search-bar .input-field{
+    background-color: white;
+}
+
 .center-img {
   margin: auto;
   min-width: 250px;

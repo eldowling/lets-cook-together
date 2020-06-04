@@ -9,8 +9,22 @@
 
 <div class="container">
   <div class="row">
-    <div class="col s2 offset-s2">
-      <h5>Filter By:</h5>
+    <div>
+      <form method=POST action="{{ url_for('catalog_search') }}">
+        <div class="input-field col s9">
+          <input id="search" name="search" type="search" placeholder="Search Catalog" required>
+          <label class="label-icon" for="search"></label>
+          
+        </div>
+        <div class="col s3">
+            <button type="submit" class="btn btn-primary btn-block"><i class="material-icons">search</i></button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s4 ">
+      <h6>Filter By:</h6>
     </div>
     <div class="col s6">
         <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Course</a>
@@ -25,7 +39,7 @@
   </div>
   <div class="row">
     <div class="col s6 offset-s3 sel-course-filter">
-        {% if sel_course != "ALL" -%}
+        {% if sel_course != "ALL" and sel_course != "Search" -%}
         <span class="red-text text-accent-4">Selected course: {{ sel_course }}</span>
         {% endif -%}
     </div>
