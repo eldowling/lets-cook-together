@@ -87,8 +87,10 @@ def paginate_funct(page_num, filter_type, filter):
         cursor = list(mongo.db.recipes.find().sort('course').skip(skips).limit(page_size))
         total_recs = mongo.db.recipes.count_documents({})        
     elif filter_type == 'Search':
-        cursor = list(mongo.db.recipes.find({"title": {'$regex': filter, '$options': 'i'}}).sort('course').skip(skips).limit(page_size))
-        total_recs = mongo.db.recipes.count_documents({"title": {'$regex': filter, '$options': 'i'}})
+        cursor = list(mongo.db.recipes.find({"$or": [{"title": {'$regex': filter, '$options': 'i'}}, 
+            {"description": {'$regex': filter, '$options': 'i'}}]}).sort('course').skip(skips).limit(page_size));
+        total_recs = mongo.db.recipes.count_documents({"$or": [{"title": {'$regex': filter, '$options': 'i'}}, 
+            {"description": {'$regex': filter, '$options': 'i'}}]})
     elif filter_type == 'Course':
         cursor = list(mongo.db.recipes.find({"course": filter}).sort('course').skip(skips).limit(page_size))
         total_recs = mongo.db.recipes.count_documents({"course": filter})
