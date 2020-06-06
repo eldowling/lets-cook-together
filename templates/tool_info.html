@@ -11,13 +11,13 @@
 </div>
 <div class="container">
     <div class="row">
-        <div class="col s4 offset-s8">
-            <a class="waves-effect waves-light btn" href="#"><i class="material-icons left">add_shopping_cart</i>Buy</a>
+        <div class="col s4 m2 offset-s8 offset-m10">
+            <a class="waves-effect waves-light btn modal-trigger" href="#ComingSoon"><i class="material-icons left">add_shopping_cart</i>Buy</a>
         </div>
     </div>
   </div>
 <div class="row">
-    <div class="col s6 offset-s3 offset-m4">
+    <div class="col s6 offset-s3">
         <img src="{{tool.image_url}}" alt="{{ tool.tool_name }}" width="100%" height="auto"/>
     </div>
 </div>
@@ -36,6 +36,16 @@
     </div>
   </div>
 
-  
+  <div id="ComingSoon" class="modal">
+    <div class="modal-content">
+      <h4>ToolsPro Shopping</h4>
+      <p>We're sorry this feature is currently unavailable.</p>
+      <br>
+      <p>Please check back soon</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+  </div>
 
 {% endblock %}

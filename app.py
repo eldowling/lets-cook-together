@@ -129,7 +129,7 @@ def catalog_search():
 @app.route('/show_recipe/<recipe_id>')
 def show_recipe(recipe_id):
     the_recipe =  mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
-    tools = mongo.db.tools.find()
+    tools = list(mongo.db.tools.find())
     if 'username' in session:
         session_user = session['username']
         find_rating = mongo.db.ratings.find({"recipe_id": recipe_id, "user": session_user}).count()
