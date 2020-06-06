@@ -89,7 +89,10 @@
                         <ul>
                             {% for tool in tools %}
                                 <li>
-                                <i class="material-icons">chevron_right</i> {{tool.tool_code}} - {{tool.tool_name}}
+                                    <i class="material-icons">chevron_right</i> <h6>{{tool.tool_code}} - {{tool.tool_name}}</h6>
+                                    <div class="col s12 divider"></div>
+                                    <p><b>Description:</b> {{ tool.description }}</p>
+                                    <p><b>Price:</b> {{ tool.price }}</p>
                                 </li>
                             {% endfor %}
                         </ul>
@@ -156,7 +159,24 @@
             </div>
             <div class="input-field col s12 m6">
                 <input id="name" name="name" type="text" class="validate" required>
-                <label for="name">Name / Description</label>
+                <label for="name">Tool Name</label>
+            </div>
+            <div class="input-field col s12 m6">
+                <input id="image_url" name="image_url" type="url" class="validate">
+                <label for="image_url">Image URL</label>
+            </div>
+            <div class="input-field col s12 m6">
+                <input id="price" name="price" type="text" class="validate" pattern="[-+]?[0-9]*[.,]?[0-9]+" >
+                <label for="price">Item Price</label>
+            </div>
+            <div class="input-field col s12">
+                <input id="description" name="description" type="text" class="validate" required min="5" max="150">
+                <label for="description">Short Description</label>
+            </div>
+            <div class="input-field col s12">
+                <textarea id="further_info" name="further_info" class="materialize-textarea" required min="15"></textarea>
+                <label for="further_info">Further Information on Item</label>
+                <p class="small-msg">(Item information can be seperated by a new line)</p>
             </div>
         </div>
         <div class="row">

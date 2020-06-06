@@ -303,9 +303,14 @@ def insert_cuisine():
 @app.route('/insert_tool', methods=['POST'])    
 def insert_tool():
     tools=mongo.db.tools
+    further_info = request.form.get("further_info").splitlines()
     save_tool = {
             "tool_code": request.form.get("code"),
-            "tool_name": request.form.get("name")
+            "tool_name": request.form.get("name"),
+            "image_url": request.form.get("image_url"),
+            "description": request.form.get("description"),
+            "further_info": further_info,
+            "price": request.form.get("price")
     }
     tools.insert_one(save_tool)
     return redirect(url_for('maintenance'))
