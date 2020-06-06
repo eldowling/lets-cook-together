@@ -77,7 +77,7 @@
                 {% for recp_tool in recipe.tools %}
                     {% for tool in tools %}
                         {% if recp_tool == tool.tool_code %}
-                            <li><a href="{{url_for('show_tool', tool_id=tool._id)}}">{{tool.tool_name}}</a></li>
+                            <li><i class="fas fa-caret-right"> &nbsp</i><a href="{{url_for('show_tool', tool_id=tool._id)}}">{{tool.tool_name}}</a></li>
                         {% endif %}
                     {% endfor %}
                 {% endfor %} 
