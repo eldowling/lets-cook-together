@@ -52,7 +52,7 @@ def login():
         else:
             flash('Invalid username/password combination')
 	
-    return render_template('index.html')
+    return render_template('index.html', form=form)
 
 @app.route('/register', methods=['POST', 'GET'])
 def register():
@@ -247,6 +247,24 @@ def rate_recipe(recipe_id):
                         {"$set": {"avg_rating": avg_rating}})
         
         return redirect(url_for('show_recipe', recipe_id=recipe_id))
+
+@app.route('/featured_tools')
+def featured_tools():
+    tools = mongo.db.tools.find().sort('tool_name')
+    return render_template("tools_catalog.html", tools=tools)
+
+@app.route('/tools_search', methods=['POST'])
+def tools_search():
+    if request.method == 'POST':
+        search_text = request.form['toolsearch']
+        found_tools = mongo.db.tools.find({"$or": [{"tool_name": {'$regex': search_text, '$options': 'i'}}, 
+            {"description": {'$regex': search_text, '$options': 'i'}}, {"further_info": {'$regex': search_text, '$options': 'i'}}]}).sort('tool_name')
+        return render_template("tools_catalog.html", tools=found_tools)
+
+@app.route('/show_tool/<tool_id>')
+def show_tool(tool_id):
+    sel_tool =  mongo.db.tools.find_one({"_id": ObjectId(tool_id)})
+    return render_template('tool_info.html', tool=sel_tool)
 
 @app.route('/maintenance')
 @login_required

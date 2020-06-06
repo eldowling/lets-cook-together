@@ -1,0 +1,41 @@
+{% extends 'base.html'%} {% block content %}
+{% set temp_further = tool.further_info -%}
+{% set temp_further = '\n'.join(temp_further) -%}
+<div class="container">
+  <div class="row  justify-content-center">
+    <div class="col s12 center title-block">
+      <h5 class="white-text text-darken-2 ">{{ tool.tool_name }} - {{tool.tool_code}} </h5>
+      <span class="white-text text-darken-2 ">Price: {{ tool.price }}</span>
+    </div>
+  </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col s4 offset-s8">
+            <a class="waves-effect waves-light btn" href="#"><i class="material-icons left">add_shopping_cart</i>Buy</a>
+        </div>
+    </div>
+  </div>
+<div class="row">
+    <div class="col s6 offset-s3 offset-m4">
+        <img src="{{tool.image_url}}" alt="{{ tool.tool_name }}" width="100%" height="auto"/>
+    </div>
+</div>
+<div class="row">
+    <div class="col s12">
+      <ul class="tabs">
+        <li class="tab col s3"><a class="active" href="#general">Full Details</a></li>
+      </ul>
+    </div>
+    <div id="general" class="container">
+        <div class="row">
+            <div class="col s11 offset-s1">
+                <span class="flow-text">{{tool.further_info}}</span>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  
+
+{% endblock %}
