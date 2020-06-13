@@ -317,12 +317,9 @@ def insert_tool():
 #def update_tool(tool_id):
 @app.route('/update_tool/', methods=['POST'])
 def update_tool():
-    tools=mongo.db.tools
-    tool_id = request.form.get("toolID")
-    #if request.method =="GET":
-    #    
     if request.method == "POST":
-        
+        tools=mongo.db.tools
+        tool_id = request.form.get("toolID")
         further_info = request.form.get("further_info").splitlines()
         save_tool = {
             "tool_name": request.form.get("name"),
