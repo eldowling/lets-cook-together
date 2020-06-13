@@ -72,7 +72,7 @@ def register():
         else:
             flash ('That username already exists!')
 
-    return render_template('register.html')
+    return render_template('register.html', form=form)
 
 @app.route('/signout')
 def signout():
@@ -313,10 +313,16 @@ def insert_tool():
     tools.insert_one(save_tool)
     return redirect(url_for('maintenance'))
 
-@app.route('/update_tool/<tool_id>', methods=['POST'])
-def update_tool(tool_id):
+#@app.route('/update_tool/<tool_id>', methods=['POST'])
+#def update_tool(tool_id):
+@app.route('/update_tool/', methods=['POST'])
+def update_tool():
+    tools=mongo.db.tools
+    tool_id = request.form.get("toolID")
+    #if request.method =="GET":
+    #    
     if request.method == "POST":
-        tools=mongo.db.tools
+        
         further_info = request.form.get("further_info").splitlines()
         save_tool = {
             "tool_name": request.form.get("name"),

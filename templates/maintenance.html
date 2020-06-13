@@ -98,7 +98,7 @@
                                         <div class="col s7">{{ tool.price }}</div>
                                         <div class="col s2">
                                             <a href="#maint_modal_tools_edit" name="tools_edit" data-tool-id={{tool._id}}
-                                               class="btn-floating btn-small waves-effect waves-light red modal-trigger open-EditToolDialog">
+                                               class="open-EditToolDialog btn-floating btn-small waves-effect waves-light red">
                                                <i class="material-icons">edit</i></a>
                                         </div>
                                     </div>
@@ -200,11 +200,10 @@
 <div id="maint_modal_tools_edit" class="modal">
     <div class="modal-content">
       <h4>Update Tool Details: </h4>
-      <form action="{{ url_for('insert_tool') }}" method="POST" class="col s12">
+      <form action="{{ url_for('update_tool') }}" method="POST" class="col s12">
         <div class="row">
             <div class="input-field col s6">
                 <input type="text" name="toolID" id="toolID" disabled/>
-                <label for="toolID">Tool ID</label>
             </div>
             <div class="input-field col s12 m6">
                 <input id="name" name="name" type="text" class="validate" required min="3" max="40">
@@ -237,4 +236,14 @@
     </div>
 </div>
 
+{% endblock %}
+
+
+{% block custom_js %}
+<script>
+    $(".open-EditToolDialog").on('click', function () {
+        $("#maint_modal_tools_edit").modal("open");
+        $('#toolID').val($(this).attr('data-tool-id'));
+    });
+</script>
 {% endblock %}

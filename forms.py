@@ -13,4 +13,3 @@ class LoginForm(FlaskForm):
 class AddEditReceipeForm(FlaskForm):
     title = StringField('Title', validators=[InputRequired('A recipe title is required'),Length(min=3, max=100)])
     description = StringField('Description')
-    
