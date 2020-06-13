@@ -91,8 +91,17 @@
                                 <li>
                                     <i class="material-icons">chevron_right</i> <h6>{{tool.tool_code}} - {{tool.tool_name}}</h6>
                                     <div class="col s12 divider"></div>
-                                    <p><b>Description:</b> {{ tool.description }}</p>
-                                    <p><b>Price:</b> {{ tool.price }}</p>
+                                    <div class="row">
+                                        <div class="col s3 sm-text"><b>Description:</b></div>
+                                        <div class="col s9">{{ tool.description }}</div>
+                                        <div class="col s3 sm-text"><b>Price:</b></div>
+                                        <div class="col s7">{{ tool.price }}</div>
+                                        <div class="col s2">
+                                            <a href="#maint_modal_tools_edit" name="tools_edit" data-tool-id="this is the id"
+                                               class="btn-floating btn-small waves-effect waves-light red modal-trigger open-EditToolDialog">
+                                               <i class="material-icons">edit</i></a>
+                                        </div>
+                                    </div>
                                 </li>
                             {% endfor %}
                         </ul>
@@ -181,6 +190,51 @@
         </div>
         <div class="row">
             <button class="btn waves-effect waves-light" type="submit">Add
+                <i class="material-icons right">playlist_add</i>
+            </button>
+        </div>
+      </form>
+    </div>
+</div>
+
+<div id="maint_modal_tools_edit" class="modal">
+    <div class="modal-content">
+      <h4>Update Tool Details: </h4>
+      <form action="{{ url_for('insert_tool') }}" method="POST" class="col s12">
+        <div class="row">
+            <div class="input-field col s6">
+                <input type="text" name="toolID" id="toolID"/>
+                <label for="toolID">Tool ID</label>
+            </div>
+            <div class="input-field col s6">
+                
+                <input placeholder="Tool Code" id="code" name="code" type="text" class="validate" required>
+                <label for="code">Code</label>
+            </div>
+            <div class="input-field col s12 m6">
+                <input id="name" name="name" type="text" class="validate" required min="3" max="40">
+                <label for="name">Tool Name</label>
+            </div>
+            <div class="input-field col s12 m6">
+                <input id="image_url" name="image_url" type="url" class="validate">
+                <label for="image_url">Image URL</label>
+            </div>
+            <div class="input-field col s12 m6">
+                <input id="price" name="price" type="text" class="validate" pattern="[-+]?[0-9]*[.,]?[0-9]+" >
+                <label for="price">Item Price</label>
+            </div>
+            <div class="input-field col s12">
+                <input id="description" name="description" type="text" class="validate" required min="5" max="150">
+                <label for="description">Short Description</label>
+            </div>
+            <div class="input-field col s12">
+                <textarea id="further_info" name="further_info" class="materialize-textarea validate" required minlength="15"></textarea>
+                <label for="further_info">Further Information on Item</label>
+                <p class="small-msg">(Item information can be seperated by a new line)</p>
+            </div>
+        </div>
+        <div class="row">
+            <button class="btn waves-effect waves-light" type="submit">Update
                 <i class="material-icons right">playlist_add</i>
             </button>
         </div>

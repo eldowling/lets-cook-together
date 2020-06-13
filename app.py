@@ -223,8 +223,6 @@ def rate_recipe(recipe_id):
     if request.method == "POST":
         #save the rating for the user
         form_rating = request.form.get("rating")
-        print("form_rating:")
-        print(form_rating)
         save_rating = {
             "recipe_id": recipe_id,
             "user": session['username'],
@@ -314,6 +312,22 @@ def insert_tool():
     }
     tools.insert_one(save_tool)
     return redirect(url_for('maintenance'))
+
+@app.route('/update_tool/<tool_id>', methods=['POST'])
+def update_tool(tool_id):
+    if request.method == "POST":
+        tools=mongo.db.tools
+        further_info = request.form.get("further_info").splitlines()
+        save_tool = {
+            "tool_name": request.form.get("name"),
+            "image_url": request.form.get("image_url"),
+            "description": request.form.get("description"),
+            "further_info": further_info,
+            "price": request.form.get("price")
+        }
+        tools.update_one( {'_id': ObjectId(tool_id)},
+                        {"$set":save_tool})
+        return redirect(url_for('maintenance'))
     
 if __name__ == '__main__':
     app.secret_key = 'mysecret'

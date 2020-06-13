@@ -111,6 +111,8 @@
             $('textarea#ingredients').html($('textarea#ingredients').html().trim());
             $('textarea#prep_steps').html($('textarea#prep_steps').html().trim());
             $('textarea#further_info').html($('textarea#further_info').html().trim());
+            
+           
         });
 
         var dropdowns = document.querySelectorAll('.dropdown-trigger')
@@ -125,6 +127,15 @@
             var instances = M.Chips.init(elems, options);
         });   
         
+    </script>
+    <script>
+        $(function(){
+            $(".open-EditToolDialog").on('click'(function(){
+                $("#maint_modal_tools_edit").modal("show");
+                $('#toolID').val($(this).attr('data-tool-id'));
+                
+            });
+        });
     </script>
 </body>
 </html>

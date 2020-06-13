@@ -144,6 +144,10 @@ textarea .materialize-textarea .ingrds_field {
     line-height: 1.8;
 }
 
+.sm-text{
+    font-size: 0.8em;
+}
+
 @media only screen and (max-width: 768px) {
     .btn, .btn-large, .btn-small, .btn-flat {
         height: 30px;
