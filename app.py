@@ -313,8 +313,6 @@ def insert_tool():
     tools.insert_one(save_tool)
     return redirect(url_for('maintenance'))
 
-#@app.route('/update_tool/<tool_id>', methods=['POST'])
-#def update_tool(tool_id):
 @app.route('/update_tool/', methods=['POST'])
 def update_tool():
     if request.method == "POST":
@@ -322,11 +320,11 @@ def update_tool():
         tool_id = request.form.get("toolID")
         further_info = request.form.get("further_info").splitlines()
         save_tool = {
-            "tool_name": request.form.get("name"),
-            "image_url": request.form.get("image_url"),
-            "description": request.form.get("description"),
+            "tool_name": request.form.get("tool_name"),
+            "image_url": request.form.get("tool_url"),
+            "description": request.form.get("tool_descr"),
             "further_info": further_info,
-            "price": request.form.get("price")
+            "price": request.form.get("tool_price")
         }
         tools.update_one( {'_id': ObjectId(tool_id)},
                         {"$set":save_tool})

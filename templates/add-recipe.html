@@ -170,11 +170,11 @@
         <div class="input-field col s12">
           <textarea id="ingredients" name="ingredients" value="{{recp_ingrd_list}}" 
                     class="materialize-textarea ingrds_field validate" minlength="5" required>
-          {% if recipe != "NEW" -%} 
-            {% for ingrd in recipe.ingredients -%} 
+          {%- if recipe != "NEW" -%} 
+            {%- for ingrd in recipe.ingredients -%} 
             {{ingrd}} &#13;&#10;
-            {%- endfor %}
-          {%- endif %} 
+            {%- endfor -%}
+          {%- endif -%} 
           </textarea>
         
           <label for="ingredients">Ingredients</label>
@@ -190,11 +190,11 @@
         <div class="input-field col s12">
           <textarea id="prep_steps" name="prep_steps" value="{{recp_prepsteps}}" 
                     class="materialize-textarea validate" minlength="5" required>
-          {% if recipe != "NEW" -%} 
-            {% for prepstep in recipe.prep_steps -%} 
+          {%- if recipe != "NEW" -%} 
+            {%- for prepstep in recipe.prep_steps -%} 
               {{prepstep}} &#13;&#10;
-            {%- endfor %}
-          {%- endif %}
+            {%- endfor -%}
+          {%- endif -%}
           </textarea>
           <label for="prep_steps">Preparation Steps</label>
           <span class="helper-text" data-error="wrong" data-success="right">Enter each step on a new line</span>

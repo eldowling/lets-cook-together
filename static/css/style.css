@@ -148,6 +148,13 @@ textarea .materialize-textarea .ingrds_field {
     font-size: 0.8em;
 }
 
+.sm-input {
+    height: 1rem;
+    font-size: 8px;
+    margin: 0 0 0 0;
+    border-bottom: none
+}
+
 
 @media only screen and (max-width: 768px) {
     .btn, .btn-large, .btn-small, .btn-flat {
