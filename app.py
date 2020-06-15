@@ -94,6 +94,9 @@ def paginate_funct(page_num, filter_type, filter):
     elif filter_type == 'Course':
         cursor = list(mongo.db.recipes.find({"course": filter}).sort('course').skip(skips).limit(page_size))
         total_recs = mongo.db.recipes.count_documents({"course": filter})
+    elif filter_type == 'Cuisine':
+        cursor = list(mongo.db.recipes.find({"cuisine": filter}).sort('course').skip(skips).limit(page_size))
+        total_recs = mongo.db.recipes.count_documents({"cuisine": filter})
         
     div_times = total_recs // page_size
     remain = total_recs % page_size
@@ -108,14 +111,27 @@ def get_catalog():
     page_num = request.args.get('page', 1, type=int)
     cursor, div_times = paginate_funct(page_num, 'None', 'None')
     courses = mongo.db.courses.find().sort('course_desc')
-    return render_template("catalog.html", recipes=cursor, page=page_num, div_times=div_times, sel_course="ALL", courses=courses)
+    cuisine_list = mongo.db.cuisine.find().sort('cuisine_name')
+    return render_template("catalog.html", recipes=cursor, page=page_num, div_times=div_times, 
+                            sel_course="ALL", courses=courses, sel_cuisine="ALL", cuisine=cuisine_list)
 
-@app.route('/get_catalog/<course>')
+@app.route('/get_catalog_bycourse/<course>')
 def get_catalog_bycourse(course):
     page_num = request.args.get('page', 1, type=int)
     cursor, div_times = paginate_funct(page_num, 'Course', course)
     courses = mongo.db.courses.find().sort('course_desc')
-    return render_template("catalog.html", recipes=cursor, page=page_num, div_times=div_times, sel_course=course, courses=courses)
+    cuisine_list = mongo.db.cuisine.find().sort('cuisine_name')
+    return render_template("catalog.html", recipes=cursor, page=page_num, div_times=div_times, 
+                            sel_course=course, courses=courses, sel_cuisine="ALL", cuisine=cuisine_list)
+
+@app.route('/get_catalog_bycuisine/<cuisine>')
+def get_catalog_bycuisine(cuisine):
+    page_num = request.args.get('page', 1, type=int)
+    cursor, div_times = paginate_funct(page_num, 'Cuisine', cuisine)
+    courses = mongo.db.courses.find().sort('course_desc')
+    cuisine_list = mongo.db.cuisine.find().sort('cuisine_name')
+    return render_template("catalog.html", recipes=cursor, page=page_num, div_times=div_times, 
+                            sel_course="ALL", courses=courses, sel_cuisine=cuisine, cuisine=cuisine_list)
 
 @app.route('/catalog_search', methods=['POST'])
 def catalog_search():
@@ -124,7 +140,9 @@ def catalog_search():
         search_text = request.form['search']
         cursor, div_times = paginate_funct(page_num, 'Search', search_text)
         courses = mongo.db.courses.find().sort('course_desc')
-        return render_template("catalog.html", recipes=cursor, page=page_num, div_times=div_times, sel_course="Search", courses=courses)
+        cuisine_list = mongo.db.cuisine.find().sort('cuisine_name')
+        return render_template("catalog.html", recipes=cursor, page=page_num, div_times=div_times, 
+                                sel_course="Search", courses=courses, sel_cuisine="Search", cuisine=cuisine_list)
 
 @app.route('/show_recipe/<recipe_id>')
 def show_recipe(recipe_id):

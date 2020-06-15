@@ -1,15 +1,27 @@
 # Let's Cook Together - Recipe Catalog
 
-The Recipe catalog was created to allow users to share their own recipes in a 
+The Recipe catalog was created to allow users to share their own recipes in an easily accessible catalog, which allows registered users to add new recipes simply, and to share with other users of the recipe catalog. 
+Recipes can be easily found through the use of either a search bar or a filter button. 
+- The search bar can look for key words in the title or description of any recipe
+- A filter button displays a selection of recipes from the course selected by the user. 
+- Pagination is used to allow the catalog to be displayed in smaller lists, this can be useful in particular for mobile users to provide shorter lists and limit data usage as well as providing faster page loading.
+
+When each recipe is displayed it is divided into three tabs: "General Information", "Ingredients", "Preparation Steps". The simple layout is mobile friendly and helps with providing the user with quick and easy access to the relevant section, without having to scroll too much.
+
+While viewing the recipe a list of the tools used in the preparation or cooking of the recipe will be displayed to the user. This list is helpful for the user to prepare ahead of starting to make it, but also provides a link for each tool which allows the user to the tool information page, and will also allow the user to purchase any of these tools from the site.
  
 ## UX
  
+The recipe catalog site was developed to allow easy access to a 
 Use this section to provide insight into your UX process, focusing on who this website is for, what it is that they want to achieve and how your project is the best way to help them achieve these things.
 
 In particular, as part of this section we recommend that you provide a list of User Stories, with the following general structure:
-- As a user type, I want to perform an action, so that I can achieve a goal.
-
-This section is also where you would share links to any wireframes, mockups, diagrams etc. that you created as part of the design process. These files should themselves either be included as a pdf file in the project itself (in an separate directory), or just hosted elsewhere online and can be in any format that is viewable inside the browser.
+- As a busy mother I want to be able to view recipes quickly and easily on my phone, so that I can follow them direcly from the screen while I'm in the kitchen
+- As a parent of young children, I like to browse through specific recipe categories for lunch or dinner ideas. I also like to search for words from the recipe name when I want to find a recipe quickly. I like to have this available on my phone as I usually take some time to do this during my daily bus commute.
+- As a keen cook, I have built a large collection of recipes over a number of years. These have come from many locations such as family recipes passed down from my mother and grandmother, some of my own recipe and also magazine pullouts. I would like a central location to store all of these, as well as to help with the safe keeping of family recipes. I'd also like to be able to share them with others, and hope that they get enjoyment from making & eating them too.
+- I'm a student in a cookery school, I often browse recipes for inspiration and I find the recipe ratings useful in helping to decide on themes for my weekly menus. I would like to view the catalog on my laptop while preparing my course work, or sometimes on my phone or tablet.
+- As the business manager of ToolsPro I would like to be able to promote our products and allow users of the site to see clearly which of our tools are available to use in each recipe. I would also like the users of the site to have access to our full range of ToolsPro products, and have a plan for further development to allow them to purchase these products directly from the site.
+- As the ToolsPro sales administrator, I need functionality to add to the lists in used on the pages in the site. In particular the range of ToolsPro products that are available in order to add to this list or update the price or any details regarding each of the products.
 
 ## Features
 

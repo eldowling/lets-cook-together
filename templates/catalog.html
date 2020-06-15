@@ -26,24 +26,35 @@
     <div class="col s4 ">
       <h6>Filter By:</h6>
     </div>
-    <div class="col s6">
-        <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Course</a>
-        <ul id='dropdown1' class='dropdown-content'>
+    <div class="col s3">
+        <a class='dropdown-trigger btn' href='#' data-target='course_dropdown'>Course</a>
+        <ul id='course_dropdown' class='dropdown-content'>
             <li><a href="{{url_for('get_catalog')}}">All Courses</a></li>
             <li class="divider" tabindex="-1"></li>
             {% for c_desc in courses %}
                 <li><a href="{{url_for('get_catalog_bycourse', course=c_desc.course_desc)}}">{{c_desc.course_desc}}</a></li>
             {% endfor %}
         </ul>        
+    </div>
+    <div class="col s3">
+        <a class='dropdown-trigger btn' href='#' data-target='cuisine_dropdown'>Cuisine</a>
+        <ul id='cuisine_dropdown' class='dropdown-content'>
+            <li><a href="{{url_for('get_catalog')}}">All Cuisines</a></li>
+            <li class="divider" tabindex="-1"></li>
+            {% for c_name in cuisine %}
+                <li><a href="{{url_for('get_catalog_bycuisine', cuisine=c_name.cuisine_name)}}">{{c_name.cuisine_name}}</a></li>
+            {% endfor %}
+        </ul>        
     </div>    
   </div>
   <div class="row">
-    <div class="col s6 offset-s3 sel-course-filter">
+    <div class="col s9 offset-s3 sel-course-filter">
         {% if sel_course != "ALL" and sel_course != "Search" -%}
-        <span class="red-text text-accent-4">Selected course: {{ sel_course }}</span>
+          <span class="red-text text-accent-4">Selected course: {{ sel_course }}</span>
+        {% elif sel_cuisine != "ALL" and sel_cuisine != "Search" -%}
+          <span class="red-text text-accent-4">Selected cuisine: {{ sel_cuisine }}</span>
         {% endif -%}
     </div>
-
   </div>
 </div>
 
@@ -54,7 +65,13 @@
   <div>
     
     {% if not recipes|groupby('course') %}
-            <div>No recipes found for selected course: {{sel_course}} </div>
+        {% if sel_course != "ALL" and sel_course != "Search" -%}
+          <div>No recipes found for selected course: {{sel_course}} </div>
+        {% elif sel_cuisine != "ALL" and sel_cuisine != "Search" -%}
+          <div>No recipes found for selected cuisine: {{sel_cuisine}} </div>
+        {% elif sel_course == "Search" and sel_cuisine == "Search" -%}
+          <div>No recipes found for the search text entered </div>
+        {% endif %}
     {% endif %}
     {% for group in recipes|groupby('course') %}
       <h4>{{ group.grouper }}</h4>
@@ -79,7 +96,12 @@
             </div>
             <div class="row">
                 <div class="col s12">
-                    <strong>Rating: </strong>
+                    <b>Cuisine: </b>{{recipe.cuisine}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <b>Rating: </b>
                     {% if recipe.avg_rating == 0 %}
                         {% for x in range(5) %}
                             <li class="material-icons rating_star">star_border</li>
