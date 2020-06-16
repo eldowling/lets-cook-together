@@ -49,6 +49,8 @@ def login():
                 if next_url:
                     return redirect(next_url)
                 return redirect(url_for('get_catalog'))
+            else:
+                flash('Invalid username/password combination')
         else:
             flash('Invalid username/password combination')
 	
