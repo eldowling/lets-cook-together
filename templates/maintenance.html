@@ -123,12 +123,14 @@
       <form action="{{ url_for('insert_course') }}" method="POST" class="col s12">
         <div class="row">
             <div class="input-field col s6">
-                <input placeholder="Course Code" id="code" name="code" type="text" class="validate" required>
+                <input placeholder="Course Code" id="code" name="code" type="text" class="validate" required minlength="3" maxlength="10">
                 <label for="code">Code</label>
+                <span class="helper-text" data-error="Invalid field length" data-success="Valid Entry"></span>
             </div>
             <div class="input-field col s12 m6">
-                <input id="name" name="name" type="text" class="validate" required>
+                <input id="name" name="name" type="text" class="validate" required minlength="3" maxlength="40">
                 <label for="name">Name / Description</label>
+                <span class="helper-text" data-error="Invalid field length" data-success="Valid Entry"></span>
             </div>
         </div>
         <div class="row">
@@ -146,12 +148,14 @@
       <form action="{{ url_for('insert_cuisine') }}" method="POST" class="col s12">
         <div class="row">
             <div class="input-field col s6">
-                <input placeholder="Cuisine Code" id="code" name="code" type="text" class="validate" required>
+                <input placeholder="Cuisine Code" id="code" name="code" type="text" class="validate" required minlength="3" maxlength="10">
                 <label for="code">Code</label>
+                <span class="helper-text" data-error="Invalid field length" data-success="Valid Entry"></span>
             </div>
             <div class="input-field col s12 m6">
-                <input id="name" name="name" type="text" class="validate" required>
+                <input id="name" name="name" type="text" class="validate" required minlength="3" maxlength="40">
                 <label for="name">Name / Description</label>
+                <span class="helper-text" data-error="Invalid field length" data-success="Valid Entry"></span>
             </div>
         </div>
         <div class="row">
@@ -169,28 +173,33 @@
       <form action="{{ url_for('insert_tool') }}" method="POST" class="col s12">
         <div class="row">
             <div class="input-field col s6">
-                <input placeholder="Tool Code" id="code" name="code" type="text" class="validate" required>
+                <input placeholder="Tool Code" id="code" name="code" type="text" class="validate" required minlength="3" maxlength="10">
                 <label for="code">Code</label>
             </div>
             <div class="input-field col s12 m6">
-                <input id="name" name="name" type="text" class="validate" required min="3" max="40">
+                <input id="name" name="name" type="text" class="validate" required minlength="3" maxlength="40">
                 <label for="name">Tool Name</label>
+                <span class="helper-text" data-error="Invalid field length" data-success="Valid Entry"></span>
             </div>
             <div class="input-field col s12 m6">
                 <input id="image_url" name="image_url" type="url" class="validate">
                 <label for="image_url">Image URL</label>
+                <span class="helper-text" data-error="Please enter a valid URL" data-success="Valid Entry"></span>
             </div>
             <div class="input-field col s12 m6">
                 <input id="price" name="price" type="text" class="validate" pattern="[-+]?[0-9]*[.,]?[0-9]+" >
                 <label for="price">Item Price</label>
+                <span class="helper-text" data-error="Must be in numeric (e.g. 99.99)" data-success="Valid Entry"></span>
             </div>
             <div class="input-field col s12">
-                <input id="description" name="description" type="text" class="validate" required min="5" max="150">
+                <input id="description" name="description" type="text" class="validate" required minlength="5" maxlength="150">
                 <label for="description">Short Description</label>
+                <span class="helper-text" data-error="Invalid field length" data-success="Valid Entry"></span>
             </div>
             <div class="input-field col s12">
                 <textarea id="further_info" name="further_info" class="materialize-textarea validate" required minlength="15"></textarea>
                 <label for="further_info">Further Information on Item</label>
+                <span class="helper-text" data-error="Invalid field length" data-success="Valid Entry"></span>
                 <p class="small-msg">(Item information can be seperated by a new line)</p>
             </div>
         </div>
@@ -211,28 +220,28 @@
         <div class="row">
             <div class="input-field col s12 m6">
                 <input type="text" name="name_label" value="Tool Name" class="sm-input" disabled/>
-                <input id="tool_name" name="tool_name" type="text" class="validate" required min="3" max="40">
-                <!--label for="tool_name" class="active">Tool Name</label-->
+                <input id="tool_name" name="tool_name" type="text" class="validate" required minlength="3" maxlength="40">
+                <span class="helper-text" data-error="Invalid field length" data-success="Valid Entry"></span>
             </div>
             <div class="input-field col s12 m6">
                 <input type="text" name="price_label" value="Price" class="sm-input" disabled/>
                 <input id="tool_price" name="tool_price" type="text" class="validate" pattern="[-+]?[0-9]*[.,]?[0-9]+" >
-                <!--label for="tool_price" class="active">Price</label-->
+                <span class="helper-text" data-error="Must be in numeric (e.g. 99.99)" data-success="Valid Entry"></span>
             </div>
             <div class="input-field col s12">
                 <input type="text" name="url_label" value="Image URL" class="sm-input" disabled/>
                 <input id="tool_url" name="tool_url" type="url" class="validate">
-                <!--label for="tool_url" class="active">Image URL</label-->
+                <span class="helper-text" data-error="Please enter a valid URL" data-success="Valid Entry"></span>
             </div>
             <div class="input-field col s12">
                 <input type="text" name="descr_label" value="Description" class="sm-input" disabled/>
-                <input id="tool_descr" name="tool_descr" type="text" class="validate" required min="5" max="150">
-                <!--label for="tool_descr" class="active">Description</label-->
+                <input id="tool_descr" name="tool_descr" type="text" class="validate" required minlength="5" maxlength="150">
+                <span class="helper-text" data-error="Invalid field length" data-success="Valid Entry"></span>
             </div>
             <div class="input-field col s12">
                 <input type="text" name="info_label" value="Further Information" class="sm-input" disabled/>
                 <textarea id="tool_further_info" name="further_info" class="materialize-textarea validate" required minlength="15"></textarea>
-                <!--label for="tool_further_info" class="active">Further Information</label-->
+                <span class="helper-text" data-error="Invalid field length" data-success="Valid Entry"></span>
                 <p class="small-msg">(Item information can be seperated by a new line)</p>
             </div>
         </div>

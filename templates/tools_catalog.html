@@ -11,13 +11,17 @@
   <div class="row">
     <div>
       <form method=POST action="{{ url_for('tools_search') }}">
-        <div class="input-field col s9">
-          <input id="toolsearch" name="toolsearch" type="search" placeholder="Search our featured tools" required>
+        <div class="input-field col s8">
+          <input id="toolsearch" name="toolsearch" type="search" placeholder="Search our featured tools" required minlength="3">
           <label class="label-icon" for="toolsearch"></label>
           
         </div>
-        <div class="col s3">
+        <div class="col s2">
             <button type="submit" class="btn btn-primary btn-block"><i class="material-icons">search</i></button>
+        </div>
+        <div class="col s2">
+            <a href="{{url_for('featured_tools')}}" name="show_all_tools" class="waves-effect waves-light btn btn_medium" title="Show Full Tools List">
+            <i class="fas fa-clipboard-list"></i></a>
         </div>
       </form>
     </div>
@@ -27,6 +31,9 @@
 <div class="container">
   <div class = "row">
     <div class="col s12 divider"></div>
+    {% if tools.count() == 0 -%}
+          <div>No tools were found for the search text entered</div>
+    {% endif %}
   </div>
   <div>
     

@@ -48,6 +48,7 @@ When the user edits a recipe, all of these boxes will already be populated with 
 - Featured Tools Page - This section of the site is to promote and provide further details of any of the tools that are used in the recipes. It provides a list of all tools, as well as an individual page for each of the tools with additional information about each of the tools that are available. The site can be further developed to allow for any of the tools to be purchased by the user.
 - List Maintenance - The site has a Maintenance section which is to allow a user to add to the lists such as Course and Cuisine, which are available when adding each recipe to categorize them. These categories are used to provide simple filter options on the main recipe catalog page.
 - Another feature of the maintenance section is to allow the list of Tools to be added to and updated. The user can view the list of tools that have already been entered. Each data item that is stored against the tool can then be updated. For example if the price increases, or if the item description of further information needs to be modified, it can be done through this tool maintenance. Additionally, new tools can be added to the tools list, and these will in turn appear in the available tools list when adding a new recipe / editing existing recipes or in the Featured Tools section of the site too.
+- A lot of issues were encountered with in implementing the "Edit Tools modal form" in trying to resolve how to pass the current tool field values from the button to the modal form. A considerable amount of work was involved in resolving the issue including Google searches to find information on passing it through a JQuery function when the Edit button was clicked. The tutor also provided me with some assistance and advice on the best approach to try and complete it using the method I had already partly implemented. If I was to re-do this section, I have learnt that it would be easier to have an Edit form rather than using a modal, as it would have been less complicated to have created a route for the Edit Tool that loaded the form details from the python side rather than doing it with JS and using the modal form.
 
 ### Features Left to Implement
 The recipe catalog site could be further expanded to include some of the following features, which have not yet been implemented:
@@ -72,7 +73,10 @@ Some of the technologies that I used to implement the features and functionality
 
 ## Testing
 
-In this section, you need to convince the assessor that you have conducted enough testing to legitimately believe that the site works well. Essentially, in this part you will want to go over all of your user stories from the UX section and ensure that they all work as intended, with the project providing an easy and straightforward way for the users to achieve their goals.
+Extensive testing was required to be carried out at each stage of the project. Testing was performed during the development of all new functions in the site, and after each function had been completed, some more testing was performed to ensure it was working correctly, or if any issue was found it could be corrected and retested before proceeding to creating the next function.
+
+The while designing the initial layout, a simple format was chosen for a mobile first approach. The layout for some pages are changed slightly to allow the data fill out on larger screens more, while it is kept more compact for smaller screens which makes it easier to read. Testing was carried out on a mobile device, tablet and medium and large screen
+devices to ensure the layout was adjusted for each screen size. Different browsers were also tested to check that the layout remained the same on each - these included Chrome,  Firefox, and Microsoft Edge.
 
 The scenarios used for testing each of the sites components are detailed below:
 
@@ -175,15 +179,78 @@ The scenarios used for testing each of the sites components are detailed below:
 		12. Message is displayed to enter a valid URL, and field is highlighted red to indicate the issue.
 		13. The highlighted field changes to green after a valid URL has been entered. Click on Update to save the changes.
 		14. When the recipe is displayed again the recipe image that was entered should be displayed at the top of the General tab. If there is no image, the course name will then be displayed.
-6. Tools Catalog
-	1. View Tools List
-	2. View Tool Details
-	3. Link from Recipe to Tool Details
+6. Featured Tools Catalog
+	1. View Full Featured Tools List:
+		1. Click on the Featured Tools List link from the navbar.
+		2. A list of all the available featured tools will be displayed and sorted in alphabetical order.
+		3. The tool name is displayed with a link available to show further information. 
+		4. A picture of the tool and the short description are also displayed on the tools catalog page.
+	2. Search Bar:
+		1. Check that the field length is validated before searching.
+		2. Search text will be searched for in the following fields: Tool Name, Description, Further Information.
+		2. Enter text that is not contained in any of the 3 search text fields. A message is displayed to indicate that no tools were found for the search text entered.
+		3. Enter different combinations of key words that are contained in the search text fields. Check that the tools matching this criteria are displayed.
+		4. Clicking the clipboard button to the right of the search bar is to return the full list of tools, 
+	3. View Tool Details:	
+		1. Click on the link from the tool name from the featured tools catalog.
+		2. The tools details page is opened. Check that the details for the selected tool are displayed.
+		3. The tool name and price are displayed in the title bar at the top of the details.
+		4. The large tool image is displayed below this as well as a purchase button.
+		5. Clicking the purchase button will display a modal to indicate that the on-line shopping section is not yet available
+		6. A tab for the "Full Details" of the tool is displayed, an unordered bullet list is displayed with all of the details from the further_info field.
+	4. Link from Recipe to Tool Details
+		1. In the show recipe section, check the list of tools for a selected recipe
+		2. Click on the link for the 1st tool name and check that the tool details page is correctly displayed.
+		3. Compare with the view tool details page, that was previously tested from the featured tools catalog
+		4. Return to the recipe and click on another tool to ensure that each tool listed in the recipe is opening the correct tool information.
 7. Maintenance
-	1. Add Course
-	2. Add Cuisine
-	3. Add Tool
-	4. Edit Tool
+	1. Sign out of the application and then click on the Maintenance button on the navbar.
+	2. The login form will then be displayed, as the user must be logged in to access this function.
+	3. After logging in the user is directed back to the Maintenance page.
+	4. Check that all 3 lists are displayed. Click the down arrow for each to show the items in each list under their list name headings.
+	5. Each list has an "Add New" button to add new items to the lists. Test each of these by click the Add New button.
+	6. Add Course:
+		1. Click on the Add new button for the Course list. 
+		2. Opens a modal form with the Course code and Name / Description field.
+		3. Try to Add without completing either field, get a warning to complete both fields.
+		4. Enter code and description below the minimum field length, it displays an error to indicate the minimum length for that field.
+		5. Max length for both fields tests, and it restrict data entry above that value.
+		6. Completed both fields with valid data, then clicked Add, it was saved. 
+		7. Checked the Courses list on the maintenance page, new course code & description are available in the list.
+	7. Add Cuisine:
+		1. Click on the Add new button for the Cuisine list. 
+		2. Opens a modal form with the Cuisine code and Name / Description field.
+		3. Try to Add without completing either field, get a warning to complete both fields.
+		4. Enter code and description below the minimum field length, it displays an error to indicate the minimum length for that field.
+		5. Max length for both fields tests, and it restrict data entry above that value.
+		6. Completed both fields with valid data, then clicked Add, it was saved. 
+		7. Checked the Cuisine list on the maintenance page, new Cuisine code & description are available in the list.
+	8. Add Tool:
+		1. Click on the Add new button for the Tools list. 
+		2. Opens a modal form with all 6 fields available to add the new tool details.
+		3. Validation:
+			1. Tested field validation for min and max field length on all of the following fields: Code, Tool Name, Short Description, Further Information.
+			2. It displays warnings and shows the helper text for each of these field, cannot save without completing all with valid entries.
+			3. Tested field validation for price. It only allows numeric entries, with comma or decimal values. 
+			4. Displayed a warning for invalid price entered. Error was cleared after a valid numeric entry was completed.
+			5. Tested the Image URL field is correctly validated for a valid URL entry.
+			6. Completed all fields with valid data, then clicked Add, the new tool was saved. 
+			7. Checked the Tools list on the maintenance page, the new tool entry is available in the list.
+	9. Edit Tool:
+		1. Check that an Edit button is displayed beside each tool in the tools list.
+		2. Click on the Edit button beside one of the tools. 
+		2. The modal form is displayed, and the tool details are populated in all 5 fields available. Tool code field is not displayed as it shouldn't be modified.
+		3. Validation:
+			1. Tested field validation for min and max field length on all of the following fields: Tool Name, Short Description, Further Information.
+			2. It displays warnings and shows the helper text for each of these field, cannot save without completing all with valid entries.
+			3. Tested field validation for price. It only allows numeric entries, with comma or decimal values. 
+			4. Displayed a warning for invalid price entered. Error was cleared after a valid numeric entry was completed.
+			5. Tested the Image URL field is correctly validated for a valid URL entry.
+			6. Updated all fields with valid data, then clicked the Update button to save the modified data for that tool. 
+			7. Checked the Tools list on the maintenance page, the new tool entry is available in the list.
+			8. Edited another tool and deleted the price value. Then clicked on Update button. 
+			9. Record was saved as this is not a required field, and validation is only needed if data is entered in the field.
+			9. Checked the entry in the tools list and could see the tool listed with no price assigned.
 
 ## Deployment
 
