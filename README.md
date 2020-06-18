@@ -57,8 +57,14 @@ The recipe catalog site could be further expanded to include some of the followi
 - Develop an on-line shop to allow users to purchase tools from the site.
 
 ## Technologies Used
+Some of the technologies that I used to implement the features and functionality of the Recipe Catalog site are detailed below:
 
-In this section, you should mention all of the languages, frameworks, libraries, and any other tools that you have used to construct this project. For each, provide its name, a link to its official site and a short sentence of why it was used.
+- [HTML5](https://en.wikipedia.org/wiki/HTML5)
+    - **HTML5** is the markup language used to structure and present the content of the website. It provides features allowing for placement of the Map, and use of forms and tables in the website.
+- [CSS3](https://en.wikipedia.org/wiki/Cascading_Style_Sheets)
+    - A **CSS Stylesheet** was used to define the style of the page such as images, headings and tables. Media Queries are also used in order to apply different settings depending on the screen size being used to view the site.
+- [Materialize](https://materializecss.com/getting-started.html)
+    - Materialize
 
 - [JQuery](https://jquery.com)
     - The project uses **JQuery** to simplify DOM manipulation.
@@ -110,14 +116,70 @@ The scenarios used for testing each of the sites components are detailed below:
 		4. Select a cuisine without any recipes. The message "No recipes found for selected cuisine: [CuisineName] " is displayed to indicate to the user that no recipes were found.
 		5. Select "All Cuisines" from the cuisine dropdown list to check that the full catalog of recipes is display and correctly grouped by their course.
 4. Show Recipe
+	1. Click on the recipe title from the catalog list of recipes, a page displaying "General" tab of the recipe details is displayed.
+	2. "General" Tab:
+		1. Make sure the correct recipe details are displayed, as well as the author of the recipe showing in the top bar beside the recipe title.
+		2. Check that the recipe image is being displayed at the top of the General tab.
+		3. Recipe Ratings:
+			1. Check that the ratings stars are being displayed and calculated as the average for the recipe - if the recipe has already been rated by the current user
+			2. Log in as a new user, check the Rate button is displayed because the user has not rated the recipe before.
+			3. Rate the recipe as this user and check that the average rating value has changed based on the rating that was just applied.
+		4. Ensure that all the rows and columns are displayed with the correct details in each.
+		5. Test the layout with different screen sizes to check that the layout is being updated, in particular in the nutritional values between small and medium screens.
+		6. Check that the tools listed in a recipe all contain links that can be opened.
+	3. Select the "Ingredients" tab:
+		1. Make sure that the selected / highlighted tab changes and the fields from the General tab are no longer visible.
+		2. Check that all ingredients are listed in a check-mark unordered list.
+	4. Select the "Preparation Steps" tab:
+		1. Make sure that the selected / highlighted tab changes and the fields from the Ingredients tab are no longer visible.
+		2. Check that all the preparation are listed in an ordered list .
+	5. Edit and Delete button availability.
+		1. View a recipe that was created by a different user to the current user.
+		2. Check that neither the Edit nor the Delete buttons are visible to this user at the end of the Show Recipe page.
+		3. Select a recipe that was created by the current user. Check that both Edit and Delete buttons are available for this user.
+		4. Edit Button:
+			1. Click the Edit button and ensure that the correct recipe is loaded with all the fields populated with the correct recipe details.
+			2. Make some updates to values, such as adding tools, changing some nutritional information, adding or removing ingredients / preparation steps.
+			3. Click on the Update button to save the recipe.
+			4. When it has been saved the recipe will be displayed again in the show recipe page.
+			5. Check for the updates that were made during edit, and that they are displayed correctly.
+			6. Check for updates made to ingredients and preparation steps lists, so that these lists are still displayed correctly.
+		5. Delete Button:
+			1. Click on the Delete button on the selected recipe.
+			2. When message box is displayed to confirm delete - click Cancel.
+			3. Check that you are returned to the recipe after this.
+			4. Click Delete again, this time selecting Delete to confirm that this recipe should be deleted.
+			5. Catalog page will be loaded after delete. Check the catalog to make sure this recipe is no longer listed.
 5. Add Recipe
-6. Edit Recipe
-7. Delete Recipe
-8. Tools Catalog
+	1. Sign out of the application and then click on the Add Recipe button on the navbar.
+	2. The login form will then be displayed, as the user must be logged in to access this function.
+	3. After logging in the user is directed back to the Add Recipe page.
+	4. From the Recipe Catalog page click on the Add recipe button from the navbar, an empty recipe form is displayed.
+	5. Check that the list boxes for Course, Cuisine and Tools are populated.
+	6. Form Validation:
+		1. Enter a recipe title and try to click on the Update button to add the new recipe without any further details.
+		2. The course list is highlighted and a message displayed to select an item from the list.
+		3. Select a course from the list box, and then click on the Update button again.
+		4. The Ingredients text are is then highlighted with a message to fill out the field.
+		5. Check the minimum field length is being validated by entering under 5 characters.
+		6. Error is shown to tell the user the details of the invalid entry "Please enter at least 5 characters (You are currently using 3 characters)" - Field remains red to indicate it is invalid.
+		7. Enter some ingredients with the valid minimum number of characters, the field changes to green to indicate the entry is valid once above 5 characters, click Update again.
+		8. The Preparation Steps textarea is now highlighted to show that there is an invalid entry, and it must also be populated.
+		9. Check the minimum field length is being validated by entering under 5 characters.
+		6. Error is displayed for the invalid entry "Please enter at least 5 characters (You are currently using 4 characters)" - Field remains red to indicate it is still invalid.
+		7. Enter some prep. steps with the valid minimum number of characters, the field changes to green to indicate the entry is valid once above 5 characters.
+		8. Click Update and the recipe is saved as all required fields have now been completed. 
+		9. The recipe that was just added is displayed in the Show Recipe page. Check that all data that was entered in the Add Recipe are populated on the different tabs.
+		10. Click on Edit Recipe to check that you can return to editing this current recipe.
+		11. Test the URL validation is working on the Image URL field. Enter an invalid URL and click the Update button.
+		12. Message is displayed to enter a valid URL, and field is highlighted red to indicate the issue.
+		13. The highlighted field changes to green after a valid URL has been entered. Click on Update to save the changes.
+		14. When the recipe is displayed again the recipe image that was entered should be displayed at the top of the General tab. If there is no image, the course name will then be displayed.
+6. Tools Catalog
 	1. View Tools List
 	2. View Tool Details
 	3. Link from Recipe to Tool Details
-9. Maintenance
+7. Maintenance
 	1. Add Course
 	2. Add Cuisine
 	3. Add Tool
