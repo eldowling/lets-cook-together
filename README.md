@@ -96,6 +96,8 @@ Some of the technologies that I used to implement the features and functionality
 	- **Werkzeug Security** - two functions from this Python library were used in the user Registration and Login forms. It will store secure passwords with salted hashes and later verifies the password entered by the user in plain text against it's password hash stored in the database.
 - [WTForms](https://wtforms.readthedocs.io/en/2.3.x/)
 	- **WTForms** is a flexible validation and rendering library for Python web applications. It was used to create and validate fields on the Registration, Login and Add Recipe forms.
+- [Heroku](https://www.heroku.com)
+	- **Heroku** is a platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud. The web application has been deployed to and run from the Heroku platform.
 
 ## Testing
 The testing carried out in my project is available to view in the [Testing Documentation](./Testing.md) in this project
@@ -106,7 +108,8 @@ The project was developed using Gitpod which is an on-line IDE for GitHub which 
 
 The project was committed to the GitHub repository at regular intervals during development, or when an element of the project had been completed. Comments are entered on each commit in order to track updates that have been made.
 
-There are no differences between the deployed and development versions. Any components that were implemented in the development stage were uploaded to GitHub and then to Heroku for final deployment.
+There are no differences between the deployed and development versions. Any components that were implemented in the development stage were uploaded to GitHub and then to Heroku for final deployment. To deploy the project to Heroku the requirements.txt file were updated and then the GitHub repository was used to linked from Heroku and be deployed.
+A manual deploy was done in Heroku to push through all of the latest build, and Automatic deploys has been enabled for future updates to be deployed directly from the GitHub Repository.
 
 ## Credits
 
@@ -166,8 +169,27 @@ The following articles and tutorials were used to learn about the different func
 
 
 ### Media
-- The photos used in this site were obtained from ...
+The photos used for my application were obtained from the following sources:
+- [Main Image - PeakPx.com](https://c1.peakpx.com/wallpaper/828/1010/470/chefs-spices-preparation-eat-cook-wallpaper-preview.jpg) The main image was originally obtained from the PeakPx site, but then modified to include the "Let's cook together" logo, and the text "Recipe Catalog" is added on top of the image. They are all combined together using paint.
+- Recipe Images:
+	- [Homestyle Pot Noodles](https://cdn.pixabay.com/photo/2019/08/05/17/56/noodles-4386591__480.jpg)
+	- [Banana Pancakes with maple syrup](https://image.shutterstock.com/image-photo/stack-delicious-pancakes-banana-maple-600w-187148783.jpg)
+	- [Shortbread cookies](https://cdn.pixabay.com/photo/2017/11/14/23/24/christmas-biscuits-2950295__480.png)
+	- [Scotch Pancakes](https://image.shutterstock.com/image-photo/traditional-american-pancakes-on-plate-260nw-115767526.jpg)
+	- [Mango and banana smoothie](https://image.shutterstock.com/image-photo/banana-mango-smoothies-on-dark-260nw-277342283.jpg)
+	- [Porridge and banana](https://image.shutterstock.com/image-photo/bowl-porridge-bananas-selective-focus-260nw-126897488.jpg)
+	- [Poached egg and kale on toast](https://image.shutterstock.com/image-photo/poached-eggs-on-toast-watercress-260nw-141967816.jpg)
+	
+- Tools Images:
+	- [Copper Non-Stick Frying Pan](https://images-na.ssl-images-amazon.com/images/I/71OtNyCBmvL._AC_SL1500_.jpg)
+	- [OptiGrill Elite 750D](https://images-na.ssl-images-amazon.com/images/I/71mImVP45IL._AC_SL1464_.jpg)
+	- [Blender - Easy-Clean Performance Pro](https://cdn.pixabay.com/photo/2011/12/05/14/46/blender-10933__340.jpg)
+	- [Non-stick Saucepan](https://images-na.ssl-images-amazon.com/images/I/51SlSNT%2B1qL._AC_SL1000_.jpg)
+	- [Springform Cake Tin with Loose Base](https://images-na.ssl-images-amazon.com/images/I/71A%2BbAwYdJL._AC_SL1500_.jpg)
 
-### Acknowledgements
+### Acknowledgments
 
-- I received inspiration for this project from X
+- I would like to thank my Mentor Dick Vlaanderen, for his input, guidance and support over the course of the project.
+- I would also like to thank all tutors in the Code Institute, as well as my fellow students on Slack for their help on and support on queries I had while I worked on implementing this project.
+- I'd like to thank my family for their support and patience during the completion of my project.
+

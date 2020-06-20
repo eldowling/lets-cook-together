@@ -191,3 +191,21 @@ The scenarios used for testing each of the sites components are detailed below:
 			8. Edited another tool and deleted the price value. Then clicked on Update button. 
 			9. Record was saved as this is not a required field, and validation is only needed if data is entered in the field.
 			9. Checked the entry in the tools list and could see the tool listed with no price assigned.
+
+Additional testing was also carried out to validate the HTML and CSS code, the results of this are shown below. There were 2 validators used to check the quality of the code and display any errors found in the code. The validators check HTML and CSS code to check documents for well formed markup. This is an important step towards ensuring the technical quality of web pages.
+- The [W3C HTML Validator](https://validator.w3.org/) was used to validate the HTML code in all of the sites pages
+- The [W3C CSS Validator](https://jigsaw.w3.org/css-validator/validator) was used to valid the CSS style sheet that sets the format for various elements on the site.
+
+1. Home Page:
+	1. Missing lang attribute in HTML tag - added lang="en" to the HTML tag to resolve this issue.
+	2. Alt attribute for the main image was missing, and extra </img> closing tag found - added some alt text to the image tag, removed the unnecessary closing tag to resolve this.
+2. Recipe Catalog:
+	1. Image styling was incorrect with width and height defined outside of the style="" attribute. Corrected the styling for the image to fix the issue.
+	2. Stray </ul> and </li> tags when page is loaded - Removed these as they were from previous <ul> and <li> tags that had already been removed without removing the ending tags. This cleared all errors from the Recipe Catalog page.
+3. Show Recipe:
+	1. Image styling was incorrect with width and height defined outside of the style="" attribute. Corrected the styling for the image to fix the issue.
+4. Featured Tools:
+	1. Image styling was incorrect with width and height defined outside of the style="" attribute. Corrected the styling for the image to fix the issue.
+	2. Obsolete attribute "name" in the "Show Full Tools List" button. Changed this to an id and fixed the issues on this page.
+5. Style.css:
+	1. Warning: @extend is a CSS hack - I used this code to style the Materialize "waves-light" class colour, and so leaving as is.
