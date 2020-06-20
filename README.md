@@ -53,7 +53,8 @@ When the user edits a recipe, all of these boxes will already be populated with 
 ### Features Left to Implement
 The recipe catalog site could be further expanded to include some of the following features, which have not yet been implemented:
 - Expand on the filters and search functionality, to allow the user to select a search by option on the recipe catalog page (For example: ingredients / tools)
-- Include sorting functionality to allow the user to sort recipes by different fields such as rating, or cuisines
+- Include sorting functionality to allow the user to sort recipes by different fields such as rating, cuisines, recipe difficulty
+- Allow users to add recipes to their favourites list, and ingredients from a recipe to be added to a printable shopping list
 - Enhance the maintenance section by adding super user levels of access to this section, so as only selected users could make updates to the sites lists and tools.
 - Develop an on-line shop to allow users to purchase tools from the site.
 
@@ -61,196 +62,43 @@ The recipe catalog site could be further expanded to include some of the followi
 Some of the technologies that I used to implement the features and functionality of the Recipe Catalog site are detailed below:
 
 - [HTML5](https://en.wikipedia.org/wiki/HTML5)
-    - **HTML5** is the markup language used to structure and present the content of the website. It provides features allowing for placement of the Map, and use of forms and tables in the website.
+    - **HTML5** is the markup language used to structure and present the content of the website. It provides features allowing for use of forms and tables in the website.
 - [CSS3](https://en.wikipedia.org/wiki/Cascading_Style_Sheets)
-    - A **CSS Stylesheet** was used to define the style of the page such as images, headings and tables. Media Queries are also used in order to apply different settings depending on the screen size being used to view the site.
-- [Materialize](https://materializecss.com/getting-started.html)
-    - Materialize
-
+    - A **CSS Stylesheet** was used to define the style of the page such as images, headings and tables. Some Media Queries are also used in order to apply different settings depending on the screen size being used to view the site.
+- [Google API Material Icons](https://materializecss.com/icons.html)
+	- **Material Icons** are used with Materialize CSS and are a libary of material design icons, which can be used to style anything on the site using these icons. These icons were used in styling buttons, as well as on the pages as bullet points for unordered lists, or even to style the star ratings using filled or empty stars.
+- [FontAwesome](https://fontawesome.com/)
+    - **Font Awesome** icons on the page were also used similar to the Material Icons, if a required icon was not available in Material Icon, then font awsome icons were sought to provide addition icon styles.
+- [Materialize CSS and JavaScript](https://materializecss.com)
+    - **Materialize** was developed by Google it contains CSS and JavaScript based design templates which are used to style the pages, and keeps it to a uniform design and style accross all pages by using the same design templates for typography, forms, navbar and buttons.
 - [JQuery](https://jquery.com)
-    - The project uses **JQuery** to simplify DOM manipulation.
-
+    - **JQuery** is a JavaScript libary designed to simplify HTML DOM tree traversal and manipulation.
+	- In this project it is used by some of the Materialize functions for event handling and CSS functionality. 
+	- JQuery was used in order to activate dropdown lists, trigger modals, and even for the side navigation bar used on the mobile layout. Other components were for the tabs and chips used on the show recipe page.
+- [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
+	- **MongoDB Atlas** stores data in JSON-like documents that can vary in structure, offering a dynamic, flexible schema.
+	- The recipe catalog was built around a MongoDB Atlas database structure. The required tables could be added simply and could be easily accessed from the Python application.
+- [Python](https://www.python.org/)
+	- **Python** is a high-level programming language that can be used for developing desktop applications as well as web applications.
+	- It was used in this project to perform a number of functions. It provides the route for each of the pages to be loaded in the web application, as it can perform the tasks to open / search / update and delete records from the MongoDB and allow these to be passed to the web page to be displayed in the application.
+	- It also provided functions to check the user login, and form validation
+	- Another purpose for using Python was the creation of function which performed calculations in order to work out the the correct number of page numbers to display at the bottom of the recipe catalog for the pagination numbers. There were also a number of criteria fed into this function so that it would work the same with or without using the search or course / cuisine filters.
+	- Other calculations to work out the average recipe rating after a user rated an individual recipe were also used. This function would have to add the user's rating to one table in the MongoDB, it would then lookup the same table and find all ratings for that recipe in order to calculate the average rating value, and finally update the recipe to provide the newly calculated average. This in turn could then be displayed in the web application.
+- [PyMongo](https://pymongo.readthedocs.io/en/stable/)
+	- **PyMongo** is the MongoDB driver used by Python to access the MongoDB database.
+- [Flask](https://flask.palletsprojects.com/en/1.1.x/)
+	- **Flask** is a web framework written in Python, which provides the tools, libraries and technologies that allow you to build a web application.
+	- Flask was used throughout the project for various functions in the python application in order to display flash messages, render templates or redirection to another page.
+- [Jinja2](https://jinja.palletsprojects.com/en/2.11.x/)
+	- **Jinja2** is a Python template engine used to create HTML, XML or other markup formats that are returned to the user via a HTTP response.
+	- Jinja2 was used in this project to feed the Python / MongoDB data into the application forms and pages. It also allows If statements to be used in determine if some text or sections should or should not be displayed. For Loops were also used throughout the pages in order to load multiple values from a list or array in the database.
+- [Werkzeug Security](https://werkzeug.palletsprojects.com/en/1.0.x/utils/)
+	- **Werkzeug Security** - two functions from this Python library were used in the user Registration and Login forms. It will store secure passwords with salted hashes and later verifies the password entered by the user in plain text against it's password hash stored in the database.
+- [WTForms](https://wtforms.readthedocs.io/en/2.3.x/)
+	- **WTForms** is a flexible validation and rendering library for Python web applications. It was used to create and validate fields on the Registration, Login and Add Recipe forms.
 
 ## Testing
-
-Extensive testing was required to be carried out at each stage of the project. Testing was performed during the development of all new functions in the site, and after each function had been completed, some more testing was performed to ensure it was working correctly, or if any issue was found it could be corrected and retested before proceeding to creating the next function.
-
-The while designing the initial layout, a simple format was chosen for a mobile first approach. The layout for some pages are changed slightly to allow the data fill out on larger screens more, while it is kept more compact for smaller screens which makes it easier to read. Testing was carried out on a mobile device, tablet and medium and large screen
-devices to ensure the layout was adjusted for each screen size. Different browsers were also tested to check that the layout remained the same on each - these included Chrome,  Firefox, and Microsoft Edge.
-
-The scenarios used for testing each of the sites components are detailed below:
-
-1. Registration Form:
-	1. Open form from the login page, then click the "Sign up here" link. Checked that form opens and displays the correct fields.
-	2. Test the required fields and field length are validated before allowing to submit the form.
-	3. Create a new user to test their login, when new user is created they are automatically logged in and the Recipe Catalog page is displayed. 
-2. Login Form
-	1. Open the form using the Login link in the navbar, check that the correct fields have been display when the form is opened.
-	2. Test the username and password validation: 
-		1. If a valid username with an incorrect password is entered a flash message should display to indicate "Invalid username / password combination".
-		2. If an invalid username and / or password combination is entered, the same flash message will also be displayed.
-		3. When the correct username and password are entered, the user is logged in and "Welcome, [username]" is displayed below the navbar for mobile users, or inside the navbar for larger screens.
-		4. Redirect to the page that you came from after you have logged in. Some pages such as Add Recipe / Rating / Maintenance require a log in to access their functionality. After the user logs in they should be redirected back to these pages, otherwise they will be logged in and shown the recipe catalog page.
-	3. Signout and Login links availability:
-		1. Signout button is available in the navbar once a user is logged in. 
-		2. Clicking the Signout button will log the user out and display a flash message to show that the user has been signed out. 
-		3. Login button is available from the navbar after the user has been signed out.
-3. Recipe Catalog
-	1. Full Catalog
-		1. Catalog page should be displayed as main landing page.
-		2. A list of all recipies should be displayed and grouped by the recipe course.
-		3. Each course should have it's own group header before listing recipes for that course below the header.
-		4. The page pagination numeric links should be displayed at the end of the page, showing a max of 5 recipes per page. 
-		5. The pagination should only show 2 page numbers either side of the current page, and "<" or ">" at the beginning or end of the numeric list if there are more pages either side of the edge numbers of the list.
-		6. Test that the left/right arrows in the pagination list work to display the previous or next page in the number sequence. The max number of recipes per page was reduced from 5 to 2 so that this could be fully tested.
-	2. Search Bar
-		1. Check that the field length is validated before searching.
-		2. Enter text that is not contained in the recipe title or description. Message is displayed to indicate that no recipes were found for the search text entered.
-		3. Enter different combinations of key words that are contained in the title and description. Check that recipes are displayed for these key words, and that they are shown under their correct Course group header.
-	3. Course Filter
-		1. Select a course filter from the dropdown list. Check that recipes from that course are displayed.
-		2. Check that the pagination works when the course filter is used, and that only recipes for that course are displayed when the next page is selected.
-		3. Select another course filter, ensure that recipes for only that course have been displayed, and that recipes for the previously selected course are no longer available.
-		4. Select a course without any recipes. The message "No recipes found for selected course: [CourseName] " is displayed to indicate to the user that no recipes were found.
-		5. Select "All Courses" from the course dropdown list to check that the full catalog of recipes is display and correctly grouped by their course.
-	4. Cuisine Filter
-		1. Select a cuisine filter from the dropdown list. Check that recipes from that cuisine are displayed.
-		2. Check that the pagination works when the cuisine filter is used, and that only recipes for that cuisine are displayed when the next page is selected.
-		3. Select another cuisine filter, ensure that recipes for only that cuisine have been displayed, and that recipes for the previously selected cuisine are no longer available.
-		4. Select a cuisine without any recipes. The message "No recipes found for selected cuisine: [CuisineName] " is displayed to indicate to the user that no recipes were found.
-		5. Select "All Cuisines" from the cuisine dropdown list to check that the full catalog of recipes is display and correctly grouped by their course.
-4. Show Recipe
-	1. Click on the recipe title from the catalog list of recipes, a page displaying "General" tab of the recipe details is displayed.
-	2. "General" Tab:
-		1. Make sure the correct recipe details are displayed, as well as the author of the recipe showing in the top bar beside the recipe title.
-		2. Check that the recipe image is being displayed at the top of the General tab.
-		3. Recipe Ratings:
-			1. Check that the ratings stars are being displayed and calculated as the average for the recipe - if the recipe has already been rated by the current user
-			2. Log in as a new user, check the Rate button is displayed because the user has not rated the recipe before.
-			3. Rate the recipe as this user and check that the average rating value has changed based on the rating that was just applied.
-		4. Ensure that all the rows and columns are displayed with the correct details in each.
-		5. Test the layout with different screen sizes to check that the layout is being updated, in particular in the nutritional values between small and medium screens.
-		6. Check that the tools listed in a recipe all contain links that can be opened.
-	3. Select the "Ingredients" tab:
-		1. Make sure that the selected / highlighted tab changes and the fields from the General tab are no longer visible.
-		2. Check that all ingredients are listed in a check-mark unordered list.
-	4. Select the "Preparation Steps" tab:
-		1. Make sure that the selected / highlighted tab changes and the fields from the Ingredients tab are no longer visible.
-		2. Check that all the preparation are listed in an ordered list .
-	5. Edit and Delete button availability.
-		1. View a recipe that was created by a different user to the current user.
-		2. Check that neither the Edit nor the Delete buttons are visible to this user at the end of the Show Recipe page.
-		3. Select a recipe that was created by the current user. Check that both Edit and Delete buttons are available for this user.
-		4. Edit Button:
-			1. Click the Edit button and ensure that the correct recipe is loaded with all the fields populated with the correct recipe details.
-			2. Make some updates to values, such as adding tools, changing some nutritional information, adding or removing ingredients / preparation steps.
-			3. Click on the Update button to save the recipe.
-			4. When it has been saved the recipe will be displayed again in the show recipe page.
-			5. Check for the updates that were made during edit, and that they are displayed correctly.
-			6. Check for updates made to ingredients and preparation steps lists, so that these lists are still displayed correctly.
-		5. Delete Button:
-			1. Click on the Delete button on the selected recipe.
-			2. When message box is displayed to confirm delete - click Cancel.
-			3. Check that you are returned to the recipe after this.
-			4. Click Delete again, this time selecting Delete to confirm that this recipe should be deleted.
-			5. Catalog page will be loaded after delete. Check the catalog to make sure this recipe is no longer listed.
-5. Add Recipe
-	1. Sign out of the application and then click on the Add Recipe button on the navbar.
-	2. The login form will then be displayed, as the user must be logged in to access this function.
-	3. After logging in the user is directed back to the Add Recipe page.
-	4. From the Recipe Catalog page click on the Add recipe button from the navbar, an empty recipe form is displayed.
-	5. Check that the list boxes for Course, Cuisine and Tools are populated.
-	6. Form Validation:
-		1. Enter a recipe title and try to click on the Update button to add the new recipe without any further details.
-		2. The course list is highlighted and a message displayed to select an item from the list.
-		3. Select a course from the list box, and then click on the Update button again.
-		4. The Ingredients text are is then highlighted with a message to fill out the field.
-		5. Check the minimum field length is being validated by entering under 5 characters.
-		6. Error is shown to tell the user the details of the invalid entry "Please enter at least 5 characters (You are currently using 3 characters)" - Field remains red to indicate it is invalid.
-		7. Enter some ingredients with the valid minimum number of characters, the field changes to green to indicate the entry is valid once above 5 characters, click Update again.
-		8. The Preparation Steps textarea is now highlighted to show that there is an invalid entry, and it must also be populated.
-		9. Check the minimum field length is being validated by entering under 5 characters.
-		6. Error is displayed for the invalid entry "Please enter at least 5 characters (You are currently using 4 characters)" - Field remains red to indicate it is still invalid.
-		7. Enter some prep. steps with the valid minimum number of characters, the field changes to green to indicate the entry is valid once above 5 characters.
-		8. Click Update and the recipe is saved as all required fields have now been completed. 
-		9. The recipe that was just added is displayed in the Show Recipe page. Check that all data that was entered in the Add Recipe are populated on the different tabs.
-		10. Click on Edit Recipe to check that you can return to editing this current recipe.
-		11. Test the URL validation is working on the Image URL field. Enter an invalid URL and click the Update button.
-		12. Message is displayed to enter a valid URL, and field is highlighted red to indicate the issue.
-		13. The highlighted field changes to green after a valid URL has been entered. Click on Update to save the changes.
-		14. When the recipe is displayed again the recipe image that was entered should be displayed at the top of the General tab. If there is no image, the course name will then be displayed.
-6. Featured Tools Catalog
-	1. View Full Featured Tools List:
-		1. Click on the Featured Tools List link from the navbar.
-		2. A list of all the available featured tools will be displayed and sorted in alphabetical order.
-		3. The tool name is displayed with a link available to show further information. 
-		4. A picture of the tool and the short description are also displayed on the tools catalog page.
-	2. Search Bar:
-		1. Check that the field length is validated before searching.
-		2. Search text will be searched for in the following fields: Tool Name, Description, Further Information.
-		2. Enter text that is not contained in any of the 3 search text fields. A message is displayed to indicate that no tools were found for the search text entered.
-		3. Enter different combinations of key words that are contained in the search text fields. Check that the tools matching this criteria are displayed.
-		4. Clicking the clipboard button to the right of the search bar is to return the full list of tools, 
-	3. View Tool Details:	
-		1. Click on the link from the tool name from the featured tools catalog.
-		2. The tools details page is opened. Check that the details for the selected tool are displayed.
-		3. The tool name and price are displayed in the title bar at the top of the details.
-		4. The large tool image is displayed below this as well as a purchase button.
-		5. Clicking the purchase button will display a modal to indicate that the on-line shopping section is not yet available
-		6. A tab for the "Full Details" of the tool is displayed, an unordered bullet list is displayed with all of the details from the further_info field.
-	4. Link from Recipe to Tool Details
-		1. In the show recipe section, check the list of tools for a selected recipe
-		2. Click on the link for the 1st tool name and check that the tool details page is correctly displayed.
-		3. Compare with the view tool details page, that was previously tested from the featured tools catalog
-		4. Return to the recipe and click on another tool to ensure that each tool listed in the recipe is opening the correct tool information.
-7. Maintenance
-	1. Sign out of the application and then click on the Maintenance button on the navbar.
-	2. The login form will then be displayed, as the user must be logged in to access this function.
-	3. After logging in the user is directed back to the Maintenance page.
-	4. Check that all 3 lists are displayed. Click the down arrow for each to show the items in each list under their list name headings.
-	5. Each list has an "Add New" button to add new items to the lists. Test each of these by click the Add New button.
-	6. Add Course:
-		1. Click on the Add new button for the Course list. 
-		2. Opens a modal form with the Course code and Name / Description field.
-		3. Try to Add without completing either field, get a warning to complete both fields.
-		4. Enter code and description below the minimum field length, it displays an error to indicate the minimum length for that field.
-		5. Max length for both fields tests, and it restrict data entry above that value.
-		6. Completed both fields with valid data, then clicked Add, it was saved. 
-		7. Checked the Courses list on the maintenance page, new course code & description are available in the list.
-	7. Add Cuisine:
-		1. Click on the Add new button for the Cuisine list. 
-		2. Opens a modal form with the Cuisine code and Name / Description field.
-		3. Try to Add without completing either field, get a warning to complete both fields.
-		4. Enter code and description below the minimum field length, it displays an error to indicate the minimum length for that field.
-		5. Max length for both fields tests, and it restrict data entry above that value.
-		6. Completed both fields with valid data, then clicked Add, it was saved. 
-		7. Checked the Cuisine list on the maintenance page, new Cuisine code & description are available in the list.
-	8. Add Tool:
-		1. Click on the Add new button for the Tools list. 
-		2. Opens a modal form with all 6 fields available to add the new tool details.
-		3. Validation:
-			1. Tested field validation for min and max field length on all of the following fields: Code, Tool Name, Short Description, Further Information.
-			2. It displays warnings and shows the helper text for each of these field, cannot save without completing all with valid entries.
-			3. Tested field validation for price. It only allows numeric entries, with comma or decimal values. 
-			4. Displayed a warning for invalid price entered. Error was cleared after a valid numeric entry was completed.
-			5. Tested the Image URL field is correctly validated for a valid URL entry.
-			6. Completed all fields with valid data, then clicked Add, the new tool was saved. 
-			7. Checked the Tools list on the maintenance page, the new tool entry is available in the list.
-	9. Edit Tool:
-		1. Check that an Edit button is displayed beside each tool in the tools list.
-		2. Click on the Edit button beside one of the tools. 
-		2. The modal form is displayed, and the tool details are populated in all 5 fields available. Tool code field is not displayed as it shouldn't be modified.
-		3. Validation:
-			1. Tested field validation for min and max field length on all of the following fields: Tool Name, Short Description, Further Information.
-			2. It displays warnings and shows the helper text for each of these field, cannot save without completing all with valid entries.
-			3. Tested field validation for price. It only allows numeric entries, with comma or decimal values. 
-			4. Displayed a warning for invalid price entered. Error was cleared after a valid numeric entry was completed.
-			5. Tested the Image URL field is correctly validated for a valid URL entry.
-			6. Updated all fields with valid data, then clicked the Update button to save the modified data for that tool. 
-			7. Checked the Tools list on the maintenance page, the new tool entry is available in the list.
-			8. Edited another tool and deleted the price value. Then clicked on Update button. 
-			9. Record was saved as this is not a required field, and validation is only needed if data is entered in the field.
-			9. Checked the entry in the tools list and could see the tool listed with no price assigned.
+The testing carried out in my project is available to view in the [Testing Documentation](./Testing.md) in this project
 
 ## Deployment
 
@@ -299,9 +147,10 @@ The following articles and tutorials were used to learn about the different func
 - [Python and Flask - Getting data from Web Forms by TheCodex](//www.youtube.com/watch?v=f8qvLBvrIFI&list=PLB5jA40tNf3vX6Ue_ud64DDRVSryHHr1h&index=7)
 - [Using Validators in Flask-WTF (Part 2 of 5) by Pretty Printed](//www.youtube.com/watch?v=jR2aFKuaOBs)
 - [WTForms Validators](//wtforms.readthedocs.io/en/latest/validators/)
-- [How to validate select option for a Materialize dropdown? by Stackoverflow](//stackoverflow.com/questions/34248898/how-to-validate-select-option-for-a-materialize-dropdown)
+- [How to validate select option for a Materialize dropdown? by Stack Overflow](//stackoverflow.com/questions/34248898/how-to-validate-select-option-for-a-materialize-dropdown)
 - [New line in text area - Stack Overflow](//stackoverflow.com/questions/8627902/new-line-in-text-area)
-- [Why is textarea filled with mysterious white spaces? - Stackoverflow](//stackoverflow.com/questions/2202999/why-is-textarea-filled-with-mysterious-white-spaces)
+- [Why is textarea filled with mysterious white spaces? - Stack Overflow](//stackoverflow.com/questions/2202999/why-is-textarea-filled-with-mysterious-white-spaces)
+- [Remove unnecessary whitespace from Jinja rendered template - Stack Overflow](https://stackoverflow.com/questions/35775207/remove-unnecessary-whitespace-from-jinja-rendered-template)
 - [How to apply min and max on textarea? - Stack Overflow](//stackoverflow.com/questions/18184791/how-to-apply-min-and-max-on-textarea)
 - [Text Input Patterns: Numbers with or without decimals by Frédéric Hewitt](http://html5pattern.com/Miscs)
 - [Flask and JavaScript Confirm Before Deleting - Stack Overflow](//stackoverflow.com/questions/45874906/flask-and-javascript-confirm-before-deleting)
