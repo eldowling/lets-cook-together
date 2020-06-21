@@ -73,6 +73,7 @@ The scenarios used for testing each of the sites components are detailed below:
 		4. Edit Button:
 			1. Click the Edit button and ensure that the correct recipe is loaded with all the fields populated with the correct recipe details.
 			2. An issue encountered with the text area for ingredients and preparation steps on this page, was that extra lines and spaces were being added while the fields were being read from the array in the database into the text area. The function .html().trim() was originally used to resolve this issue. But on further investigation I found that it is better to use the minus sign in the jinja code to remove whitespace from the start or end of the text. In testing this then the .html().trim() function could be removed.
+			3. Another issue was found when editing a recipe that already had an average rating assigned - it was set to 0. This was because the add and edit functionality were together to insert or update a recipe. Excluded the avg_rating field from the update set to resolve the issue.
 			3. Make some updates to values, such as adding tools, changing some nutritional information, adding or removing ingredients / preparation steps.
 			4. Click on the Update button to save the recipe.
 			5. When it has been saved the recipe will be displayed again in the show recipe page.

@@ -200,8 +200,7 @@ def insert_recipe(recipe_id):
             "fibre": request.form.get("fibre"),
             "ingredients": ingredients,
             "prep_steps": prep_steps,
-            "image_url": request.form.get("image_url"),
-            "avg_rating": avg_rate
+            "image_url": request.form.get("image_url")
         }
 
         recipes = mongo.db.recipes
@@ -210,6 +209,8 @@ def insert_recipe(recipe_id):
                         {"$set":save_recipe})
         else:
             recipe_id = recipes.insert_one(save_recipe).inserted_id
+            recipes.update_one( {'_id': ObjectId(recipe_id)},
+                        {"$set": {"avg_rating": avg_rate}})
         return redirect(url_for('show_recipe', recipe_id=recipe_id))
     else:
         flash('Validation errors in recipe')
