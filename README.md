@@ -56,6 +56,7 @@ The recipe catalog site could be further expanded to include some of the followi
 - Include sorting functionality to allow the user to sort recipes by different fields such as rating, cuisines, recipe difficulty
 - Allow users to add recipes to their favourites list, and ingredients from a recipe to be added to a printable shopping list
 - Enhance the maintenance section by adding super user levels of access to this section, so as only selected users could make updates to the sites lists and tools.
+- Additional sorting enhancements could be made to the tables to allow for a customised sort for some of the lists. For example the Courses or Cuisines lists are sorted alphabetically, but if a sort order field was put into Courses, then the administrator could choose in which order to display the courses, and have them displayed in order of when the course is eaten (i.e. Breakfast, Lunch, Starter, Main Course, etc.)
 - Develop an on-line shop to allow users to purchase tools from the site.
 
 ## Technologies Used
@@ -179,7 +180,15 @@ The photos used for my application were obtained from the following sources:
 	- [Mango and banana smoothie](https://image.shutterstock.com/image-photo/banana-mango-smoothies-on-dark-260nw-277342283.jpg)
 	- [Porridge and banana](https://image.shutterstock.com/image-photo/bowl-porridge-bananas-selective-focus-260nw-126897488.jpg)
 	- [Poached egg and kale on toast](https://image.shutterstock.com/image-photo/poached-eggs-on-toast-watercress-260nw-141967816.jpg)
-	
+	- [Salmon and Sweet Potato Fish Cakes](https://media.istockphoto.com/photos/tuna-fishcakes-with-salad-served-picture-id1170074607?b=1&k=6&m=1170074607&s=170667a&w=0&h=rPBHAsAj1zdVxZmT7alAyzZIGAuOu3EGf5hvbyh2RfQ=)
+	- [Cappuccino Tiramisu](https://cdn.pixabay.com/photo/2016/09/01/14/20/tiramisu-1636223__480.jpg)
+	- [Sweet and Sour Chicken, simple, no-fry](https://cdn.pixabay.com/photo/2020/03/31/01/56/general-tso-chicken-4985986__480.jpg)
+	- [Lamb Koftas with mint yogurt and flatbread](https://live.staticflickr.com/7438/10332838805_fb8ab4dea0_b.jpg)
+	- [Mexican Beef Chilli](https://upload.wikimedia.org/wikipedia/commons/0/0f/Pot-o-chili.jpg)
+	- [Italian bean & olive salad](https://www.theglobeandmail.com/resizer/SwTyOWdZ_M6jb-YYBbKt2Hq7Dhw=/4288x0/filters:quality(80)/arc-anglerfish-tgam-prod-tgam.s3.amazonaws.com/public/C7RDGAT6RBDENMBQVO3DSCPOUU.jpg)
+	- [Ultimate Makeover: French Onion Soup](https://live.staticflickr.com/2418/2132229379_32d319bbab_b.jpg)
+	- [Chocolate Eclairs](https://upload.wikimedia.org/wikipedia/commons/a/ad/Chocolate_eclairs_%286792699085%29.jpg)
+	- [Lychee & ginger sorbet](https://cdn.drweil.com/wp-content/uploads/2016/12/diet-nutrition_recipes_lemon-ginger-sorbet_2718x1808_000012681647.jpg)
 - Tools Images:
 	- [Copper Non-Stick Frying Pan](https://images-na.ssl-images-amazon.com/images/I/71OtNyCBmvL._AC_SL1500_.jpg)
 	- [OptiGrill Elite 750D](https://images-na.ssl-images-amazon.com/images/I/71mImVP45IL._AC_SL1464_.jpg)
@@ -192,4 +201,3 @@ The photos used for my application were obtained from the following sources:
 - I would like to thank my Mentor Dick Vlaanderen, for his input, guidance and support over the course of the project.
 - I would also like to thank all tutors in the Code Institute, as well as my fellow students on Slack for their help on and support on queries I had while I worked on implementing this project.
 - I'd like to thank my family for their support and patience during the completion of my project.
-
